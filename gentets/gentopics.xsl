@@ -8,6 +8,16 @@
         />
     </xsl:template>
 
+    <xsl:template match="row[subject_code = 'null']" mode="outPath">
+        <xsl:value-of select="concat('products/', pg_code, '/', topic_id, '.dita')"/>
+    </xsl:template>
+
+    <xsl:template match="row[subject_code != 'null' and predicate_code = 'null']" mode="outPath">
+        <xsl:value-of
+            select="concat('products/', pg_code, '/', subject_code, '/', topic_id, '.dita')"
+        />
+    </xsl:template>
+
     <xsl:function name="cpm:outPath">
         <xsl:param name="row"/>
         <xsl:apply-templates select="$row" mode="outPath"/>

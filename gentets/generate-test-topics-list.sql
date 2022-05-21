@@ -122,8 +122,8 @@ insert into testdata.product_groups (code, title) values ('animals', 'Animals');
 insert into testdata.product_groups (code, title) values ('persons', 'Persons');
 insert into testdata.product_groups (code, title) values ('things', 'Things');
 
-insert into testdata.aspects (code, title, infotype, scope) values ('understanding', 'Understanding', 'concept', 'product_group')
-insert into testdata.aspects (code, title, infotype, scope) values ('intro', 'Basics of', 'concept', 'product_subgroup')
+insert into testdata.aspects (code, title, infotype, scope) values ('understanding', 'Understanding', 'concept', 'product_group');
+insert into testdata.aspects (code, title, infotype, scope) values ('intro', 'Basics of', 'concept', 'product_subgroup');
 insert into testdata.aspects (code, title, infotype, scope) values ('basics', 'Meet', 'concept', 'product');
 insert into testdata.aspects (code, title, infotype, scope) values ('planning', 'Planning Your', 'concept', 'product');
 insert into testdata.aspects (code, title, infotype, scope) values ('fun', 'Having Fun with', 'concept', 'product');
@@ -271,31 +271,27 @@ with
         as
     (select
         concat(a.code, '_', pg.code),
-        pg.code, p.code, s.code, concat(p.code, '_', s.code), a.code,
+        pg.code, null, null, null, a.code,
         concat(a.title, ' ', pg.title),
         random_quasi_normal_int(1, 100),
         random_normal_int(1, 100)
         from
-            testdata.aspects a,
-            testdata.predicates p,
-            testdata.subjects s,
-            testdata.product_groups pg
+            testdata.product_groups pg,
+            testdata.aspects a
+
         where
-            a.scope = 'product_group'
-                and
-            s.pg_code = pg.code),
+            a.scope = 'product_group'),
     product_subgroup_topics (topic_id,
         pg_code, predicate_code, subject_code, product_code, aspect_code,
         title, quality, demand)
         as
     (select concat(a.code, '_', s.code),
-        pg.code, p.code, s.code, concat(p.code, '_', s.code), a.code,
+        pg.code, null, s.code, null, a.code,
         concat(a.title, ' ', s.title),
         random_quasi_normal_int(1, 100),
         random_normal_int(1, 100)
         from
             testdata.aspects a,
-            testdata.predicates p,
             testdata.subjects s,
             testdata.product_groups pg
         where
