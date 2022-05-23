@@ -34,7 +34,7 @@ begin
 end
 $$;
 
-create testdata.function random_quasi_normal_int(min int, max int) returns int
+create function testdata.random_quasi_normal_int(min int, max int) returns int
     language plpgsql
 as
 $$
@@ -46,6 +46,12 @@ $$;
 
 /* Tables */
 
+drop table if exists testdata.countries;
+drop table if exists testdata.langs;
+drop table if exists testdata.countries_langs;
+drop table if exists testdata.oss;
+drop table if exists testdata.browsers;
+drop table if exists testdata.oss_browsers;
 drop table if exists testdata.genres;
 drop table if exists testdata.product_groups;
 drop table if exists testdata.product_subgroups;
@@ -54,6 +60,41 @@ drop table if exists testdata.aspects;
 drop table if exists testdata.genres_aspects;
 drop table if exists testdata.online_docs;
 drop table if exists testdata.topics;
+drop table if exists testdata.users;
+
+create table testdata.countries (
+    code        varchar,
+    title       varchar,
+    pop_size    varchar
+);
+
+create table testdata.langs (
+    code    varchar,
+    title   varchar
+);
+
+create table testdata.countries_langs (
+    country_code    varchar,
+    lang_code       varchar,
+    lang_share      real
+);
+
+create table testdata.oss (
+    code        varchar,
+    title       varchar,
+    os_share    real
+);
+
+create table testdata.browsers (
+    code    varchar,
+    title   varchar
+)
+
+create table testdata.oss_browsers (
+    os_code             varchar,
+    browser_code        varchar,
+    browser_share       real
+)
 
 create table testdata.genres (
     code    varchar,
@@ -112,20 +153,100 @@ create table testdata.topics (
     demand              int
 );
 
+create table users (
+    uuid                uuid default gen_random_uuid() not null primary key,
+    country_code        varchar,
+    lang_code           varchar,
+    os_code             varchar,
+    browser_code        varchar,
+    iq                  int,
+    iw                  int
+)
+
 
 /* Data */
 
-turncate table testdata.genres;
-turncate table testdata.product_groups;
-turncate table testdata.product_subgroups;
-turncate table testdata.predicates;
-turncate table testdata.aspects;
-turncate table testdata.genres_aspects;
-turncate table testdata.online_docs;
-turncate table testdata.topics;
+truncate table testdata.genres;
+truncate table testdata.product_groups;
+truncate table testdata.product_subgroups;
+truncate table testdata.predicates;
+truncate table testdata.aspects;
+truncate table testdata.genres_aspects;
+truncate table testdata.online_docs;
+truncate table testdata.topics;
 
 
 /* Producing directories */
+
+insert into testdata.countries (code, title, pop_size) values ('ar', 'Argentina', 40);
+insert into testdata.countries (code, title, pop_size) values ('gh', 'Ghana', 24);
+insert into testdata.countries (code, title, pop_size) values ('de', 'Germany', 82);
+insert into testdata.countries (code, title, pop_size) values ('il', 'Israel', 8);
+insert into testdata.countries (code, title, pop_size) values ('jp', 'Japan', 128);
+insert into testdata.countries (code, title, pop_size) values ('ru', 'Russia', 145);
+insert into testdata.countries (code, title, pop_size) values ('kr', 'South Korea', 50);
+insert into testdata.countries (code, title, pop_size) values ('es', 'Spain', 46);
+insert into testdata.countries (code, title, pop_size) values ('ua', 'Ukrane', 80);
+insert into testdata.countries (code, title, pop_size) values ('uk', 'United Kingdom', 62);
+insert into testdata.countries (code, title, pop_size) values ('us', 'USA', 311);
+insert into testdata.countries (code, title, pop_size) values ('za', 'South Africa', 50);
+
+insert into testdata.langs (code, title) values ('af', 'Afrikaans');
+insert into testdata.langs (code, title) values ('de', 'German');
+insert into testdata.langs (code, title) values ('en', 'English');
+insert into testdata.langs (code, title) values ('he', 'Hebrew');
+insert into testdata.langs (code, title) values ('jp', 'Japanese');
+insert into testdata.langs (code, title) values ('kr', 'Korean');
+insert into testdata.langs (code, title) values ('ru', 'Russian');
+insert into testdata.langs (code, title) values ('es', 'Spainish');
+insert into testdata.langs (code, title) values ('ua', 'Ukrainian');
+
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('gh', 'en', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('de', 'de', 0.95);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'de', 0.05);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'he', 0.5);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'ru', 0.2);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'sp', 0.1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('jp', 'jp', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ru', 'ru', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('kr', 'kr', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('es', 'es', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ua', 'ru', 0.5);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ua', 'ua', 0.5);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('uk', 'en', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('us', 'en', 0.7);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('us', 'es', 0.2);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('us', 'ru', 0.1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('za', 'ar', 0.3);
+
+insert into testdata.oss (code, title, os_share) values ('android', 'Android', 0.3);
+insert into testdata.oss (code, title, os_share) values ('ios', 'iOS', 0.1);
+insert into testdata.oss (code, title, os_share) values ('linux', 'Linux', 0.1);
+insert into testdata.oss (code, title, os_share) values ('macos', 'macOS', 0.2);
+insert into testdata.oss (code, title, os_share) values ('windows', 'Windows', 0.3);
+
+insert into testdata.browsers (code, title) values ('chrome', 'Chrome');
+insert into testdata.browsers (code, title) values ('edge', 'Edge');
+insert into testdata.browsers (code, title) values ('ffox', 'FireFox');
+insert into testdata.browsers (code, title) values ('opera', 'Opera');
+insert into testdata.browsers (code, title) values ('safari', 'Safari');
+
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('android', 'chrome', 0.8);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('android', 'ffox', 0.1);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('android', 'opera', 0.1);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('ios', 'chrome', 0.3);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('ios', 'ffox', 0.3);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('ios', 'safari', 0.4);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('linux', 'chrome', 0.2);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('linux', 'ffox', 0.6);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('linux', 'opera', 0.2);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('macos', 'chrome', 0.3);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('macos', 'ffox', 0.1);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('macos', 'safari', 0.6);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'chrome', 0.5);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'edge', 0.1);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'ffox', 0.3);
+insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'opera', 0.1);
 
 insert into testdata.genres (code, title) values ('ug', 'Quick Oparation Guide');
 insert into testdata.genres (code, title) values ('mg', 'Maintenance Guide');

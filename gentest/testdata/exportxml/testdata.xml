@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE testDatabase [
+     <!ENTITY genres_aspects SYSTEM "genres_acpects.xml">
     <!ENTITY online_docs SYSTEM "online_docs.xml">
     <!ENTITY topics SYSTEM "topics.xml">
 ]>
 <database>
+    <genres_aspects>&genres_aspects;</genres_aspects>
     <online_docs>&online_docs;</online_docs>
     <topics>&topics;</topics>
 </database>

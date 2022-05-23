@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>understanding</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>intro</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>basics</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>planning</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>fun</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>safety</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>appending</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>activating</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>using</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>deactivating</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>removing</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>configuring</aspect_code>
+</row>
+<row>
+  <genre_code>ug</genre_code>
+  <aspect_code>sharing</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>basics</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>safety</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>verifying</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>updating</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>troubleshooting</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>protecting</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>respassw</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>repairing</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>maintaining</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>supressing</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>resuming</aspect_code>
+</row>
+<row>
+  <genre_code>mg</genre_code>
+  <aspect_code>resetting</aspect_code>
+</row>
+</data>

@@ -1,0 +1,2403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<row>
+  <uuid>fb0fbbae-6eb3-45df-b975-2fc42635deee</uuid>
+  <online_doc_code>biotech_platypuses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>biotech_platypuses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Platypuses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>1e899104-d15e-4653-bb62-e082fa3bef49</uuid>
+  <online_doc_code>biotech_platypuses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>biotech_platypuses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Platypuses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9f1a87c0-18a7-431a-a4c8-27804ece4ca5</uuid>
+  <online_doc_code>robotic_platypuses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>robotic_platypuses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Platypuses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>b0e744af-8bb3-48fd-918f-9330980bfcc2</uuid>
+  <online_doc_code>robotic_platypuses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>robotic_platypuses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Platypuses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>13ecb494-cb3c-43b1-abe6-8c70e46c59b8</uuid>
+  <online_doc_code>shared_platypuses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>shared_platypuses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Platypuses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>cd92dbf8-74f4-487b-8c6f-385ed2ab13af</uuid>
+  <online_doc_code>shared_platypuses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>shared_platypuses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Platypuses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>7c62012d-4667-49e4-9988-c6d2a09391a7</uuid>
+  <online_doc_code>virtual_platypuses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>virtual_platypuses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Platypuses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>da1cceaa-8f27-4456-b2b8-6beaf086866e</uuid>
+  <online_doc_code>virtual_platypuses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>platypuses</ps_code>
+  <product_code>virtual_platypuses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Platypuses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>425f836d-0c3b-40f3-a0b5-456a577d3823</uuid>
+  <online_doc_code>biotech_hamsters_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>biotech_hamsters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Hamsters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>740e7e43-6523-4dd6-af91-f8b4a9f33166</uuid>
+  <online_doc_code>biotech_hamsters_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>biotech_hamsters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Hamsters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>fa8ba433-9167-4bc4-a849-87c08059a474</uuid>
+  <online_doc_code>robotic_hamsters_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>robotic_hamsters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Hamsters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>cbef9e96-af64-4c51-b3b2-29b2bc13ae0c</uuid>
+  <online_doc_code>robotic_hamsters_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>robotic_hamsters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Hamsters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>6e74ee6c-9697-4040-824a-937951cd037f</uuid>
+  <online_doc_code>shared_hamsters_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>shared_hamsters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Hamsters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>456c3641-6633-4013-a4c3-8119c38eed08</uuid>
+  <online_doc_code>shared_hamsters_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>shared_hamsters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Hamsters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>58a398d4-520d-4f51-9b3f-3b96db7c230e</uuid>
+  <online_doc_code>virtual_hamsters_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>virtual_hamsters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Hamsters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>807be403-40ca-4939-bb7c-499dbc45abb9</uuid>
+  <online_doc_code>virtual_hamsters_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>hamsters</ps_code>
+  <product_code>virtual_hamsters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Hamsters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>61bf19cf-dfd7-4886-bd11-20bd66ab91c3</uuid>
+  <online_doc_code>biotech_Rhinoceroses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>biotech_Rhinoceroses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Rhinoceros. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>293e8e66-001f-40b7-a0a2-526509ca4b7d</uuid>
+  <online_doc_code>biotech_Rhinoceroses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>biotech_Rhinoceroses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Rhinoceros. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>961b723b-d9e5-45a3-a9fb-8f11fea3c092</uuid>
+  <online_doc_code>robotic_Rhinoceroses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>robotic_Rhinoceroses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Rhinoceros. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>3637d2e8-4f41-4202-ba57-4d74a5d0b22a</uuid>
+  <online_doc_code>robotic_Rhinoceroses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>robotic_Rhinoceroses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Rhinoceros. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9efdbf3d-f7cf-4468-ab3a-85796b979038</uuid>
+  <online_doc_code>shared_Rhinoceroses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>shared_Rhinoceroses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Rhinoceros. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>f814088f-19cb-4088-a1a8-52a6d7c98782</uuid>
+  <online_doc_code>shared_Rhinoceroses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>shared_Rhinoceroses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Rhinoceros. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>afec1f64-6095-4e1a-b2f0-ba01e6567fff</uuid>
+  <online_doc_code>virtual_Rhinoceroses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>virtual_Rhinoceroses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Rhinoceros. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>531cab9f-ad09-46ee-b7ed-cb1dabf28c9e</uuid>
+  <online_doc_code>virtual_Rhinoceroses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>Rhinoceroses</ps_code>
+  <product_code>virtual_Rhinoceroses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Rhinoceros. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>487b099c-69c0-4ca9-aab4-9af6877fb6b8</uuid>
+  <online_doc_code>biotech_elephants_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>biotech_elephants</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Elephants. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>2d022d2f-8e75-4571-8a36-e01355821dee</uuid>
+  <online_doc_code>biotech_elephants_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>biotech_elephants</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Elephants. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f454b90e-b329-4e83-9142-56c074777e85</uuid>
+  <online_doc_code>robotic_elephants_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>robotic_elephants</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Elephants. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>7cd031ca-38cb-4a5e-9223-c8532426d3d0</uuid>
+  <online_doc_code>robotic_elephants_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>robotic_elephants</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Elephants. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>40c3759f-01a9-4b57-bc40-fc358ffe647a</uuid>
+  <online_doc_code>shared_elephants_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>shared_elephants</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Elephants. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>2b640903-eca8-415d-a427-6c700e26de82</uuid>
+  <online_doc_code>shared_elephants_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>shared_elephants</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Elephants. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f5cc7293-191e-459b-917f-9bf38aed0f6d</uuid>
+  <online_doc_code>virtual_elephants_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>virtual_elephants</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Elephants. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>be19d90d-e8cc-4e24-a959-8203364428c2</uuid>
+  <online_doc_code>virtual_elephants_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>elephants</ps_code>
+  <product_code>virtual_elephants</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Elephants. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>eb4aa967-cad7-44b9-850c-a39711324c9d</uuid>
+  <online_doc_code>biotech_horses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>biotech_horses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Horses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>84184058-613c-4fdf-9ef8-0150ad6ed419</uuid>
+  <online_doc_code>biotech_horses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>biotech_horses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Horses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>2d452a5e-56f8-40df-93e0-a700d55524d1</uuid>
+  <online_doc_code>robotic_horses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>robotic_horses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Horses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>adfe833e-3e5d-4a50-8081-a6ea7a082411</uuid>
+  <online_doc_code>robotic_horses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>robotic_horses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Horses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>79f0901a-6270-4f0c-8079-7a0874762369</uuid>
+  <online_doc_code>shared_horses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>shared_horses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Horses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>9da9b300-64d3-4ca4-ade7-bd7024714aad</uuid>
+  <online_doc_code>shared_horses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>shared_horses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Horses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f47346fa-5608-4f4b-947c-6a4894c3dbb8</uuid>
+  <online_doc_code>virtual_horses_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>virtual_horses</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Horses. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>26fc56d0-1254-4dd4-b747-8463f2abc49b</uuid>
+  <online_doc_code>virtual_horses_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>horses</ps_code>
+  <product_code>virtual_horses</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Horses. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>7578f988-473f-46b0-93db-27e7a360b24d</uuid>
+  <online_doc_code>biotech_dogs_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>biotech_dogs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Dogs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>7f0a4643-6979-405b-a0e2-a7be063d3a43</uuid>
+  <online_doc_code>biotech_dogs_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>biotech_dogs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Dogs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>03084f1c-c3eb-414e-a770-22027c3e7241</uuid>
+  <online_doc_code>robotic_dogs_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>robotic_dogs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Dogs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>db0d872b-f8ab-4ff8-866a-5de9a1041c3c</uuid>
+  <online_doc_code>robotic_dogs_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>robotic_dogs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Dogs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>34c6124e-bede-4629-a340-9d4d196c9e77</uuid>
+  <online_doc_code>shared_dogs_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>shared_dogs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Dogs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>76bec4f4-c1b8-4c68-a4a3-d03a02cc2e24</uuid>
+  <online_doc_code>shared_dogs_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>shared_dogs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Dogs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>bc8c6464-2f3a-40d3-a97e-7f312307713a</uuid>
+  <online_doc_code>virtual_dogs_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>virtual_dogs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Dogs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e745ea30-ed8a-48f9-9210-38d4f6f12767</uuid>
+  <online_doc_code>virtual_dogs_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>dogs</ps_code>
+  <product_code>virtual_dogs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Dogs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>5cb1c47f-1f1e-4e42-b05a-45750084ebd9</uuid>
+  <online_doc_code>biotech_cats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>biotech_cats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Cats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e352271a-7b1b-47f9-a164-1c77de8be22c</uuid>
+  <online_doc_code>biotech_cats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>biotech_cats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Cats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>616e03e8-1549-4efe-9dc0-d180c6f6c4ae</uuid>
+  <online_doc_code>robotic_cats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>robotic_cats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Cats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>317b53d9-dd72-405a-a6b2-3f99ca7ff13f</uuid>
+  <online_doc_code>robotic_cats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>robotic_cats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Cats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f36031d6-6ea9-443a-ab27-5c3b01f8f960</uuid>
+  <online_doc_code>shared_cats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>shared_cats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Cats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>a7bdc8c2-e783-4082-b2ae-2332e51e4c6a</uuid>
+  <online_doc_code>shared_cats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>shared_cats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Cats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>27a186e9-cdb1-4e58-a1c3-82e463f1f91a</uuid>
+  <online_doc_code>virtual_cats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>virtual_cats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Cats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>00cf86de-34a4-49ef-8265-e24b07f60b44</uuid>
+  <online_doc_code>virtual_cats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>cats</ps_code>
+  <product_code>virtual_cats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Cats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>1ac26e97-64a1-4747-a9c8-69c708217975</uuid>
+  <online_doc_code>biotech_cows_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>biotech_cows</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Cows. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>518e3eae-47b9-4fca-8c08-e406ef88ef48</uuid>
+  <online_doc_code>biotech_cows_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>biotech_cows</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Cows. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e6f1a0a9-0393-4b44-a984-e1be09b00a3f</uuid>
+  <online_doc_code>robotic_cows_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>robotic_cows</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Cows. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>06247053-2168-4b30-aa66-71cba1177a6d</uuid>
+  <online_doc_code>robotic_cows_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>robotic_cows</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Cows. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>24a0e564-1228-4c28-be32-ebf073ef2e6a</uuid>
+  <online_doc_code>shared_cows_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>shared_cows</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Cows. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>b3e83a05-1aae-4d11-8506-52b56e75e695</uuid>
+  <online_doc_code>shared_cows_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>shared_cows</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Cows. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>60350721-8bf5-46cd-ab9d-42f7e6efda8c</uuid>
+  <online_doc_code>virtual_cows_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>virtual_cows</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Cows. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>0989c013-7ab2-4d14-96eb-96afe603fe0c</uuid>
+  <online_doc_code>virtual_cows_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>cows</ps_code>
+  <product_code>virtual_cows</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Cows. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9da9b32e-9b49-4b76-970c-436f78627309</uuid>
+  <online_doc_code>biotech_wombats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>biotech_wombats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Wombats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>7da9570b-ebdd-416a-9472-132fbb87c51d</uuid>
+  <online_doc_code>biotech_wombats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>biotech_wombats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Wombats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>99eb002b-933e-451b-974e-939fa9a6d031</uuid>
+  <online_doc_code>robotic_wombats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>robotic_wombats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Wombats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>68d0d830-222d-44bf-aeaa-b07f07369800</uuid>
+  <online_doc_code>robotic_wombats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>robotic_wombats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Wombats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>993b9447-19aa-42ce-b382-d871e8f44671</uuid>
+  <online_doc_code>shared_wombats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>shared_wombats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Wombats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>44e53d2b-6e55-437b-8c88-7cf83f783ec4</uuid>
+  <online_doc_code>shared_wombats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>shared_wombats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Wombats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>22fb4d34-7081-40e7-bbc5-995f0399e252</uuid>
+  <online_doc_code>virtual_wombats_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>virtual_wombats</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Wombats. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>5a1d4c09-4f38-477c-86f4-b142f3280e6d</uuid>
+  <online_doc_code>virtual_wombats_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>wombats</ps_code>
+  <product_code>virtual_wombats</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Wombats. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9f84cc96-db6e-4759-8c0b-d5f8dedc41e1</uuid>
+  <online_doc_code>biotech_rabbits_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>biotech_rabbits</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Rabbits. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>8a183baa-f9c3-4363-9eee-c2d37b498f5d</uuid>
+  <online_doc_code>biotech_rabbits_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>biotech_rabbits</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Rabbits. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e5ea2a1b-f842-4a45-ab7c-ce1ad835e683</uuid>
+  <online_doc_code>robotic_rabbits_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>robotic_rabbits</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Rabbits. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>f8d771f3-cdab-48f2-973b-7fbcdd8c01cc</uuid>
+  <online_doc_code>robotic_rabbits_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>robotic_rabbits</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Rabbits. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>ae346c25-eca3-4b6e-a679-0657a25f37a6</uuid>
+  <online_doc_code>shared_rabbits_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>shared_rabbits</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Rabbits. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>6d513f7d-0165-4487-bd29-bdfba3e733d8</uuid>
+  <online_doc_code>shared_rabbits_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>shared_rabbits</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Rabbits. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>ef5ddf37-873b-4c34-b3f3-c1d545be3ef8</uuid>
+  <online_doc_code>virtual_rabbits_ug</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>virtual_rabbits</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Rabbits. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>98a1e831-6ef1-404b-b2b7-99980ba308c7</uuid>
+  <online_doc_code>virtual_rabbits_mg</online_doc_code>
+  <pg_code>animals</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>rabbits</ps_code>
+  <product_code>virtual_rabbits</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Rabbits. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>6c01f125-3e20-43b3-8265-0694d8430302</uuid>
+  <online_doc_code>biotech_strangers_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>biotech_strangers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Strangers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>d9a5e4c4-04a4-494b-8583-bbba4cf13b1e</uuid>
+  <online_doc_code>biotech_strangers_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>biotech_strangers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Strangers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>6c441a3b-d522-4892-96d2-951a80d4b95e</uuid>
+  <online_doc_code>robotic_strangers_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>robotic_strangers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Strangers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>3cb8f3aa-8f33-4dd5-a6f7-a854245082b9</uuid>
+  <online_doc_code>robotic_strangers_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>robotic_strangers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Strangers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e96dc060-bb6d-4192-9e92-6b0e7c1ee12c</uuid>
+  <online_doc_code>shared_strangers_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>shared_strangers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Strangers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>3dce22bf-1c53-4add-9d2c-b7cde2132324</uuid>
+  <online_doc_code>shared_strangers_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>shared_strangers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Strangers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>fbb52f09-f519-48cf-bdfe-570249dff51c</uuid>
+  <online_doc_code>virtual_strangers_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>virtual_strangers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Strangers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>2162f83c-977a-48db-8890-e666a87036dd</uuid>
+  <online_doc_code>virtual_strangers_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>strangers</ps_code>
+  <product_code>virtual_strangers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Strangers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>b436bdd9-ce82-4503-baa1-29b76fd908fd</uuid>
+  <online_doc_code>biotech_partners_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>biotech_partners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Partners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>1cd9d296-4585-4582-8fc5-2ffd0b102237</uuid>
+  <online_doc_code>biotech_partners_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>biotech_partners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Partners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>3a4cd19b-c9f7-45be-9c89-933cf6c9aec1</uuid>
+  <online_doc_code>robotic_partners_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>robotic_partners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Partners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>31d1780e-735d-4075-b1c5-07917d8c901b</uuid>
+  <online_doc_code>robotic_partners_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>robotic_partners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Partners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>d0ca291d-9d51-4318-b40f-ff6623f471bc</uuid>
+  <online_doc_code>shared_partners_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>shared_partners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Partners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>c55eb893-8da0-46fd-b448-cc22113e0f94</uuid>
+  <online_doc_code>shared_partners_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>shared_partners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Partners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>2d01ee01-b224-47ec-ad44-a2b15dbeefa1</uuid>
+  <online_doc_code>virtual_partners_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>virtual_partners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Partners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>c88aea76-c45f-4531-b8f0-1b4eb4eb7b5c</uuid>
+  <online_doc_code>virtual_partners_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>partners</ps_code>
+  <product_code>virtual_partners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Partners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>3e339d39-f5fe-4534-9f87-c64d51785dca</uuid>
+  <online_doc_code>biotech_enemies_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>biotech_enemies</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Enemies. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>2f7deb21-634b-4c83-8508-63c1888b1c24</uuid>
+  <online_doc_code>biotech_enemies_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>biotech_enemies</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Enemies. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>927da600-c6f1-4cfc-957e-fffa0275b110</uuid>
+  <online_doc_code>robotic_enemies_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>robotic_enemies</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Enemies. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>820c38f5-5e62-43be-9cf6-db8836bcfebb</uuid>
+  <online_doc_code>robotic_enemies_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>robotic_enemies</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Enemies. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>77aac2bb-d445-4345-9b43-9e4be1f3fb84</uuid>
+  <online_doc_code>shared_enemies_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>shared_enemies</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Enemies. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>8a67fb23-afd5-451d-8019-b56bb93e5fe1</uuid>
+  <online_doc_code>shared_enemies_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>shared_enemies</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Enemies. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>18f39660-f8c7-4d84-885b-678cd0f58e40</uuid>
+  <online_doc_code>virtual_enemies_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>virtual_enemies</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Enemies. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>f4e1919d-1e19-40f3-b4a0-b19e6411782c</uuid>
+  <online_doc_code>virtual_enemies_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>enemies</ps_code>
+  <product_code>virtual_enemies</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Enemies. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>b6844b71-9c4d-4f7a-8eba-54cf77b246fc</uuid>
+  <online_doc_code>biotech_psychos_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>biotech_psychos</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Psychotherapists. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>3e86f0e9-8041-4adb-b6bc-dffc7b76a777</uuid>
+  <online_doc_code>biotech_psychos_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>biotech_psychos</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Psychotherapists. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e091f8be-6ec3-428f-8387-dcda2c1294a7</uuid>
+  <online_doc_code>robotic_psychos_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>robotic_psychos</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Psychotherapists. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>51d98a52-4fe4-41ed-a781-a891dfda793c</uuid>
+  <online_doc_code>robotic_psychos_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>robotic_psychos</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Psychotherapists. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9579f7d2-c2ee-46e2-a3f3-9b105f27d6c7</uuid>
+  <online_doc_code>shared_psychos_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>shared_psychos</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Psychotherapists. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>5e3fc7bd-8e81-4005-988a-5eaaaaeb1cfc</uuid>
+  <online_doc_code>shared_psychos_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>shared_psychos</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Psychotherapists. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>6ea70263-97ef-4b2b-a9c2-05d396797ad8</uuid>
+  <online_doc_code>virtual_psychos_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>virtual_psychos</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Psychotherapists. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>3874fb01-98f8-4d41-b9d6-fb4c4213bb55</uuid>
+  <online_doc_code>virtual_psychos_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>psychos</ps_code>
+  <product_code>virtual_psychos</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Psychotherapists. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e5a19ca3-bea7-4529-8d93-6482b460f17e</uuid>
+  <online_doc_code>biotech_adherents_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>biotech_adherents</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Adherents. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e761374c-4cec-476f-887e-214f2402d3c0</uuid>
+  <online_doc_code>biotech_adherents_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>biotech_adherents</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Adherents. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>b8bb1932-d67c-4eed-88f8-51b7050f5696</uuid>
+  <online_doc_code>robotic_adherents_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>robotic_adherents</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Adherents. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>6e252126-a4d7-4415-90b3-3fa3d588f4bc</uuid>
+  <online_doc_code>robotic_adherents_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>robotic_adherents</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Adherents. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>02de6c98-be46-4f5c-9736-3d798dd33a7f</uuid>
+  <online_doc_code>shared_adherents_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>shared_adherents</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Adherents. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>0b5dbc5f-b179-4518-9d6d-51addd82eba5</uuid>
+  <online_doc_code>shared_adherents_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>shared_adherents</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Adherents. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>91446586-4738-4cee-ae03-de0861542f6c</uuid>
+  <online_doc_code>virtual_adherents_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>virtual_adherents</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Adherents. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>1f7ac4ec-dd82-4dc0-a06f-f62062821a5b</uuid>
+  <online_doc_code>virtual_adherents_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>adherents</ps_code>
+  <product_code>virtual_adherents</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Adherents. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>381c2aa0-9891-4391-a550-a43d7a9a9d03</uuid>
+  <online_doc_code>biotech_сolleagues_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>biotech_сolleagues</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Сolleagues. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>480ce0bb-09e9-49df-8b16-d932bdda01d2</uuid>
+  <online_doc_code>biotech_сolleagues_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>biotech_сolleagues</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Сolleagues. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>1f32aa82-dc14-4e2c-a936-03296aae683c</uuid>
+  <online_doc_code>robotic_сolleagues_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>robotic_сolleagues</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Сolleagues. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>5f6db368-0c51-4c3b-af3f-94c2586cdb7b</uuid>
+  <online_doc_code>robotic_сolleagues_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>robotic_сolleagues</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Сolleagues. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>a1fc9553-2f4f-4704-b663-0035c508238f</uuid>
+  <online_doc_code>shared_сolleagues_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>shared_сolleagues</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Сolleagues. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>606c4bc7-4367-4a1c-ae08-7ee6fbbb57af</uuid>
+  <online_doc_code>shared_сolleagues_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>shared_сolleagues</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Сolleagues. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e2eef717-e910-417e-b1cf-d04138d057bc</uuid>
+  <online_doc_code>virtual_сolleagues_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>virtual_сolleagues</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Сolleagues. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>13c21ab7-201a-4e02-a794-03fa17de6306</uuid>
+  <online_doc_code>virtual_сolleagues_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>сolleagues</ps_code>
+  <product_code>virtual_сolleagues</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Сolleagues. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9d73798f-7083-4874-a57d-363831abfe34</uuid>
+  <online_doc_code>biotech_neighbours_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>biotech_neighbours</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Neighbours. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>860792a0-df27-4937-ada6-91fa176105c9</uuid>
+  <online_doc_code>biotech_neighbours_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>biotech_neighbours</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Neighbours. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>d835dbf2-2ac9-44c3-9802-66878fc70cfd</uuid>
+  <online_doc_code>robotic_neighbours_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>robotic_neighbours</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Neighbours. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>ae0d8621-6910-4a75-9f1e-0657d02ab2de</uuid>
+  <online_doc_code>robotic_neighbours_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>robotic_neighbours</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Neighbours. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>2a71fada-d592-419d-a2f3-c4c9ab757802</uuid>
+  <online_doc_code>shared_neighbours_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>shared_neighbours</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Neighbours. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>20c5d6b6-1318-49e5-8a88-f751c8f9ffb8</uuid>
+  <online_doc_code>shared_neighbours_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>shared_neighbours</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Neighbours. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>e93564dd-bded-4709-8803-3a31eeb849f9</uuid>
+  <online_doc_code>virtual_neighbours_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>virtual_neighbours</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Neighbours. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>16a0c2f1-6f23-4369-b87a-c1775d11a5ef</uuid>
+  <online_doc_code>virtual_neighbours_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>neighbours</ps_code>
+  <product_code>virtual_neighbours</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Neighbours. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>2b479619-243e-49ac-898c-bea938c54e27</uuid>
+  <online_doc_code>biotech_classmates_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>biotech_classmates</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Classmates. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>4781a6cd-ae04-4169-8989-79da11190978</uuid>
+  <online_doc_code>biotech_classmates_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>biotech_classmates</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Classmates. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>be4e4850-4629-4391-9b02-1429838bba50</uuid>
+  <online_doc_code>robotic_classmates_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>robotic_classmates</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Classmates. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>77c22985-d132-4590-bcf1-2bdd94805276</uuid>
+  <online_doc_code>robotic_classmates_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>robotic_classmates</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Classmates. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>d15b9840-9d66-4abe-937b-6342c90fed0c</uuid>
+  <online_doc_code>shared_classmates_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>shared_classmates</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Classmates. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>47d7266a-eb01-4e6f-9e69-df27f6e5e4e1</uuid>
+  <online_doc_code>shared_classmates_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>shared_classmates</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Classmates. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>454ad0d2-1928-4ad1-a8aa-a4eec86ea5a9</uuid>
+  <online_doc_code>virtual_classmates_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>virtual_classmates</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Classmates. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e7d227b1-e5f9-4508-9a43-c40b61adebe9</uuid>
+  <online_doc_code>virtual_classmates_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>classmates</ps_code>
+  <product_code>virtual_classmates</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Classmates. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>94ec4a67-51b2-42e1-a4a6-2076b44cd815</uuid>
+  <online_doc_code>biotech_friends_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>biotech_friends</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Friends. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>21412a43-0a3f-4e69-8bd9-59b2c3d4c263</uuid>
+  <online_doc_code>biotech_friends_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>biotech_friends</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Friends. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>a62665f9-1187-4b93-a712-b1d91d8aca3a</uuid>
+  <online_doc_code>robotic_friends_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>robotic_friends</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Friends. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>5d45da29-88fc-4a1f-8d85-0cf86c7a243d</uuid>
+  <online_doc_code>robotic_friends_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>robotic_friends</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Friends. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>b3c9f1da-cb13-460f-878b-7ea9d84bbfe6</uuid>
+  <online_doc_code>shared_friends_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>shared_friends</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Friends. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e0c6d72e-7d5c-462f-8164-a9bcbea1b49d</uuid>
+  <online_doc_code>shared_friends_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>shared_friends</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Friends. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>33b1f632-f943-44cd-9dfb-bd754f233ac0</uuid>
+  <online_doc_code>virtual_friends_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>virtual_friends</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Friends. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>7bb91d88-75b2-4278-b88b-e366315cfc95</uuid>
+  <online_doc_code>virtual_friends_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>friends</ps_code>
+  <product_code>virtual_friends</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Friends. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>1ad7e6b6-f1d6-4eb3-8458-0497abf7e3d6</uuid>
+  <online_doc_code>biotech_relatives_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>biotech_relatives</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Relatives. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>334beb2a-098f-4f86-a9be-a91c78656754</uuid>
+  <online_doc_code>biotech_relatives_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>biotech_relatives</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Relatives. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>d5644f65-f460-4b77-a395-7c4dfcbbbb70</uuid>
+  <online_doc_code>robotic_relatives_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>robotic_relatives</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Relatives. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>b1532e48-4d96-42ce-9983-94cb36361e20</uuid>
+  <online_doc_code>robotic_relatives_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>robotic_relatives</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Relatives. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f23077e6-b7df-4f49-86da-a3e21113b5fb</uuid>
+  <online_doc_code>shared_relatives_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>shared_relatives</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Relatives. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>feef11e7-afc7-46ea-8324-a8ad5b1aeaa2</uuid>
+  <online_doc_code>shared_relatives_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>shared_relatives</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Relatives. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>7965a30b-2091-4434-b40f-956b93b75ad4</uuid>
+  <online_doc_code>virtual_relatives_ug</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>virtual_relatives</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Relatives. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>25c18ddf-0ac2-4aaf-86d7-806e363f8484</uuid>
+  <online_doc_code>virtual_relatives_mg</online_doc_code>
+  <pg_code>persons</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>relatives</ps_code>
+  <product_code>virtual_relatives</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Relatives. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>8874f420-233d-42b0-ad39-15d5a799e932</uuid>
+  <online_doc_code>biotech_mgrinders_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>biotech_mgrinders</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Meat Grinders. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>63e56df6-fe7b-4cc2-9482-7f196cdf571d</uuid>
+  <online_doc_code>biotech_mgrinders_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>biotech_mgrinders</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Meat Grinders. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f79e20d7-f15d-4f07-ba76-ba1737c72bb9</uuid>
+  <online_doc_code>robotic_mgrinders_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>robotic_mgrinders</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Meat Grinders. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>6adbc15e-3c0e-4c69-bcd9-555ea84200f1</uuid>
+  <online_doc_code>robotic_mgrinders_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>robotic_mgrinders</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Meat Grinders. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>6afb52a1-24da-4b86-8b61-cf3d7413bd3c</uuid>
+  <online_doc_code>shared_mgrinders_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>shared_mgrinders</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Meat Grinders. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e6dfbe07-7082-48e4-b25e-3e74ca74ec9a</uuid>
+  <online_doc_code>shared_mgrinders_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>shared_mgrinders</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Meat Grinders. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>491837e4-a952-4a08-a64e-caa7a1a9fdf1</uuid>
+  <online_doc_code>virtual_mgrinders_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>virtual_mgrinders</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Meat Grinders. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>dac0982e-a363-4814-8d23-9eb90afde4d2</uuid>
+  <online_doc_code>virtual_mgrinders_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>mgrinders</ps_code>
+  <product_code>virtual_mgrinders</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Meat Grinders. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>c599cf11-3262-4a7b-8de9-7ed4870d8c9e</uuid>
+  <online_doc_code>biotech_hookahs_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>biotech_hookahs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Hookahs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>da85bc14-3558-4fdb-a9a8-c08293bc958a</uuid>
+  <online_doc_code>biotech_hookahs_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>biotech_hookahs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Hookahs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>cf986926-f600-49f1-a997-cfce178c4e7f</uuid>
+  <online_doc_code>robotic_hookahs_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>robotic_hookahs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Hookahs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>ae735187-9821-4fb5-bcc2-cedea3e97e6a</uuid>
+  <online_doc_code>robotic_hookahs_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>robotic_hookahs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Hookahs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>3a3ddecb-c6d1-4b2b-9ddb-6c6a7254b609</uuid>
+  <online_doc_code>shared_hookahs_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>shared_hookahs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Hookahs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>28c655ae-893a-46fd-b05b-063466b75211</uuid>
+  <online_doc_code>shared_hookahs_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>shared_hookahs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Hookahs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>2041cff7-4ed0-4131-8376-29a13bf67e80</uuid>
+  <online_doc_code>virtual_hookahs_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>virtual_hookahs</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Hookahs. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>d865316a-311f-4cd1-8f91-244c032a8cec</uuid>
+  <online_doc_code>virtual_hookahs_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>hookahs</ps_code>
+  <product_code>virtual_hookahs</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Hookahs. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>12a28b61-6af8-47f5-82b0-de141a2c7358</uuid>
+  <online_doc_code>biotech_toasters_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>biotech_toasters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Toasters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>22ab818d-2f44-4fd6-afb0-dd49b4945768</uuid>
+  <online_doc_code>biotech_toasters_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>biotech_toasters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Toasters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>43ddb97a-c200-4d0c-ad81-0fb55058dddc</uuid>
+  <online_doc_code>robotic_toasters_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>robotic_toasters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Toasters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>0c0822a0-2e63-469c-ad9c-6a729720dba8</uuid>
+  <online_doc_code>robotic_toasters_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>robotic_toasters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Toasters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>db2026fd-0b75-4b9b-b284-864ed8a62fb0</uuid>
+  <online_doc_code>shared_toasters_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>shared_toasters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Toasters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>894d0405-a4d2-4114-9af7-a4ad17d6a955</uuid>
+  <online_doc_code>shared_toasters_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>shared_toasters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Toasters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>2a6154c3-d965-417b-b5cf-ba8023528175</uuid>
+  <online_doc_code>virtual_toasters_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>virtual_toasters</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Toasters. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>c3ea9919-b890-4c5a-af36-a2a03561327d</uuid>
+  <online_doc_code>virtual_toasters_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>toasters</ps_code>
+  <product_code>virtual_toasters</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Toasters. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>17fabd57-b27e-48d2-8a1b-fe37935195e5</uuid>
+  <online_doc_code>biotech_aconds_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>biotech_aconds</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Air Conditioners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>8a4a17d7-05cf-4c89-8294-fd1e06f7c630</uuid>
+  <online_doc_code>biotech_aconds_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>biotech_aconds</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Air Conditioners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>eb7aa5d1-0ac8-48a4-8161-174ed9a3f34e</uuid>
+  <online_doc_code>robotic_aconds_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>robotic_aconds</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Air Conditioners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>84c8bece-cbc8-49d2-b3c2-9d988a1d02f0</uuid>
+  <online_doc_code>robotic_aconds_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>robotic_aconds</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Air Conditioners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>305c343a-5e29-4f86-ac08-e2af301fd142</uuid>
+  <online_doc_code>shared_aconds_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>shared_aconds</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Air Conditioners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>9fef3555-e5cb-4124-b05c-f3fe0bcd6e05</uuid>
+  <online_doc_code>shared_aconds_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>shared_aconds</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Air Conditioners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>6dad3fae-15b1-4a0b-bd59-2e83de2ff45f</uuid>
+  <online_doc_code>virtual_aconds_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>virtual_aconds</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Air Conditioners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>86f3ca8e-4424-42e5-9be8-34859992c4eb</uuid>
+  <online_doc_code>virtual_aconds_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>aconds</ps_code>
+  <product_code>virtual_aconds</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Air Conditioners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>8645f623-66de-49a9-a816-7ac81dd7e8e1</uuid>
+  <online_doc_code>biotech_wmachines_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>biotech_wmachines</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Washing Machines. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>7ea0da1a-4f29-462c-bdfe-6e65563a92c8</uuid>
+  <online_doc_code>biotech_wmachines_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>biotech_wmachines</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Washing Machines. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f8ae1b03-392d-463d-9859-53c2b834ec31</uuid>
+  <online_doc_code>robotic_wmachines_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>robotic_wmachines</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Washing Machines. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>6b85b971-f6fa-4fde-8858-1c7452bf1658</uuid>
+  <online_doc_code>robotic_wmachines_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>robotic_wmachines</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Washing Machines. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>8f889b6e-251b-4f82-9484-9febe96b5f12</uuid>
+  <online_doc_code>shared_wmachines_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>shared_wmachines</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Washing Machines. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>ad688b5f-ec3e-4ede-95d0-c257da930320</uuid>
+  <online_doc_code>shared_wmachines_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>shared_wmachines</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Washing Machines. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>881d7bf5-e045-426f-ae80-16af1001f69f</uuid>
+  <online_doc_code>virtual_wmachines_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>virtual_wmachines</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Washing Machines. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>c5bd7d6a-62da-4554-b400-24a1a60443e5</uuid>
+  <online_doc_code>virtual_wmachines_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>wmachines</ps_code>
+  <product_code>virtual_wmachines</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Washing Machines. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9aa1164c-9a5a-4c85-9209-576d0f25cb95</uuid>
+  <online_doc_code>biotech_phones_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>biotech_phones</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Cell Phones. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>fac7572a-e4fe-4976-9664-219fe4290100</uuid>
+  <online_doc_code>biotech_phones_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>biotech_phones</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Cell Phones. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>afe5ccae-04ca-4c4b-ae1f-f1ddd3838e08</uuid>
+  <online_doc_code>robotic_phones_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>robotic_phones</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Cell Phones. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>97a6ee7b-52d1-45b1-8882-4fdf1345930d</uuid>
+  <online_doc_code>robotic_phones_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>robotic_phones</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Cell Phones. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>b1b59bee-80dc-48f0-84e2-3ac58a9f1ed4</uuid>
+  <online_doc_code>shared_phones_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>shared_phones</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Cell Phones. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>ed588c1a-5c12-4dba-b9dd-c91dbcd16bd7</uuid>
+  <online_doc_code>shared_phones_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>shared_phones</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Cell Phones. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>645b5b66-2c89-4d0a-a9a9-ad66dde53df7</uuid>
+  <online_doc_code>virtual_phones_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>virtual_phones</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Cell Phones. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>a24069d7-669d-4834-a3a9-7e92bbd21e24</uuid>
+  <online_doc_code>virtual_phones_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>phones</ps_code>
+  <product_code>virtual_phones</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Cell Phones. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>71646782-5501-47bd-a115-49e26bdc2728</uuid>
+  <online_doc_code>biotech_routers_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>biotech_routers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Routers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>4c74ec49-7253-4843-87c0-740ce9b12a6a</uuid>
+  <online_doc_code>biotech_routers_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>biotech_routers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Routers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>4c573d46-49a9-424a-bf67-812cef3acf4c</uuid>
+  <online_doc_code>robotic_routers_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>robotic_routers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Routers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>7778a0a4-6aa7-4dbf-bd43-7ac829f2a20a</uuid>
+  <online_doc_code>robotic_routers_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>robotic_routers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Routers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f70b0c34-df82-4a4b-8bf0-f4fdba90ad8e</uuid>
+  <online_doc_code>shared_routers_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>shared_routers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Routers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>e06b2512-d835-49ad-b73d-3bc6c17a119b</uuid>
+  <online_doc_code>shared_routers_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>shared_routers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Routers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>53f98c82-e3a8-4a01-b46c-95f1b9393f11</uuid>
+  <online_doc_code>virtual_routers_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>virtual_routers</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Routers. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>dd9b4871-5637-47fc-991b-55723d57a0db</uuid>
+  <online_doc_code>virtual_routers_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>routers</ps_code>
+  <product_code>virtual_routers</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Routers. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>66ef793e-d4f0-4f28-984a-bc60c75e4ad3</uuid>
+  <online_doc_code>biotech_fridges_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>biotech_fridges</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Refrigerators. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>5291e312-9d57-4b79-b3e0-88a918fb3106</uuid>
+  <online_doc_code>biotech_fridges_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>biotech_fridges</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Refrigerators. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>24e35638-23e4-4b68-be12-f04176a42d2a</uuid>
+  <online_doc_code>robotic_fridges_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>robotic_fridges</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Refrigerators. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>505be516-c136-4167-83e7-c382dba8b2e4</uuid>
+  <online_doc_code>robotic_fridges_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>robotic_fridges</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Refrigerators. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>9ec0e40e-450d-4449-a824-a18b35fc13fc</uuid>
+  <online_doc_code>shared_fridges_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>shared_fridges</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Refrigerators. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>907374b7-9aa4-44b9-b5b7-6deb97b43835</uuid>
+  <online_doc_code>shared_fridges_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>shared_fridges</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Refrigerators. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>7f2c8409-f5b0-4c80-9fd3-92ba3470e866</uuid>
+  <online_doc_code>virtual_fridges_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>virtual_fridges</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Refrigerators. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>c4098827-bc51-4e15-a8af-9e2ff395dcf6</uuid>
+  <online_doc_code>virtual_fridges_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>fridges</ps_code>
+  <product_code>virtual_fridges</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Refrigerators. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>647ffc5e-e480-4ded-88d6-7b149d0bd40e</uuid>
+  <online_doc_code>biotech_vcleaners_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>biotech_vcleaners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Vacuum Cleaners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>28c5037a-d268-47e6-bdb3-d6147b15c02d</uuid>
+  <online_doc_code>biotech_vcleaners_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>biotech_vcleaners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Vacuum Cleaners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>8013efae-71d1-400e-b81b-7fc2319856b5</uuid>
+  <online_doc_code>robotic_vcleaners_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>robotic_vcleaners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Vacuum Cleaners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>0d2df36d-caf5-4eaf-94e2-ebedb44b7752</uuid>
+  <online_doc_code>robotic_vcleaners_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>robotic_vcleaners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Vacuum Cleaners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>180b29b6-a104-432d-aa6f-c6ac3b0e7450</uuid>
+  <online_doc_code>shared_vcleaners_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>shared_vcleaners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Vacuum Cleaners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>bf9e65a0-953f-4295-a49b-fff2e28db2a0</uuid>
+  <online_doc_code>shared_vcleaners_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>shared_vcleaners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Vacuum Cleaners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>f5956c4b-105e-49fc-bab7-bd0f6766bb6d</uuid>
+  <online_doc_code>virtual_vcleaners_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>virtual_vcleaners</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Vacuum Cleaners. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>b9791cb7-4fb5-4524-bfba-12f97f03920a</uuid>
+  <online_doc_code>virtual_vcleaners_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>vcleaners</ps_code>
+  <product_code>virtual_vcleaners</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Vacuum Cleaners. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>8a47fa64-08cf-43d4-be1b-a885e08e66cc</uuid>
+  <online_doc_code>biotech_teapots_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>biotech_teapots</product_code>
+  <genre_code>ug</genre_code>
+  <title>Biotech Teapots. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>615d25c4-01b1-461c-9ee2-28276f41aadf</uuid>
+  <online_doc_code>biotech_teapots_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>biotech</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>biotech_teapots</product_code>
+  <genre_code>mg</genre_code>
+  <title>Biotech Teapots. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>71ef5ad5-f4fc-424b-b5b5-d5812d099651</uuid>
+  <online_doc_code>robotic_teapots_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>robotic_teapots</product_code>
+  <genre_code>ug</genre_code>
+  <title>Robotic Teapots. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>cae5bafa-9411-4f0e-abaa-5009dfde1eb8</uuid>
+  <online_doc_code>robotic_teapots_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>robotic</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>robotic_teapots</product_code>
+  <genre_code>mg</genre_code>
+  <title>Robotic Teapots. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>4789a4da-9d21-4026-8196-da3827dd44b2</uuid>
+  <online_doc_code>shared_teapots_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>shared_teapots</product_code>
+  <genre_code>ug</genre_code>
+  <title>Shared Teapots. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>344041cd-a5a3-494d-81b7-692ff8ad1827</uuid>
+  <online_doc_code>shared_teapots_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>shared</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>shared_teapots</product_code>
+  <genre_code>mg</genre_code>
+  <title>Shared Teapots. Maintenance Guide</title>
+</row>
+<row>
+  <uuid>abbe0db5-c3f6-4500-bd98-0ad410129bd4</uuid>
+  <online_doc_code>virtual_teapots_ug</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>virtual_teapots</product_code>
+  <genre_code>ug</genre_code>
+  <title>Virtual Teapots. Quick Oparation Guide</title>
+</row>
+<row>
+  <uuid>9a8519da-08c6-456c-9f54-a1e090be3a98</uuid>
+  <online_doc_code>virtual_teapots_mg</online_doc_code>
+  <pg_code>things</pg_code>
+  <predicate_code>virtual</predicate_code>
+  <ps_code>teapots</ps_code>
+  <product_code>virtual_teapots</product_code>
+  <genre_code>mg</genre_code>
+  <title>Virtual Teapots. Maintenance Guide</title>
+</row>
+</data>
