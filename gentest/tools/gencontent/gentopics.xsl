@@ -2,26 +2,69 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cpm="CPM"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="cpm xs" version="2.0">
 
-    <xsl:template match="row" mode="outPath">
-        <xsl:value-of
-            select="concat('products/', pg_code, '/', subject_code, '/', predicate_code, '/', topic_id, '.dita')"
-        />
+    <!-- Where to put generated content? -->
+    <xsl:param name="outRootPath"/>
+
+
+    <!-- Topic filename -->
+
+    <xsl:template match="row" mode="topicFilename">
+        <xsl:value-of select="concat(topic_id, '.dita')"/>
     </xsl:template>
 
-    <xsl:template match="row[subject_code = 'null']" mode="outPath">
-        <xsl:value-of select="concat('products/', pg_code, '/', topic_id, '.dita')"/>
-    </xsl:template>
-
-    <xsl:template match="row[subject_code != 'null' and predicate_code = 'null']" mode="outPath">
-        <xsl:value-of
-            select="concat('products/', pg_code, '/', subject_code, '/', topic_id, '.dita')"
-        />
-    </xsl:template>
-
-    <xsl:function name="cpm:outPath">
-        <xsl:param name="row"/>
-        <xsl:apply-templates select="$row" mode="outPath"/>
+    <xsl:function name="cpm:topicFilename">
+        <xsl:param name="topicRow"/>
+        <xsl:apply-templates select="$topicRow" mode="topicFilename"/>
     </xsl:function>
+
+
+    <!-- Topic relative path -->
+
+    <xsl:template match="row" mode="productPath">
+        <xsl:value-of select="concat(pg_code, '/', ps_code, '/', predicate_code)"/>
+    </xsl:template>
+    <xsl:template match="row[ps_code = 'null']" mode="outPath">
+        <xsl:value-of select="pg_code"/>
+    </xsl:template>
+
+    <xsl:template match="row[ps_code != 'null' and predicate_code = 'null']" mode="outPath">
+        <xsl:value-of select="concat(pg_code, '/', ps_code)"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:topicPath">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="topicPath"/>
+    </xsl:function>
+
+
+    <!-- Topic full path -->
+
+    <xsl:function name="cpm:outRootPath">
+        <xsl:value-of select="'products'"/>
+    </xsl:function>
+
+    <xsl:function name="cpm:topicFullPath">
+        <xsl:param name="topicRow"/>
+
+        <xsl:variable name="topicPath"
+            select="concat(cpm:topicPath($topicRow), '/', cpm:topicFilename($topicRow))"/>
+
+        <xsl:variable name="outRootPath" select="cpm:outRootPath()"/>
+
+        <xsl:choose>
+            <xsl:when test="$outRootPath">
+                <xsl:value-of select="concat($outRootPath, '/', $topicPath)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$topicPath"/>
+            </xsl:otherwise>
+        </xsl:choose>
+
+
+    </xsl:function>
+
+
+
 
     <xsl:template match="row" mode="ditaBody">
         <body>
@@ -67,8 +110,39 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xsl:template match="row" mode="ditaTopicref">
+        <topicref href="{cpm:topicFilename(row)}" format="dita"/>
+    </xsl:template>
+
+    <xsl:template name="ditaMap">
+
+        <map id="{}">
+            <title/>
+            <xsl:apply-templates select="//row[]" mode="ditaTopicref"/>
+        </map>
+
+    </xsl:template>
+
+    <xsl:template name="ditaMaps">
+        <xsl:param name="product_id"/>
+
+        <xsl:call-template name="ditaMap"/>
+
+    </xsl:template>
+
     <xsl:template match="/">
-        <xsl:apply-templates select="//row" mode="ditaWriteOut"/>
+
+        <!-- Producing topics -->
+        <xsl:apply-templates select="//topics/row" mode="ditaWriteOut"/>
+
+        <!-- Producing document maps -->
+        <xsl:for-each select="distinct-values(//row/product_id)">
+            <xsl:call-template name="ditaMaps">
+                <xsl:with-param name="product_id" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
+
     </xsl:template>
 
 </xsl:stylesheet>

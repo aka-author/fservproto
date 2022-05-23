@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE testDatabase [
+    <!ENTITY online_docs SYSTEM "online_docs.xml">
+    <!ENTITY topics SYSTEM "topics.xml">
+]>
+<database>
+    <online_docs>&online_docs;</online_docs>
+    <topics>&topics;</topics>
+</database>
