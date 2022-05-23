@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Binding tables we export from the testdata database 
+    into a single XML file  
+-->
 <!DOCTYPE testDatabase [
-     <!ENTITY genres_aspects SYSTEM "genres_aspects.xml">
+    <!ENTITY genres_aspects SYSTEM "genres_aspects.xml">
     <!ENTITY online_docs SYSTEM "online_docs.xml">
     <!ENTITY topics SYSTEM "topics.xml">
 ]>
