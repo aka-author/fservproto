@@ -6,57 +6,114 @@
     <xsl:param name="outRootPath"/>
 
 
-    <!-- Topic filename -->
+    <!-- Detecting topics -->
 
-    <xsl:template match="row" mode="topicFilename">
-        <xsl:value-of select="concat(topic_id, '.dita')"/>
+    <xsl:template match="row" mode="isTopic" as="xs:boolean">
+        <xsl:value-of select="exists(ancestor::topics)"/>
     </xsl:template>
 
-    <xsl:function name="cpm:topicFilename">
-        <xsl:param name="topicRow"/>
-        <xsl:apply-templates select="$topicRow" mode="topicFilename"/>
+    <xsl:function name="cpm:isTopic" as="xs:boolean">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="isTopic"/>
     </xsl:function>
 
 
-    <!-- Topic relative path -->
+    <!-- Detecting group topics -->
 
-    <xsl:template match="row" mode="productPath">
-        <xsl:value-of select="concat(pg_code, '/', ps_code, '/', predicate_code)"/>
+    <xsl:template match="row" mode="isGroupTopic" as="xs:boolean">
+        <xsl:value-of select="cpm:isTopic(.) and ps_code = 'null'"/>
     </xsl:template>
-    <xsl:template match="row[ps_code = 'null']" mode="outPath">
+
+    <xsl:function name="cpm:isGroupTopic" as="xs:boolean">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="isGroupTopic"/>
+    </xsl:function>
+
+
+    <!-- Detecting subgroup topics -->
+
+    <xsl:template match="row" mode="isSubgroupTopic" as="xs:boolean">
+        <xsl:value-of select="cpm:isTopic(.) and ps_code != 'null' and predicate_code = 'null'"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:isSubgroupTopic" as="xs:boolean">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="isSubgroupTopic"/>
+    </xsl:function>
+
+
+    <!-- Detecting product topics -->
+
+    <xsl:template match="row" mode="isProductTopic" as="xs:boolean">
+        <xsl:value-of select="cpm:isTopic(.) and predicate_code != 'null'"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:isProductTopic" as="xs:boolean">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="isProductTopic"/>
+    </xsl:function>
+
+    <!-- Topic or map filename -->
+
+    <xsl:template match="row[cpm:isTopic(.)]" mode="outFilename">
+        <xsl:value-of select="concat(topic_id, '.dita')"/>
+    </xsl:template>
+
+    <xsl:template match="online_docs//row" mode="outFilename">
+        <xsl:value-of select="concat(topic_id, '.dita')"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:outFilename">
+        <xsl:param name="topicRow"/>
+        <xsl:apply-templates select="$topicRow" mode="outFilename"/>
+    </xsl:function>
+
+
+    <!-- Relative path -->
+
+    <xsl:template match="row[cpm:isGroupTopic(.)]" mode="outPath">
         <xsl:value-of select="pg_code"/>
     </xsl:template>
 
-    <xsl:template match="row[ps_code != 'null' and predicate_code = 'null']" mode="outPath">
+    <xsl:template match="row[cpm:isSubgroupTopic(.)]" mode="outPath">
         <xsl:value-of select="concat(pg_code, '/', ps_code)"/>
     </xsl:template>
 
-    <xsl:function name="cpm:topicPath">
+    <xsl:template match="row[cpm:isProductTopic(.)]" mode="outPath">
+        <xsl:value-of select="concat(pg_code, '/', ps_code, '/', predicate_code)"/>
+    </xsl:template>
+
+
+    <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="outPath">
+        <xsl:value-of select="cpm:productPath(product_code)"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:outPath">
         <xsl:param name="row"/>
-        <xsl:apply-templates select="$row" mode="topicPath"/>
+        <xsl:apply-templates select="$row" mode="outPath"/>
     </xsl:function>
 
 
     <!-- Topic full path -->
 
     <xsl:function name="cpm:outRootPath">
-        <xsl:value-of select="'products'"/>
+        <xsl:value-of select="$outRootPath"/>
     </xsl:function>
 
-    <xsl:function name="cpm:topicFullPath">
+    <xsl:function name="cpm:outFullPath">
         <xsl:param name="topicRow"/>
 
-        <xsl:variable name="topicPath"
-            select="concat(cpm:topicPath($topicRow), '/', cpm:topicFilename($topicRow))"/>
+        <xsl:variable name="relativePath"
+            select="concat(cpm:outPath($topicRow), '/', cpm:outFilename($topicRow))"/>
 
         <xsl:variable name="outRootPath" select="cpm:outRootPath()"/>
 
         <xsl:choose>
             <xsl:when test="$outRootPath">
-                <xsl:value-of select="concat($outRootPath, '/', $topicPath)"/>
+                <xsl:value-of select="concat($outRootPath, '/', $relativePath)"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$topicPath"/>
+                <xsl:value-of select="$relativePath"/>
             </xsl:otherwise>
         </xsl:choose>
 
@@ -65,6 +122,20 @@
 
 
 
+    <!-- 
+        Common elements
+    -->
+    
+    <xsl:template match="row" mode="ditaTitle">
+        <title>
+            <xsl:value-of select="title"/>
+        </title>
+    </xsl:template>
+
+
+    <!-- 
+        Topics
+    -->
 
     <xsl:template match="row" mode="ditaBody">
         <body>
@@ -88,60 +159,80 @@
         </body>
     </xsl:template>
 
-    <xsl:template match="row" mode="ditaTitle">
-        <title>
-            <xsl:value-of select="title"/>
-        </title>
-    </xsl:template>
-
-    <xsl:template match="row" mode="ditaTopic">
+    <xsl:template match="row" mode="ditaDoc">
         <topic id="{topic_id}" xml:lang="en">
             <xsl:apply-templates select="." mode="ditaTitle"/>
             <xsl:apply-templates select="." mode="ditaBody"/>
         </topic>
     </xsl:template>
 
-    <xsl:template match="row" mode="ditaWriteOut">
-        <xsl:if test="count(//row[topic_id = current()/topic_id]) = 1">
-            <xsl:result-document href="{cpm:outPath(.)}" indent="yes"
-                doctype-public="-//OASIS//DTD DITA Topic//EN" doctype-system="topic.dtd">
-                <xsl:apply-templates select="." mode="ditaTopic"/>
-            </xsl:result-document>
-        </xsl:if>
+    <xsl:template match="row[cpm:isTopic(.)]" mode="ditaWriteOut">
+        <xsl:result-document href="{cpm:outFullPath(.)}" indent="yes"
+            doctype-public="-//OASIS//DTD DITA Topic//EN" doctype-system="topic.dtd">
+            <xsl:apply-templates select="." mode="ditaDoc"/>
+        </xsl:result-document>
     </xsl:template>
 
+
+    <!--
+        Maps
+    -->
+
+    <xsl:template match="row" mode="isOnlineDoc" as="xs:boolean">
+        <xsl:value-of select="exists(ancestor::online_docs)"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:isOnlineDoc" as="xs:boolean">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="isOnlineDoc"/>
+    </xsl:function>
 
     <xsl:template match="row" mode="ditaTopicref">
-        <topicref href="{cpm:topicFilename(row)}" format="dita"/>
+        <topicref href="{cpm:outFilename(row)}" format="dita"/>
     </xsl:template>
 
-    <xsl:template name="ditaMap">
+    <xsl:function name="cpm:checkAspect" as="xs:boolean">
+        <xsl:param name="online_doc"/>
+        <xsl:param name="topic"/>
+        <xsl:variable name="gc" select="$online_doc/genre_code"/>
+        <xsl:variable name="ac" select="$topic/aspect_code"/>
+        <xsl:value-of
+            select="exists(root($online_doc)/genres_aspects/data/row[genre_code = $gc and aspect_code = $ac])"
+        />
+    </xsl:function>
 
-        <map id="{}">
-            <title/>
-            <xsl:apply-templates select="//row[]" mode="ditaTopicref"/>
+    <xsl:function name="cpm:belongs" as="xs:boolean">
+        <xsl:param name="online_doc"/>
+        <xsl:param name="topic"/>
+        <xsl:sequence select="cpm:isTopic($online_doc) and cpm:checkAspect($online_doc, $topic)"/>
+    </xsl:function>
+
+    <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="ditaDoc">
+        <map id="{online_doc_code}">
+            <xsl:apply-templates select="." mode="ditaTitle"/>
+            <xsl:apply-templates select="//row[cpm:belongs(current(), .)]" mode="ditaTopicref"/>
         </map>
-
     </xsl:template>
 
-    <xsl:template name="ditaMaps">
-        <xsl:param name="product_id"/>
-
-        <xsl:call-template name="ditaMap"/>
-
+    <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="ditaWriteOut">
+        <xsl:result-document href="{cpm:outFullPath(.)}" indent="yes"
+            doctype-public="-//OASIS//DTD DITA Map//EN" doctype-system="map.dtd">
+            <xsl:apply-templates select="." mode="ditaDoc"/>
+        </xsl:result-document>
     </xsl:template>
+
+
+    <!-- 
+        Main    
+    -->
 
     <xsl:template match="/">
 
         <!-- Producing topics -->
-        <xsl:apply-templates select="//topics/row" mode="ditaWriteOut"/>
+        <xsl:apply-templates select="//topics/data/row" mode="ditaWriteOut"/>
 
         <!-- Producing document maps -->
-        <xsl:for-each select="distinct-values(//row/product_id)">
-            <xsl:call-template name="ditaMaps">
-                <xsl:with-param name="product_id" select="."/>
-            </xsl:call-template>
-        </xsl:for-each>
+        <xsl:apply-templates select="//online_docs/data/row" mode="ditaWriteOut"/>
 
     </xsl:template>
 

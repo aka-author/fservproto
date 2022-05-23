@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE testDatabase [
-     <!ENTITY genres_aspects SYSTEM "genres_acpects.xml">
+     <!ENTITY genres_aspects SYSTEM "genres_aspects.xml">
     <!ENTITY online_docs SYSTEM "online_docs.xml">
     <!ENTITY topics SYSTEM "topics.xml">
 ]>
