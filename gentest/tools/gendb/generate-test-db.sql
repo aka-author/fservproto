@@ -6,6 +6,10 @@ drop function if exists testdata.random_normal;
 drop function if exists testdata.random_normal_int;
 drop function if exists testdata.random_quasi_normal;
 drop function if exists testdata.random_quasi_normal_int;
+drop function if exists testdata.code2;
+drop function if exists testdata.title2;
+drop function if exists testdata.online_doc_title;
+drop function if exists testdata.topic_title;
 
 create function testdata.random_normal(min real, max real) returns real
     language plpgsql
@@ -43,6 +47,42 @@ begin
 end
 $$;
 
+create function testdata.code2(code1 varchar, code2 varchar) returns varchar
+    language plpgsql
+as
+$$
+begin
+    return concat(code1, '_', code2);
+end
+$$;
+
+create function testdata.title2(title1 varchar, title2 varchar) returns varchar
+    language plpgsql
+as
+$$
+begin
+    return concat(title1, ' ', title2);
+end
+$$;
+
+create function testdata.online_doc_title(subject_title varchar, genre_title varchar) returns varchar
+    language plpgsql
+as
+$$
+begin
+    return concat(subject_title, '. ', genre_title);
+end
+$$;
+
+create function testdata.topic_title(subject_title varchar, aspect_title varchar) returns varchar
+    language plpgsql
+as
+$$
+begin
+    return concat(aspect_title, '. ', subject_title);
+end
+$$;
+
 
 /* Tables */
 
@@ -55,103 +95,118 @@ drop table if exists testdata.oss_browsers;
 drop table if exists testdata.genres;
 drop table if exists testdata.product_groups;
 drop table if exists testdata.product_subgroups;
-drop table if exists testdata.predicates;
+drop table if exists testdata.kinds;
+drop table if exists testdata.products;
 drop table if exists testdata.aspects;
 drop table if exists testdata.genres_aspects;
 drop table if exists testdata.online_docs;
+drop table if exists testdata.online_docs_vers;
 drop table if exists testdata.topics;
+drop table if exists testdata.topic_vers;
 drop table if exists testdata.users;
 
 create table testdata.countries (
     code        varchar,
     title       varchar,
-    pop_size    varchar
-);
+    pop_size    varchar);
 
 create table testdata.langs (
     code    varchar,
-    title   varchar
-);
+    title   varchar);
 
 create table testdata.countries_langs (
     country_code    varchar,
     lang_code       varchar,
-    lang_share      real
-);
+    lang_share      real);
 
 create table testdata.oss (
     code        varchar,
     title       varchar,
-    os_share    real
-);
+    os_share    real);
 
 create table testdata.browsers (
     code    varchar,
-    title   varchar
-)
+    title   varchar);
 
 create table testdata.oss_browsers (
     os_code             varchar,
     browser_code        varchar,
-    browser_share       real
-)
+    browser_share       real);
 
 create table testdata.genres (
     code    varchar,
-    title   varchar
-);
+    title   varchar);
 
 create table testdata.product_groups (
     code    varchar,
-    title   varchar
-);
+    title   varchar);
 
 create table testdata.product_subgroups (
     code     varchar,
     title    varchar,
-    pg_code  varchar
-);
+    pg_code  varchar);
 
-create table testdata.predicates (
+create table testdata.kinds (
     code    varchar,
-    title   varchar
-);
+    title   varchar);
+
+create table testdata.products (
+    code        varchar,
+    title       varchar,
+    pg_code     varchar,
+    ps_code     varchar,
+    kind_code   varchar,
+    demand      real,
+    clarity     real);
 
 create table testdata.aspects (
     code        varchar,
     title       varchar,
     infotype    varchar,
-    scope       varchar
-);
+    scope       varchar);
 
 create table testdata.genres_aspects(
     genre_code  varchar,
-    aspect_code varchar
-);
+    aspect_code varchar);
 
 create table testdata.online_docs (
     uuid                uuid default gen_random_uuid() not null primary key,
     online_doc_code     varchar,
     pg_code             varchar,
-    predicate_code      varchar,
+    kind_code           varchar,
     ps_code             varchar,
     product_code        varchar,
     genre_code          varchar,
-    title               varchar
-);
+    title               varchar);
+
+create table testdata.online_docs_vers (
+    uuid                uuid default gen_random_uuid() not null primary key,
+    online_doc_uuid     uuid,
+    ver_no              int,
+    ver_date            timestamp);
 
 create table testdata.topics (
     uuid                uuid default gen_random_uuid() not null primary key,
     topic_id            varchar,
-    pg_code             varchar,
-    predicate_code      varchar,
-    ps_code             varchar,
-    product_code        varchar,
-    aspect_code         varchar,
     title               varchar,
-    quality             int,
-    demand              int
-);
+    product_code        varchar,
+    pg_code             varchar,
+    ps_code             varchar,
+    kind_code           varchar,
+    aspect_code         varchar,
+    initial_quality     real,
+    quality_trend       real,
+    demand_trend        real);
+
+create table testdata subjects (
+    code        varchar,
+    title       varchar);
+
+create table testdata.topics_vers (
+    uuid                uuid default gen_random_uuid() not null primary key,
+    topic_uuid          uuid,
+    ver_no              int,
+    ver_date            timestamp);
 
 create table users (
     uuid                uuid default gen_random_uuid() not null primary key,
@@ -160,8 +215,7 @@ create table users (
     os_code             varchar,
     browser_code        varchar,
     iq                  int,
-    iw                  int
-)
+    iw                  int);
 
 
 /* Data */
@@ -169,11 +223,13 @@ create table users (
 truncate table testdata.genres;
 truncate table testdata.product_groups;
 truncate table testdata.product_subgroups;
-truncate table testdata.predicates;
+truncate table testdata.kinds;
 truncate table testdata.aspects;
 truncate table testdata.genres_aspects;
 truncate table testdata.online_docs;
+truncate table testdata.online_doc_vers;
 truncate table testdata.topics;
+truncate table testdata.topic_vers;
 
 
 /* Producing directories */
@@ -305,10 +361,10 @@ insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'supr
 insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'resuming');
 insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'resetting');
 
-insert into testdata.predicates (code, title) values ('biotech', 'Biotech');
-insert into testdata.predicates (code, title) values ('robotic', 'Robotic');
-insert into testdata.predicates (code, title) values ('shared', 'Shared');
-insert into testdata.predicates (code, title) values ('virtual', 'Virtual');
+insert into testdata.kinds (code, title) values ('biotech', 'Biotech');
+insert into testdata.kinds (code, title) values ('robotic', 'Robotic');
+insert into testdata.kinds (code, title) values ('shared', 'Shared');
+insert into testdata.kinds (code, title) values ('virtual', 'Virtual');
 
 insert into testdata.product_subgroups (code, title, pg_code) values ('rabbits', 'Rabbits', 'animals');
 insert into testdata.product_subgroups (code, title, pg_code) values ('wombats', 'Wombats', 'animals');
@@ -344,137 +400,111 @@ insert into testdata.product_subgroups (code, title, pg_code) values ('partners'
 insert into testdata.product_subgroups (code, title, pg_code) values ('strangers', 'Strangers', 'persons');
 
 
+/* Producing products */
+     
+insert into 
+    products (
+        code, title, 
+        pg_code, ps_code, kind_code, 
+        demand, clarity)
+    select 
+        testdata.code2(ps.code, k.code), testdata.title2(k.title,  ps.title),
+        pg.code, ps.code, k.code
+        random_normal(0, 1), random_normal(0, 1)
+        from
+            product_groups pg,
+            product_subgroups ps,
+            kinds k 
+        where
+             ps.pg_code = pg.code;       
+    
+
 /* Producing online documents */
 
-with
-    online_doc_protos
-        as
-    (select
-        concat(p.code, '_', s.code, '_', g.code) as online_doc_code,
-        pg.code as pg_code,
-        p.code as predicate_code,
-        s.code as ps_code,
-        concat(p.code, '_', s.code) as product_code,
-        g.code as genre_code,
-        concat(p.title, ' ', s.title, '. ', g.title) as title
-        from
-            testdata.predicates p,
-            testdata.product_subgroups s,
-            testdata.genres g,
-            testdata.product_groups pg
-        where
-            s.pg_code = pg.code)
-    insert into
-        online_docs (
-            online_doc_code,
-            pg_code,
-            predicate_code,
-            ps_code,
-            product_code,
-            genre_code,
-            title
-        )
+insert into
+    online_docs (
+        online_doc_code, title, 
+        product_code, pg_code, ps_code, kind_code,        
+        genre_code)
     select
-        online_doc_code,
-        pg_code,
-        predicate_code,
-        ps_code,
-        product_code,
-        genre_code,
-        title
-    from
-        online_doc_protos;
+        testdata.code2(p.code, g.code), testdata.online_doc_title(p.title, g.title)
+        p.code, p.pg_code, p.ps_code, p.kind_code,
+        g.code
+        from
+            testdata.products p,
+            testdata.genres g;
 
 
 /* Producing topics */
 
 with
-    product_demands (predicate_code, ps_code, product_demand)
-        as
-    (select p.code, s.code, random_quasi_normal_int(1, 10)
-        from
-            predicates p, product_subgroups s),
-    aspect_demands (aspect_code, aspect_demand)
-        as
-    (select code, random_quasi_normal_int(1, 10)
-        from
-            aspects),
-    product_group_topics (topic_id,
-        pg_code, predicate_code, ps_code, product_code, aspect_code,
-        title, quality, demand)
+    product_group_topics (
+        code, title,
+        product_code, pg_code, ps_code, kind_code, 
+        aspect_code,
+        initial_quality, quality_trend, demand_trend) 
         as
     (select
-        concat(a.code, '_', pg.code),
-        pg.code, null, null, null, a.code,
-        concat(a.title, ' ', pg.title),
-        random_quasi_normal_int(1, 100),
-        random_normal_int(1, 100)
+        testdata.code2(pg.code, a.code), testdata.topic_title(pg.code, a.code),
+        null, pg.code, null, null, 
+        a.code,
+        random_normal(0, 1), random_normal(-1, 1), random_normal_(-1, 1)
         from
             testdata.product_groups pg,
             testdata.aspects a
-
         where
             a.scope = 'product_group'),
-    product_subgroup_topics (topic_id,
-        pg_code, predicate_code, ps_code, product_code, aspect_code,
-        title, quality, demand)
+    product_subgroup_topics (
+        code, title,
+        product_code, pg_code, ps_code, kind_code, 
+        aspect_code,
+        initial_quality, quality_trend, demad_trend)
         as
-    (select concat(a.code, '_', s.code),
-        pg.code, null, s.code, null, a.code,
-        concat(a.title, ' ', s.title),
-        random_quasi_normal_int(1, 100),
-        random_normal_int(1, 100)
+    (select 
+        testdata.code2(a.code, ps.code), testdata.topic_title(ps.title, a.title),
+        null, ps.pg_code, ps.code, null, 
+        a.code,
+        random_normal(0, 1), random_normal(-1, 1), random_normal(-1, 1)
         from
             testdata.aspects a,
-            testdata.product_subgroups s,
-            testdata.product_groups pg
+            testdata.product_subgroups ps
         where
-            a.scope = 'product_subgroup'
-                and
-            s.pg_code = pg.code),
-    product_topics (topic_id,
-        pg_code, predicate_code, ps_code, product_code, aspect_code,
-        title, quality, demand)
+            a.scope = 'product_subgroup'),
+    product_topics (
+        code, title,
+        product_code, pg_code, ps_code, kind_code, 
+        aspect_code,
+        initial_quality, quality_trend, demad_trend)
         as
     (select
-        concat(a.code, '_', p.code, '_', s.code),
-        pg.code, p.code, s.code, concat(p.code, '_', s.code), a.code,
-        concat(a.title, ' ', p.title, ' ', s.title),
-        random_quasi_normal_int(1, 100),
-        ad.aspect_demand*pd.product_demand
+        testdata.code2(a.code, p.code), testdata.topic_title(p.title, a.title),
+        p.code, p.pg_code, p.ps_code, p.kind_code, 
+        a.code,
+        random_normal(0, 1), random_normal(-1, 1), random_normal(-1, 1)
         from
-            testdata.aspects a,
-            testdata.predicates p,
-            testdata.product_subgroups s,
-            testdata.product_groups pg,
-            aspect_demands ad,
-            product_demands pd
+            testdata.products p,
+            testdata.aspects a
         where
-            a.scope = 'product'
-                and
-            a.code = ad.aspect_code
-                and
-            p.code = pd.predicate_code
-                and
-            s.code = pd.ps_code
-                and
-            s.pg_code = pg.code),
+            a.scope = 'product'),
     topic_protos
         as
     (select * from product_group_topics
         union all
     select * from product_subgroup_topics
-            union all
+        union all
     select * from product_topics)
-    insert into
-        topics (topic_id,
-            pg_code, predicate_code, ps_code, product_code, aspect_code,
-            title, quality, demand)
-        select
-            topic_id,
-            pg_code, predicate_code, ps_code, product_code, aspect_code,
-            title, quality, demand
-        from
-            topic_protos;
+insert into
+    topics (
+        code, title,
+        product_code, pg_code, ps_code, kind_code, 
+        aspect_code,
+        initial_quality, quality_trend, demad_trend)
+    select
+        code, title,
+        product_code, pg_code, kind_code, ps_code, 
+        aspect_code,
+        initial_quality, quality_trend, demand_trend
+    from
+        topic_protos;
 
 
