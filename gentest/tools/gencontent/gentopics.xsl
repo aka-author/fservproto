@@ -139,7 +139,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isSubgroupTopic" as="xs:boolean">
-        <xsl:value-of select="ps_code != 'null' and predicate_code = 'null'"/>
+        <xsl:value-of select="ps_code != 'null' and kind_code = 'null'"/>
     </xsl:template>
 
     <xsl:function name="cpm:isSubgroupTopic" as="xs:boolean">
@@ -155,7 +155,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isProductTopic" as="xs:boolean">
-        <xsl:value-of select="predicate_code != 'null'"/>
+        <xsl:value-of select="kind_code != 'null'"/>
     </xsl:template>
 
     <xsl:function name="cpm:isProductTopic" as="xs:boolean">
@@ -189,9 +189,9 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaDoc">
-        <topic id="{topic_id}" xml:lang="en">
+        <topic id="{code}" xml:lang="en">
             <xsl:apply-templates select="." mode="ditaTitle"/>
-            <xsl:apply-templates select="." mode="ditaBody"/>
+            <xsl:apply-templates select="." mode="ditaInnerContent"/>
         </topic>
     </xsl:template>
 
@@ -199,7 +199,7 @@
     <!-- Writing topics -->
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="outFilename">
-        <xsl:value-of select="concat(topic_id, '.dita')"/>
+        <xsl:value-of select="concat(code, '.dita')"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isGroupTopic(.)]" mode="outPath">
@@ -211,7 +211,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isProductTopic(.)]" mode="outPath">
-        <xsl:value-of select="concat(pg_code, '/', ps_code, '/', predicate_code)"/>
+        <xsl:value-of select="concat(pg_code, '/', ps_code, '/', kind_code)"/>
     </xsl:template>
 
     <xsl:function name="cpm:productPath">
@@ -267,14 +267,14 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="ditaDoc">
-        <map id="{online_doc_code}">
+        <map id="{code}">
             <xsl:apply-templates select="." mode="ditaTitle"/>
             <xsl:apply-templates select="." mode="ditaInnerContent"/>
         </map>
     </xsl:template>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="outFilename">
-        <xsl:value-of select="concat(online_doc_code, '.ditamap')"/>
+        <xsl:value-of select="concat(code, '.ditamap')"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="outPath">
