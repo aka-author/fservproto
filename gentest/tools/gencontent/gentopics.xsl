@@ -123,7 +123,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isGroupTopic" as="xs:boolean">
-        <xsl:value-of select="ps_code = 'null'"/>
+        <xsl:value-of select="pg_code != 'null' and ps_code = 'null' and kind_code = 'null'"/>
     </xsl:template>
 
     <xsl:function name="cpm:isGroupTopic" as="xs:boolean">
@@ -139,7 +139,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isSubgroupTopic" as="xs:boolean">
-        <xsl:value-of select="ps_code != 'null' and kind_code = 'null'"/>
+        <xsl:value-of select="pg_code != 'null' and ps_code != 'null' and kind_code = 'null'"/>
     </xsl:template>
 
     <xsl:function name="cpm:isSubgroupTopic" as="xs:boolean">
@@ -155,7 +155,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isProductTopic" as="xs:boolean">
-        <xsl:value-of select="kind_code != 'null'"/>
+        <xsl:value-of select="pg_code != 'null' and ps_code != 'null' and kind_code != 'null'"/>
     </xsl:template>
 
     <xsl:function name="cpm:isProductTopic" as="xs:boolean">

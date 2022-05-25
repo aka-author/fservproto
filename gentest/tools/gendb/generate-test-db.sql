@@ -79,7 +79,7 @@ create function testdata.topic_title(subject_title varchar, aspect_title varchar
 as
 $$
 begin
-    return concat(aspect_title, '. ', subject_title);
+    return concat(aspect_title, ' ', subject_title);
 end
 $$;
 
@@ -99,8 +99,9 @@ drop table if exists testdata.kinds;
 drop table if exists testdata.products;
 drop table if exists testdata.aspects;
 drop table if exists testdata.genres_aspects;
+drop table if exists testdata.subjects;
 drop table if exists testdata.online_docs;
-drop table if exists testdata.online_docs_vers;
+drop table if exists testdata.online_doc_vers;
 drop table if exists testdata.topics;
 drop table if exists testdata.topic_vers;
 drop table if exists testdata.users;
@@ -169,17 +170,21 @@ create table testdata.genres_aspects(
     genre_code  varchar,
     aspect_code varchar);
 
+create table testdata.subjects (
+    code        varchar,
+    title       varchar);
+
 create table testdata.online_docs (
     uuid                uuid default gen_random_uuid() not null primary key,
-    online_doc_code     varchar,
-    pg_code             varchar,
-    kind_code           varchar,
-    ps_code             varchar,
+    code                varchar,
+    title               varchar,
     product_code        varchar,
-    genre_code          varchar,
-    title               varchar);
+    pg_code             varchar,
+    ps_code             varchar,
+    kind_code           varchar,
+    genre_code          varchar);
 
-create table testdata.online_docs_vers (
+create table testdata.online_doc_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
     online_doc_uuid     uuid,
     ver_no              int,
@@ -187,7 +192,7 @@ create table testdata.online_docs_vers (
 
 create table testdata.topics (
     uuid                uuid default gen_random_uuid() not null primary key,
-    topic_id            varchar,
+    code                varchar,
     title               varchar,
     product_code        varchar,
     pg_code             varchar,
@@ -198,11 +203,7 @@ create table testdata.topics (
     quality_trend       real,
     demand_trend        real);
 
-create table testdata subjects (
-    code        varchar,
-    title       varchar);
-
-create table testdata.topics_vers (
+create table testdata.topic_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
     topic_uuid          uuid,
     ver_no              int,
@@ -373,7 +374,7 @@ insert into testdata.product_subgroups (code, title, pg_code) values ('cats', 'C
 insert into testdata.product_subgroups (code, title, pg_code) values ('dogs', 'Dogs', 'animals');
 insert into testdata.product_subgroups (code, title, pg_code) values ('horses', 'Horses', 'animals');
 insert into testdata.product_subgroups (code, title, pg_code) values ('elephants', 'Elephants', 'animals');
-insert into testdata.product_subgroups (code, title, pg_code) values ('Rhinoceroses', 'Rhinoceros', 'animals');
+insert into testdata.product_subgroups (code, title, pg_code) values ('rhinoceroses', 'Rhinoceros', 'animals');
 insert into testdata.product_subgroups (code, title, pg_code) values ('hamsters', 'Hamsters', 'animals');
 insert into testdata.product_subgroups (code, title, pg_code) values ('platypuses', 'Platypuses', 'animals');
 
@@ -401,33 +402,33 @@ insert into testdata.product_subgroups (code, title, pg_code) values ('strangers
 
 
 /* Producing products */
-     
-insert into 
+
+insert into
     products (
-        code, title, 
-        pg_code, ps_code, kind_code, 
+        code, title,
+        pg_code, ps_code, kind_code,
         demand, clarity)
-    select 
-        testdata.code2(ps.code, k.code), testdata.title2(k.title,  ps.title),
-        pg.code, ps.code, k.code
-        random_normal(0, 1), random_normal(0, 1)
+    select
+        testdata.code2(k.code, ps.code), testdata.title2(k.title,  ps.title),
+        pg.code, ps.code, k.code,
+        testdata.random_normal(0, 1), testdata.random_normal(0, 1)
         from
-            product_groups pg,
-            product_subgroups ps,
-            kinds k 
+            testdata.product_groups pg,
+            testdata.product_subgroups ps,
+            testdata.kinds k
         where
-             ps.pg_code = pg.code;       
-    
+             ps.pg_code = pg.code;
+
 
 /* Producing online documents */
 
 insert into
     online_docs (
-        online_doc_code, title, 
-        product_code, pg_code, ps_code, kind_code,        
+        code, title,
+        product_code, pg_code, ps_code, kind_code,
         genre_code)
     select
-        testdata.code2(p.code, g.code), testdata.online_doc_title(p.title, g.title)
+        testdata.code2(p.code, g.code), testdata.online_doc_title(p.title, g.title),
         p.code, p.pg_code, p.ps_code, p.kind_code,
         g.code
         from
@@ -440,15 +441,15 @@ insert into
 with
     product_group_topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code, 
+        product_code, pg_code, ps_code, kind_code,
         aspect_code,
-        initial_quality, quality_trend, demand_trend) 
+        initial_quality, quality_trend, demand_trend)
         as
     (select
-        testdata.code2(pg.code, a.code), testdata.topic_title(pg.code, a.code),
-        null, pg.code, null, null, 
+        testdata.code2(a.code, pg.code), testdata.topic_title(pg.title, a.title),
+        null, pg.code, null, null,
         a.code,
-        random_normal(0, 1), random_normal(-1, 1), random_normal_(-1, 1)
+        testdata.random_normal(0, 1), testdata.random_normal(-1, 1), testdata.random_normal(-1, 1)
         from
             testdata.product_groups pg,
             testdata.aspects a
@@ -456,15 +457,15 @@ with
             a.scope = 'product_group'),
     product_subgroup_topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code, 
+        product_code, pg_code, ps_code, kind_code,
         aspect_code,
         initial_quality, quality_trend, demad_trend)
         as
-    (select 
+    (select
         testdata.code2(a.code, ps.code), testdata.topic_title(ps.title, a.title),
-        null, ps.pg_code, ps.code, null, 
+        null, ps.pg_code, ps.code, null,
         a.code,
-        random_normal(0, 1), random_normal(-1, 1), random_normal(-1, 1)
+        testdata.random_normal(0, 1), testdata.random_normal(-1, 1), testdata.random_normal(-1, 1)
         from
             testdata.aspects a,
             testdata.product_subgroups ps
@@ -472,15 +473,15 @@ with
             a.scope = 'product_subgroup'),
     product_topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code, 
+        product_code, pg_code, ps_code, kind_code,
         aspect_code,
         initial_quality, quality_trend, demad_trend)
         as
     (select
         testdata.code2(a.code, p.code), testdata.topic_title(p.title, a.title),
-        p.code, p.pg_code, p.ps_code, p.kind_code, 
+        p.code, p.pg_code, p.ps_code, p.kind_code,
         a.code,
-        random_normal(0, 1), random_normal(-1, 1), random_normal(-1, 1)
+        testdata.random_normal(0, 1), testdata.random_normal(-1, 1), testdata.random_normal(-1, 1)
         from
             testdata.products p,
             testdata.aspects a
@@ -496,15 +497,13 @@ with
 insert into
     topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code, 
+        product_code, pg_code, ps_code, kind_code,
         aspect_code,
-        initial_quality, quality_trend, demad_trend)
+        initial_quality, quality_trend, demand_trend)
     select
         code, title,
-        product_code, pg_code, kind_code, ps_code, 
+        product_code, pg_code, ps_code, kind_code,
         aspect_code,
         initial_quality, quality_trend, demand_trend
     from
         topic_protos;
-
-
