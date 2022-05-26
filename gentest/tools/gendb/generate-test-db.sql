@@ -11,6 +11,8 @@ drop function if exists testdata.code2;
 drop function if exists testdata.title2;
 drop function if exists testdata.online_doc_title;
 drop function if exists testdata.topic_title;
+drop function if exists testdata.random_code;
+drop function if exists testdata.produce_users;
 
 create function testdata.random_normal(min real, max real) returns real
     language plpgsql
@@ -98,6 +100,7 @@ $$;
 
 /* Tables */
 
+drop table if exists testdata.model_parms;
 drop table if exists testdata.countries;
 drop table if exists testdata.langs;
 drop table if exists testdata.countries_langs;
@@ -119,10 +122,17 @@ drop table if exists testdata.topics;
 drop table if exists testdata.topic_vers;
 drop table if exists testdata.users;
 
+create table testdata.model_parms (
+    code                varchar,
+    n_users             int,
+    period_of_modeling  interval,
+    is_active           boolean
+);
+
 create table testdata.countries (
     code        varchar,
     title       varchar,
-    pop_size    varchar);
+    pop_size    int);
 
 create table testdata.langs (
     code    varchar,
@@ -241,6 +251,7 @@ create table users (
 
 /* Data */
 
+truncate table testdata.model_parms;
 truncate table testdata.genres;
 truncate table testdata.product_groups;
 truncate table testdata.product_subgroups;
@@ -252,6 +263,12 @@ truncate table testdata.online_docs;
 truncate table testdata.online_doc_vers;
 truncate table testdata.topics;
 truncate table testdata.topic_vers;
+truncate table users;
+
+/* Cinfiguring parameters of the model */
+insert 
+    into testdata.model_parms (code, n_users, period_of_modeling, is_active) 
+    values ('default', 10000, '6 months', true);
 
 
 /* Producing directories */
@@ -264,7 +281,7 @@ insert into testdata.countries (code, title, pop_size) values ('jp', 'Japan', 12
 insert into testdata.countries (code, title, pop_size) values ('ru', 'Russia', 145);
 insert into testdata.countries (code, title, pop_size) values ('kr', 'South Korea', 50);
 insert into testdata.countries (code, title, pop_size) values ('es', 'Spain', 46);
-insert into testdata.countries (code, title, pop_size) values ('ua', 'Ukrane', 80);
+insert into testdata.countries (code, title, pop_size) values ('ua', 'Ukrane', 40);
 insert into testdata.countries (code, title, pop_size) values ('uk', 'United Kingdom', 62);
 insert into testdata.countries (code, title, pop_size) values ('us', 'USA', 311);
 insert into testdata.countries (code, title, pop_size) values ('za', 'South Africa', 50);
@@ -566,3 +583,76 @@ begin
 end
 $$;*/
 
+/* Producing users */
+
+create function testdata.random_code(codes varchar array, shares real array) returns varchar
+    language plpgsql
+as
+$$
+    declare
+        i int;
+        max_total real;
+        dice real;
+        total real;
+        totals real array;
+        random_code varchar;
+begin
+    max_total = 0;
+    for i in 1..array_length(shares, 1)
+    loop
+        max_total = max_total + shares[i];
+    end loop;
+
+    dice = random()*max_total;
+
+    i = 1;
+    total = shares[1];
+    while total < dice
+    loop
+        i = i + 1;
+        total = total + shares[i];
+    end loop;
+
+    random_code = codes[i];
+
+    return random_code;
+end
+$$;
+
+create or replace function produce_users(n_users int) returns boolean
+    language plpgsql
+as
+$$
+begin
+    for i in 1..n_users
+    loop
+        with
+            random_country (country_code)
+                as
+            (select
+                testdata.random_code(array_agg(code), array_agg(pop_size)) as country_code
+                from
+                    testdata.countries),
+            random_os (os_code)
+                as
+            (select
+                testdata.random_code(array_agg(code), array_agg(os_share)) as os_code
+                from
+                    testdata.oss)
+        insert into testdata.users (
+            country_code,
+            os_code,
+            iq, iw)
+        select
+            country_code,
+            os_code,
+            random_normal_int(0, 200), random_normal_int(0, 200)
+            from
+                random_country,
+                random_os;
+    end loop;
+    return true;
+end
+$$;
+
+select produce_users(n_users) from model_parms;
