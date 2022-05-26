@@ -6,6 +6,7 @@ drop function if exists testdata.random_normal;
 drop function if exists testdata.random_normal_int;
 drop function if exists testdata.random_quasi_normal;
 drop function if exists testdata.random_quasi_normal_int;
+drop function if exists testdata.random_timestamp;
 drop function if exists testdata.code2;
 drop function if exists testdata.title2;
 drop function if exists testdata.online_doc_title;
@@ -46,6 +47,17 @@ begin
     return round(random_quasi_normal(min, max));
 end
 $$;
+
+/*
+create function testdata.random_timestamp(ts_from timestamp, ts_to timestamp) returns timestamp
+    language plpgsql
+as
+$$
+begin
+    return round(random_quasi_normal(min, max));
+end
+$$;*/
+
 
 create function testdata.code2(code1 varchar, code2 varchar) returns varchar
     language plpgsql
@@ -100,6 +112,7 @@ drop table if exists testdata.products;
 drop table if exists testdata.aspects;
 drop table if exists testdata.genres_aspects;
 drop table if exists testdata.subjects;
+drop table if exists testdata.locals;
 drop table if exists testdata.online_docs;
 drop table if exists testdata.online_doc_vers;
 drop table if exists testdata.topics;
@@ -174,9 +187,15 @@ create table testdata.subjects (
     code        varchar,
     title       varchar);
 
+create table testdata.locals (
+    lang_code           varchar,
+    initial_quality     real,
+    quality_trend       real);
+
 create table testdata.online_docs (
     uuid                uuid default gen_random_uuid() not null primary key,
     code                varchar,
+    lang_code           varchar,
     title               varchar,
     product_code        varchar,
     pg_code             varchar,
@@ -193,6 +212,7 @@ create table testdata.online_doc_vers (
 create table testdata.topics (
     uuid                uuid default gen_random_uuid() not null primary key,
     code                varchar,
+    lang_code           varchar,
     title               varchar,
     product_code        varchar,
     pg_code             varchar,
@@ -227,6 +247,7 @@ truncate table testdata.product_subgroups;
 truncate table testdata.kinds;
 truncate table testdata.aspects;
 truncate table testdata.genres_aspects;
+truncate table testdata.locals;
 truncate table testdata.online_docs;
 truncate table testdata.online_doc_vers;
 truncate table testdata.topics;
@@ -419,21 +440,33 @@ insert into
         where
              ps.pg_code = pg.code;
 
+/* Producing locals */
+
+insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('en', 0.95,  0.0);
+insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('es', 0.70,  0.2);
+insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('de', 0.70,  0.1);
+insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('jp', 0.30,  0.5);
+insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('kr', 0.30,  0.5);
+insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('ru', 0.90, -0.1);
+
 
 /* Producing online documents */
 
 insert into
     online_docs (
-        code, title,
+        code, lang_code,
+        title,
         product_code, pg_code, ps_code, kind_code,
         genre_code)
     select
-        testdata.code2(p.code, g.code), testdata.online_doc_title(p.title, g.title),
+        testdata.code2(p.code, g.code), l.lang_code,
+        testdata.online_doc_title(p.title, g.title),
         p.code, p.pg_code, p.ps_code, p.kind_code,
         g.code
         from
             testdata.products p,
-            testdata.genres g;
+            testdata.genres g,
+            locals l;
 
 
 /* Producing topics */
@@ -496,14 +529,40 @@ with
     select * from product_topics)
 insert into
     topics (
-        code, title,
+        code, lang_code,
+        title,
         product_code, pg_code, ps_code, kind_code,
         aspect_code,
-        initial_quality, quality_trend, demand_trend)
+        initial_quality, quality_trend,
+        demand_trend)
     select
-        code, title,
+        code, lang_code,
+        title,
         product_code, pg_code, ps_code, kind_code,
         aspect_code,
-        initial_quality, quality_trend, demand_trend
+        tp.initial_quality*l.initial_quality, tp.quality_trend*l.quality_trend,
+        demand_trend
     from
-        topic_protos;
+        topic_protos tp,
+        locals l;
+
+/* TBD */
+/*
+create function testdata.produce_online_doc_vers(online_doc_code varchar, ts_from timestamp) returns boolean
+    language plpgsql
+as
+$$
+begin
+    nvers = random(1, 10);
+    for i in 1..nvers
+    loop
+        ts_ver = ts_from + testdata.random_duration(7, 30);
+        insert into testdata.online_doc_vers (
+            online_doc_code, ver_timestamp)
+        values (
+            online_doc_code, ts_ver);
+    end loop;
+    return true;
+end
+$$;*/
+

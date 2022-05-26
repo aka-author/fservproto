@@ -189,7 +189,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaDoc">
-        <topic id="{code}" xml:lang="en">
+        <topic id="{code}" xml:lang="{lang_code}">
             <xsl:apply-templates select="." mode="ditaTitle"/>
             <xsl:apply-templates select="." mode="ditaInnerContent"/>
         </topic>
@@ -203,22 +203,23 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isGroupTopic(.)]" mode="outPath">
-        <xsl:value-of select="pg_code"/>
+        <xsl:value-of select="concat(lang_code, '/', pg_code)"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isSubgroupTopic(.)]" mode="outPath">
-        <xsl:value-of select="concat(pg_code, '/', ps_code)"/>
+        <xsl:value-of select="concat(lang_code, '/', pg_code, '/', ps_code)"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isProductTopic(.)]" mode="outPath">
-        <xsl:value-of select="concat(pg_code, '/', ps_code, '/', kind_code)"/>
+        <xsl:value-of select="concat(lang_code, '/', pg_code, '/', ps_code, '/', kind_code)"/>
     </xsl:template>
 
     <xsl:function name="cpm:productPath">
         <xsl:param name="handleElement"/>
         <xsl:param name="target_product_code"/>
+        <xsl:param name="target_lang_code"/>
         <xsl:apply-templates
-            select="root($handleElement)//row[cpm:isTopic(.) and product_code = $target_product_code][1]"
+            select="root($handleElement)//row[cpm:isTopic(.) and product_code = $target_product_code and lang_code = $target_lang_code][1]"
             mode="outPath"/>
     </xsl:function>
 
@@ -257,8 +258,10 @@
         <xsl:variable name="gat" select="cpm:genreAspectTable($onlineDoc)"/>
         <xsl:variable name="aspectMatchesGenre"
             select="cpm:doesGenreHaveAspect($gat, $onlineDoc/genre_code, $topic/aspect_code)"/>
+        
+        <xsl:variable name="langIsSame" select="$onlineDoc/lang_code = $topic/lang_code"/>
 
-        <xsl:sequence select="$productIsSame and $aspectMatchesGenre"/>
+        <xsl:sequence select="$productIsSame and $langIsSame and $aspectMatchesGenre"/>
     </xsl:function>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="ditaInnerContent">
@@ -267,7 +270,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="ditaDoc">
-        <map id="{code}">
+        <map id="{code}" xml:lang="{lang_code}">
             <xsl:apply-templates select="." mode="ditaTitle"/>
             <xsl:apply-templates select="." mode="ditaInnerContent"/>
         </map>
@@ -278,7 +281,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="outPath">
-        <xsl:value-of select="cpm:productPath(., product_code)"/>
+        <xsl:value-of select="cpm:productPath(., product_code, lang_code)"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isOnlineDoc(.)]" mode="ditaWriteOut">
@@ -297,7 +300,7 @@
 
         <!-- Producing topics -->
         <xsl:apply-templates select="//topics/data/row" mode="ditaWriteOut"/>
-       
+
         <!-- Producing document maps -->
         <xsl:apply-templates select="//online_docs/data/row" mode="ditaWriteOut"/>
 
