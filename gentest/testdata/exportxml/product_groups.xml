@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<row>
+  <code>animals</code>
+  <title>Animals</title>
+</row>
+<row>
+  <code>persons</code>
+  <title>Persons</title>
+</row>
+<row>
+  <code>things</code>
+  <title>Things</title>
+</row>
+</data>

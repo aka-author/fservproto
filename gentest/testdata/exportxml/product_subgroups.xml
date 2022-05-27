@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<row>
+  <code>rabbits</code>
+  <title>Rabbits</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>wombats</code>
+  <title>Wombats</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>cows</code>
+  <title>Cows</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>cats</code>
+  <title>Cats</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>dogs</code>
+  <title>Dogs</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>horses</code>
+  <title>Horses</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>elephants</code>
+  <title>Elephants</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>rhinoceroses</code>
+  <title>Rhinoceros</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>hamsters</code>
+  <title>Hamsters</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>platypuses</code>
+  <title>Platypuses</title>
+  <pg_code>animals</pg_code>
+</row>
+<row>
+  <code>teapots</code>
+  <title>Teapots</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>vcleaners</code>
+  <title>Vacuum Cleaners</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>fridges</code>
+  <title>Refrigerators</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>routers</code>
+  <title>Routers</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>phones</code>
+  <title>Cell Phones</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>wmachines</code>
+  <title>Washing Machines</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>aconds</code>
+  <title>Air Conditioners</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>toasters</code>
+  <title>Toasters</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>hookahs</code>
+  <title>Hookahs</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>mgrinders</code>
+  <title>Meat Grinders</title>
+  <pg_code>things</pg_code>
+</row>
+<row>
+  <code>relatives</code>
+  <title>Relatives</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>friends</code>
+  <title>Friends</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>classmates</code>
+  <title>Classmates</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>neighbours</code>
+  <title>Neighbours</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>сolleagues</code>
+  <title>Сolleagues</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>adherents</code>
+  <title>Adherents</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>psychos</code>
+  <title>Psychotherapists</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>enemies</code>
+  <title>Enemies</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>partners</code>
+  <title>Partners</title>
+  <pg_code>persons</pg_code>
+</row>
+<row>
+  <code>strangers</code>
+  <title>Strangers</title>
+  <pg_code>persons</pg_code>
+</row>
+</data>

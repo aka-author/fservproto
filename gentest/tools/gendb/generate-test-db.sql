@@ -6,8 +6,8 @@ drop function if exists testdata.random_normal;
 drop function if exists testdata.random_normal_int;
 drop function if exists testdata.random_quasi_normal;
 drop function if exists testdata.random_quasi_normal_int;
-drop function if exists random_normal_20x80;
-drop function if exists random_hyper;
+drop function if exists testdata.random_normal_20x80;
+drop function if exists testdata.random_hyper;
 drop function if exists testdata.random_timestamp;
 drop function if exists testdata.code2;
 drop function if exists testdata.title2;
@@ -16,7 +16,7 @@ drop function if exists testdata.topic_title;
 drop function if exists testdata.random_code;
 drop function if exists testdata.random_lang_code;
 drop function if exists testdata.random_browser_code;
-drop function if exists testdata.produce_users;
+drop function if exists testdata.produce_readers;
 drop function if exists testdata.random_product_code;
 
 
@@ -149,12 +149,12 @@ drop table if exists testdata.online_docs;
 drop table if exists testdata.online_doc_vers;
 drop table if exists testdata.topics;
 drop table if exists testdata.topic_vers;
-drop table if exists testdata.users;
-drop table if exists testdata.users_products;
+drop table if exists testdata.readers;
+drop table if exists testdata.readers_products;
 
 create table testdata.model_parms (
     code                varchar,
-    n_users             int,
+    n_readers           int,
     period_of_modeling  interval,
     is_active           boolean
 );
@@ -269,18 +269,19 @@ create table testdata.topic_vers (
     ver_no              int,
     ver_date            timestamp);
 
-create table users (
+create table readers (
     uuid                uuid default gen_random_uuid() not null primary key,
     country_code        varchar,
     lang_code           varchar,
     os_code             varchar,
     browser_code        varchar,
-    iq                  int,
-    iw                  int);
+    intension           real,
+    intelligence        real,
+    irritability        real);
 
-create table users_products (
-    user_uuid       uuid,
-    product_code    varchar
+create table readers_products (
+    reader_uuid         uuid,
+    product_code        varchar
 );
 
 
@@ -298,13 +299,12 @@ truncate table testdata.online_docs;
 truncate table testdata.online_doc_vers;
 truncate table testdata.topics;
 truncate table testdata.topic_vers;
-truncate table users;
-truncate table products;
-truncate table users_products;
+truncate table testdata.readers;
+truncate table testdata.readers_products;
 
 /* Cinfiguring parameters of the model */
 insert
-    into testdata.model_parms (code, n_users, period_of_modeling, is_active)
+    into testdata.model_parms (code, n_readers, period_of_modeling, is_active)
     values ('default', 10000, '6 months', true);
 
 
@@ -495,6 +495,7 @@ insert into
         where
              ps.pg_code = pg.code;
 
+
 /* Producing locals */
 
 insert into testdata.locals (lang_code, initial_quality, quality_trend) values ('en', 0.95,  0.0);
@@ -622,10 +623,10 @@ end
 $$;*/
 
 
-/* Producing users */
+/* Producing readers */
 
 create function testdata.random_code(codes varchar array, shares real array) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
     declare
@@ -660,12 +661,12 @@ end
 $$;
 
 create function testdata.random_lang_code(target_country_code varchar) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
-    declare
-        lang_codes varchar array;
-        lang_shares real array;
+declare
+    lang_codes varchar array;
+    lang_shares real array;
 begin
     select array_agg(lang_code), array_agg(lang_share)
         into
@@ -680,12 +681,12 @@ end
 $$
 
 create function testdata.random_browser_code(target_os_code varchar) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
-    declare
-        browser_codes varchar array;
-        browser_shares real array;
+declare
+    browser_codes varchar array;
+    browser_shares real array;
 begin
     select
            array_agg(browser_code), array_agg(browser_share)
@@ -700,8 +701,8 @@ begin
 end
 $$;
 
-create function produce_users(n_users int) returns boolean
-    language plpgsql
+create function produce_readers(n_readers int) returns boolean
+language plpgsql
 as
 $$
 declare
@@ -710,33 +711,51 @@ declare
     os_code varchar;
     browser_code varchar;
 begin
-    for i in 1..n_users
+    for i in 1..n_readers
     loop
-        select testdata.random_code(array_agg(code), array_agg(pop_size)) into country_code from testdata.countries;
-        select random_lang_code(country_code) into lang_code;
+        select
+            testdata.random_code(array_agg(code), array_agg(pop_size))
+            into 
+                country_code 
+            from 
+                testdata.countries;
+        
+        select 
+            random_lang_code(country_code) 
+            into
+                lang_code;
 
-        select testdata.random_code(array_agg(code), array_agg(os_share)) into os_code from testdata.oss;
-        select random_browser_code(os_code) into browser_code;
+        select 
+            testdata.random_code(array_agg(code), array_agg(os_share)) 
+            into 
+                os_code 
+            from 
+                testdata.oss;
+        
+        select 
+            random_browser_code(os_code) 
+            into 
+                browser_code;
 
         insert
-            into testdata.users (
+            into testdata.readers (
                 country_code, lang_code,
                 os_code, browser_code,
-                iq, iw)
+                intension, intelligence, irritability)
             values (
                 country_code, lang_code,
                 os_code, browser_code,
-                random_normal(0, 200), random_normal(0, 200));
+                random_normal(0, 1), random_normal(0, 1), random_normal(0, 1));
     end loop;
 
     return true;
 end
 $$;
 
-select produce_users(n_users) from model_parms;
+select produce_readers(n_readers) from model_parms;
 
 create function testdata.random_product_code() returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
 declare
@@ -755,8 +774,8 @@ end
 $$;
 
 insert into
-    users_products (user_uuid, product_code)
-select
-    u.uuid, random_product_code() from users u;
+    readers_products (reader_uuid, product_code)
+    select
+        u.uuid, random_product_code() from readers u;
 
-select product_code, count(user_uuid) from users_products group by product_code;
+select product_code, count(reader_uuid) from readers_products group by product_code;

@@ -101,6 +101,133 @@
 
 
     <!-- 
+        Metadata
+    -->
+
+    <!-- Representing metadata in topics -->
+
+    <xsl:template match="*" mode="titleByCodeElm"/>
+
+    <xsl:template match="ps_code" mode="titleByCodeElm">
+        <xsl:value-of select="//product_subgroups//row[code = current()]/title"/>
+    </xsl:template>
+
+    <xsl:template match="kind_code" mode="titleByCodeElm">
+        <xsl:value-of select="//kinds//row[code = current()]/title"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:titleByCodeElm">
+        <xsl:param name="codeElement"/>
+        <xsl:apply-templates select="$codeElement" mode="titleByCodeElm"/>
+    </xsl:function>
+
+    <xsl:template match="product_groups//row" mode="ditaTaxonomyOthermeta">
+        <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
+    </xsl:template>
+
+    <xsl:template match="product_subgroups//row" mode="ditaTaxonomyOthermeta">
+        <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
+    </xsl:template>
+
+    <xsl:template match="kinds//row" mode="ditaTaxonomyOthermeta">
+        <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
+    </xsl:template>
+
+    <xsl:template match="row[cpm:isTopic(.) and ps_code = 'null']" mode="ditaTaxonomyProduct">
+        <xsl:apply-templates select="//product_groups//row[code = current()/pg_code]"
+            mode="ditaTaxonomyOthermeta"/>
+    </xsl:template>
+
+    <xsl:template match="row[cpm:isTopic(.) and ps_code != 'null']" mode="ditaTaxonomyProduct">
+        <othermeta name="Product" props="{ps_code}" otherprops="taxonomy"
+            content="{cpm:titleByCodeElm(ps_code)}"/>
+    </xsl:template>
+
+    <xsl:template match="row[cpm:isTopic(.) and kind_code = 'null']" mode="ditaTaxonomyTechnology">
+        <xsl:apply-templates select="//kinds//row" mode="ditaTaxonomyOthermeta"/>
+    </xsl:template>
+
+    <xsl:template match="row[cpm:isTopic(.) and kind_code != 'null']" mode="ditaTaxonomyTechnology">
+        <othermeta name="Technology" props="{kind_code}" otherprops="taxonomy"
+            content="{cpm:titleByCodeElm(kind_code)}"/>
+    </xsl:template>
+
+    <xsl:template match="row[cpm:isTopic(.)]" mode="ditaTaxonomy">
+        <xsl:apply-templates select="." mode="ditaTaxonomyProduct"/>
+        <xsl:apply-templates select="." mode="ditaTaxonomyTechnology"/>
+    </xsl:template>
+
+    <xsl:template match="row[cpm:isTopic(.)]" mode="ditaProlog">
+        <prolog>
+            <metadata>
+                <xsl:apply-templates select="." mode="ditaTaxonomy"/>
+            </metadata>
+        </prolog>
+    </xsl:template>
+
+    <!-- A subject map -->
+
+    <xsl:template match="row" mode="ditaKeys">
+        <xsl:value-of select="title"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:ditaKeys">
+        <xsl:param name="row"/>
+        <xsl:apply-templates select="$row" mode="ditaKeys"/>
+    </xsl:function>
+
+    <xsl:template match="product_subgroups//row" mode="ditaTaxonomy">
+        <subjectdef keys="{cpm:ditaKeys(.)}"/>
+    </xsl:template>
+
+    <xsl:template match="product_groups//row" mode="ditaTaxonomy">
+        <subjectdef keys="{cpm:ditaKeys(.)}">
+            <xsl:apply-templates select="//product_subgroups//row[pg_code = current()/code]"
+                mode="ditaTaxonomy"/>
+        </subjectdef>
+    </xsl:template>
+
+    <xsl:template match="product_groups" mode="ditaTaxonomy">
+        <subjectdef keys="Products">
+            <xsl:apply-templates select=".//row" mode="ditaTaxonomy"/>
+        </subjectdef>
+    </xsl:template>
+
+    <xsl:template match="kinds//row" mode="ditaTaxonomy">
+        <subjectdef keys="{cpm:ditaKeys(.)}"/>
+    </xsl:template>
+
+    <xsl:template match="kinds" mode="ditaTaxonomy">
+        <subjectdef keys="Technologies">
+            <xsl:apply-templates select=".//row" mode="ditaTaxonomy"/>
+        </subjectdef>
+    </xsl:template>
+
+    <xsl:template match="taxonomy" mode="ditaSubjectMap">
+        <subjectScheme>
+            <xsl:apply-templates select="//product_groups" mode="ditaTaxonomy"/>
+            <xsl:apply-templates select="//kinds" mode="ditaTaxonomy"/>
+        </subjectScheme>
+    </xsl:template>
+
+    <xsl:template match="taxonomy" mode="outFilename">
+        <xsl:value-of select="'taxonomy.xml'"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:ditaTaxonomyFullPath">
+        <xsl:value-of select="cpm:joinPaths(cpm:outRootPath(), 'taxonomy.xml')"/>
+    </xsl:function>
+
+    <xsl:template match="taxonomy" mode="ditaWriteOut">
+        <xsl:result-document href="{cpm:ditaTaxonomyFullPath()}" indent="yes"
+            doctype-public="-//OASIS//DTD DITA Subject Scheme Map//EN"
+            doctype-system="subjectScheme.dtd">
+            <xsl:apply-templates select="." mode="ditaSubjectMap"/>
+        </xsl:result-document>
+    </xsl:template>
+
+
+    <!-- 
         Topics
     -->
 
@@ -191,6 +318,7 @@
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaDoc">
         <topic id="{code}" xml:lang="{lang_code}">
             <xsl:apply-templates select="." mode="ditaTitle"/>
+            <xsl:apply-templates select="." mode="ditaProlog"/>
             <xsl:apply-templates select="." mode="ditaInnerContent"/>
         </topic>
     </xsl:template>
@@ -258,7 +386,7 @@
         <xsl:variable name="gat" select="cpm:genreAspectTable($onlineDoc)"/>
         <xsl:variable name="aspectMatchesGenre"
             select="cpm:doesGenreHaveAspect($gat, $onlineDoc/genre_code, $topic/aspect_code)"/>
-        
+
         <xsl:variable name="langIsSame" select="$onlineDoc/lang_code = $topic/lang_code"/>
 
         <xsl:sequence select="$productIsSame and $langIsSame and $aspectMatchesGenre"/>
@@ -303,6 +431,9 @@
 
         <!-- Producing document maps -->
         <xsl:apply-templates select="//online_docs/data/row" mode="ditaWriteOut"/>
+
+        <!-- Producing a subject map for the taxonomy -->
+        <xsl:apply-templates select="//taxonomy" mode="ditaWriteOut"/>
 
     </xsl:template>
 

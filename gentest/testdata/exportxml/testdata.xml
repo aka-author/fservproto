@@ -7,9 +7,17 @@
     <!ENTITY genres_aspects SYSTEM "genres_aspects.xml">
     <!ENTITY online_docs SYSTEM "online_docs.xml">
     <!ENTITY topics SYSTEM "topics.xml">
+    <!ENTITY product_groups SYSTEM "product_groups.xml">
+    <!ENTITY product_subgroups SYSTEM "product_subgroups.xml">
+    <!ENTITY kinds SYSTEM "kinds.xml">
 ]>
 <database>
     <genres_aspects>&genres_aspects;</genres_aspects>
     <online_docs>&online_docs;</online_docs>
     <topics>&topics;</topics>
+    <taxonomy>
+        <product_groups>&product_groups;</product_groups>
+        <product_subgroups>&product_subgroups;</product_subgroups>
+        <kinds>&kinds;</kinds>
+    </taxonomy>
 </database>

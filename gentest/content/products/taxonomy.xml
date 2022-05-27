@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE subjectScheme
+  PUBLIC "-//OASIS//DTD DITA Subject Scheme Map//EN" "subjectScheme.dtd">
+<subjectScheme>
+   <subjectdef keys="Products">
+      <subjectdef keys="Animals">
+         <subjectdef keys="Rabbits"/>
+         <subjectdef keys="Wombats"/>
+         <subjectdef keys="Cows"/>
+         <subjectdef keys="Cats"/>
+         <subjectdef keys="Dogs"/>
+         <subjectdef keys="Horses"/>
+         <subjectdef keys="Elephants"/>
+         <subjectdef keys="Rhinoceros"/>
+         <subjectdef keys="Hamsters"/>
+         <subjectdef keys="Platypuses"/>
+      </subjectdef>
+      <subjectdef keys="Persons">
+         <subjectdef keys="Relatives"/>
+         <subjectdef keys="Friends"/>
+         <subjectdef keys="Classmates"/>
+         <subjectdef keys="Neighbours"/>
+         <subjectdef keys="Сolleagues"/>
+         <subjectdef keys="Adherents"/>
+         <subjectdef keys="Psychotherapists"/>
+         <subjectdef keys="Enemies"/>
+         <subjectdef keys="Partners"/>
+         <subjectdef keys="Strangers"/>
+      </subjectdef>
+      <subjectdef keys="Things">
+         <subjectdef keys="Teapots"/>
+         <subjectdef keys="Vacuum Cleaners"/>
+         <subjectdef keys="Refrigerators"/>
+         <subjectdef keys="Routers"/>
+         <subjectdef keys="Cell Phones"/>
+         <subjectdef keys="Washing Machines"/>
+         <subjectdef keys="Air Conditioners"/>
+         <subjectdef keys="Toasters"/>
+         <subjectdef keys="Hookahs"/>
+         <subjectdef keys="Meat Grinders"/>
+      </subjectdef>
+   </subjectdef>
+   <subjectdef keys="Technologies">
+      <subjectdef keys="Biotech"/>
+      <subjectdef keys="Robotic"/>
+      <subjectdef keys="Shared"/>
+      <subjectdef keys="Virtual"/>
+   </subjectdef>
+</subjectScheme>
