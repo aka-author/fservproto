@@ -7,6 +7,7 @@ drop function if exists testdata.random_normal_int;
 drop function if exists testdata.random_quasi_normal;
 drop function if exists testdata.random_quasi_normal_int;
 drop function if exists random_normal_20x80;
+drop function if exists random_hyper;
 drop function if exists testdata.random_timestamp;
 drop function if exists testdata.code2;
 drop function if exists testdata.title2;
@@ -47,7 +48,7 @@ end
 $$;
 
 create function testdata.random_quasi_normal_int(min int, max int) returns int
-    language plpgsql
+language plpgsql
 as
 $$
 begin
@@ -55,15 +56,24 @@ begin
 end
 $$;
 
+create function testdata.random_hyper(min real, max real) returns real
+    language plpgsql
+as
+$$
+begin
+    return min + (max - min)*(1/random());
+end
+$$;
+
 create function testdata.random_normal_20x80(
-    share_high, low_min real, low_max real, high_min real, high_max real) returns int
+    share_high real, low_min real, low_max real, high_min real, high_max real) returns real
 language plpgsql
 as
 $$
 begin
     if random() < share_high then
         return random_normal(high_min, high_max);
-    else 
+    else
         return random_normal(low_min, low_max);
     end if;
 end
@@ -140,7 +150,7 @@ drop table if exists testdata.online_doc_vers;
 drop table if exists testdata.topics;
 drop table if exists testdata.topic_vers;
 drop table if exists testdata.users;
-drop table is exists testdata.users_products;
+drop table if exists testdata.users_products;
 
 create table testdata.model_parms (
     code                varchar,
@@ -271,7 +281,7 @@ create table users (
 create table users_products (
     user_uuid       uuid,
     product_code    varchar
-);    
+);
 
 
 /* Data */
@@ -289,10 +299,12 @@ truncate table testdata.online_doc_vers;
 truncate table testdata.topics;
 truncate table testdata.topic_vers;
 truncate table users;
+truncate table products;
+truncate table users_products;
 
 /* Cinfiguring parameters of the model */
-insert 
-    into testdata.model_parms (code, n_users, period_of_modeling, is_active) 
+insert
+    into testdata.model_parms (code, n_users, period_of_modeling, is_active)
     values ('default', 10000, '6 months', true);
 
 
@@ -475,7 +487,7 @@ insert into
     select
         testdata.code2(k.code, ps.code), testdata.title2(k.title,  ps.title),
         pg.code, ps.code, k.code,
-        testdata.random_normal_20x80(0.1, 0.0, 0.8, 0.8, 1.0), testdata.random_normal(0, 1)
+        testdata.random_hyper(0, 1), testdata.random_normal(0, 1)
         from
             testdata.product_groups pg,
             testdata.product_subgroups ps,
@@ -655,12 +667,12 @@ $$
         lang_codes varchar array;
         lang_shares real array;
 begin
-    select array_agg(lang_code), array_agg(lang_share) 
+    select array_agg(lang_code), array_agg(lang_share)
         into
-            lang_codes, lang_shares 
-        from 
-            testdata.countries_langs cl 
-        where 
+            lang_codes, lang_shares
+        from
+            testdata.countries_langs cl
+        where
             cl.country_code = target_country_code;
 
     return random_code(lang_codes, lang_shares);
@@ -708,13 +720,13 @@ begin
 
         insert
             into testdata.users (
-                country_code, lang_code, 
+                country_code, lang_code,
                 os_code, browser_code,
                 iq, iw)
             values (
-                country_code, lang_code, 
+                country_code, lang_code,
                 os_code, browser_code,
-                random_normal(0, 200), random_normal(0, 200));        
+                random_normal(0, 200), random_normal(0, 200));
     end loop;
 
     return true;
@@ -747,3 +759,4 @@ insert into
 select
     u.uuid, random_product_code() from users u;
 
+select product_code, count(user_uuid) from users_products group by product_code;
