@@ -6,13 +6,18 @@ drop function if exists testdata.random_normal;
 drop function if exists testdata.random_normal_int;
 drop function if exists testdata.random_quasi_normal;
 drop function if exists testdata.random_quasi_normal_int;
+drop function if exists random_normal_20x80;
 drop function if exists testdata.random_timestamp;
 drop function if exists testdata.code2;
 drop function if exists testdata.title2;
 drop function if exists testdata.online_doc_title;
 drop function if exists testdata.topic_title;
 drop function if exists testdata.random_code;
+drop function if exists testdata.random_lang_code;
+drop function if exists testdata.random_browser_code;
 drop function if exists testdata.produce_users;
+drop function if exists testdata.random_product_code;
+
 
 create function testdata.random_normal(min real, max real) returns real
     language plpgsql
@@ -47,6 +52,20 @@ as
 $$
 begin
     return round(random_quasi_normal(min, max));
+end
+$$;
+
+create function testdata.random_normal_20x80(
+    share_high, low_min real, low_max real, high_min real, high_max real) returns int
+language plpgsql
+as
+$$
+begin
+    if random() < share_high then
+        return random_normal(high_min, high_max);
+    else 
+        return random_normal(low_min, low_max);
+    end if;
 end
 $$;
 
@@ -121,6 +140,7 @@ drop table if exists testdata.online_doc_vers;
 drop table if exists testdata.topics;
 drop table if exists testdata.topic_vers;
 drop table if exists testdata.users;
+drop table is exists testdata.users_products;
 
 create table testdata.model_parms (
     code                varchar,
@@ -248,6 +268,11 @@ create table users (
     iq                  int,
     iw                  int);
 
+create table users_products (
+    user_uuid       uuid,
+    product_code    varchar
+);    
+
 
 /* Data */
 
@@ -296,16 +321,17 @@ insert into testdata.langs (code, title) values ('ru', 'Russian');
 insert into testdata.langs (code, title) values ('es', 'Spainish');
 insert into testdata.langs (code, title) values ('ua', 'Ukrainian');
 
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('gh', 'en', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ar', 'es', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('es', 'es', 1);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('de', 'de', 0.95);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('gh', 'en', 1);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'de', 0.05);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'he', 0.5);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'ru', 0.2);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'sp', 0.1);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('jp', 'jp', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ru', 'ru', 1);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('kr', 'kr', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('es', 'es', 1);
+insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ru', 'ru', 1);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ua', 'ru', 0.5);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ua', 'ua', 0.5);
 insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('uk', 'en', 1);
@@ -449,7 +475,7 @@ insert into
     select
         testdata.code2(k.code, ps.code), testdata.title2(k.title,  ps.title),
         pg.code, ps.code, k.code,
-        testdata.random_normal(0, 1), testdata.random_normal(0, 1)
+        testdata.random_normal_20x80(0.1, 0.0, 0.8, 0.8, 1.0), testdata.random_normal(0, 1)
         from
             testdata.product_groups pg,
             testdata.product_subgroups ps,
@@ -583,6 +609,7 @@ begin
 end
 $$;*/
 
+
 /* Producing users */
 
 create function testdata.random_code(codes varchar array, shares real array) returns varchar
@@ -590,17 +617,18 @@ create function testdata.random_code(codes varchar array, shares real array) ret
 as
 $$
     declare
-        i int;
         max_total real;
         dice real;
         total real;
-        totals real array;
+        i int;
         random_code varchar;
 begin
     max_total = 0;
-    for i in 1..array_length(shares, 1)
+    for i in 1..coalesce(cardinality(shares), 0)
     loop
-        max_total = max_total + shares[i];
+        if shares[i] is not null then
+            max_total = max_total + shares[i];
+        end if;
     end loop;
 
     dice = random()*max_total;
@@ -619,40 +647,103 @@ begin
 end
 $$;
 
-create or replace function produce_users(n_users int) returns boolean
+create function testdata.random_lang_code(target_country_code varchar) returns varchar
     language plpgsql
 as
 $$
+    declare
+        lang_codes varchar array;
+        lang_shares real array;
+begin
+    select array_agg(lang_code), array_agg(lang_share) 
+        into
+            lang_codes, lang_shares 
+        from 
+            testdata.countries_langs cl 
+        where 
+            cl.country_code = target_country_code;
+
+    return random_code(lang_codes, lang_shares);
+end
+$$
+
+create function testdata.random_browser_code(target_os_code varchar) returns varchar
+    language plpgsql
+as
+$$
+    declare
+        browser_codes varchar array;
+        browser_shares real array;
+begin
+    select
+           array_agg(browser_code), array_agg(browser_share)
+        into
+            browser_codes, browser_shares
+        from
+             testdata.oss_browsers ob
+        where
+              ob.os_code = target_os_code;
+
+    return random_code(browser_codes, browser_shares);
+end
+$$;
+
+create function produce_users(n_users int) returns boolean
+    language plpgsql
+as
+$$
+declare
+    country_code varchar;
+    lang_code varchar;
+    os_code varchar;
+    browser_code varchar;
 begin
     for i in 1..n_users
     loop
-        with
-            random_country (country_code)
-                as
-            (select
-                testdata.random_code(array_agg(code), array_agg(pop_size)) as country_code
-                from
-                    testdata.countries),
-            random_os (os_code)
-                as
-            (select
-                testdata.random_code(array_agg(code), array_agg(os_share)) as os_code
-                from
-                    testdata.oss)
-        insert into testdata.users (
-            country_code,
-            os_code,
-            iq, iw)
-        select
-            country_code,
-            os_code,
-            random_normal_int(0, 200), random_normal_int(0, 200)
-            from
-                random_country,
-                random_os;
+        select testdata.random_code(array_agg(code), array_agg(pop_size)) into country_code from testdata.countries;
+        select random_lang_code(country_code) into lang_code;
+
+        select testdata.random_code(array_agg(code), array_agg(os_share)) into os_code from testdata.oss;
+        select random_browser_code(os_code) into browser_code;
+
+        insert
+            into testdata.users (
+                country_code, lang_code, 
+                os_code, browser_code,
+                iq, iw)
+            values (
+                country_code, lang_code, 
+                os_code, browser_code,
+                random_normal(0, 200), random_normal(0, 200));        
     end loop;
+
     return true;
 end
 $$;
 
 select produce_users(n_users) from model_parms;
+
+create function testdata.random_product_code() returns varchar
+    language plpgsql
+as
+$$
+declare
+    product_codes varchar array;
+    product_demands real array;
+begin
+    select
+           array_agg(code), array_agg(demand)
+        into
+            product_codes, product_demands
+        from
+            testdata.products;
+
+    return random_code(product_codes, product_demands);
+end
+$$;
+
+insert into
+    users_products (user_uuid, product_code)
+select
+    u.uuid, random_product_code() from users u;
+
