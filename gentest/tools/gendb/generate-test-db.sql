@@ -16,6 +16,7 @@ drop function if exists testdata.topic_title;
 drop function if exists testdata.random_code;
 drop function if exists testdata.random_lang_code;
 drop function if exists testdata.random_browser_code;
+drop function if exists assign_subjects_to_topics;
 drop function if exists testdata.produce_readers;
 drop function if exists testdata.random_product_code;
 
@@ -79,6 +80,79 @@ begin
 end
 $$;
 
+create function testdata.array_total(numbers real array) returns real
+language plpgsql
+as
+$$
+    declare
+        total real;
+        i int;
+begin
+    total = 0;
+    for i in 1..coalesce(cardinality(numbers), 0)
+    loop
+        if numbers[i] is not null then
+            total = total + numbers[i];
+        end if;
+    end loop;
+
+    return total;
+end
+$$    
+
+create function testdata.random_code(codes varchar array, shares real array) returns varchar
+language plpgsql
+as
+$$
+declare
+    max_total real;
+    dice real;
+    total real;
+    i int;
+    random_code varchar;
+begin
+    dice = random()*testdata.array_total(shares);
+
+    i = 1;
+    total = shares[1];
+    while total < dice
+    loop
+        i = i + 1;
+        total = total + shares[i];
+    end loop;
+
+    random_code = codes[i];
+
+    return random_code;
+end
+$$;
+
+create function testdata.random_code_or_null(
+    codes varchar array, shares real array, null_probability real) returns varchar
+language plpgsql
+as
+$$
+declare
+    random_code varchar;
+    total real;
+    null_share real;
+    codes_with_null real array;
+    shares_with_null real array;
+begin
+    random_code = null;
+
+    if  (0 <= null_probability) and (null_probability < 1) then
+        total = testdata.array_total(shares);
+        null_share = null_probability*total/(1 - null_probability);
+        codes_with_null = array_append(codes, null);
+        shares_with_null = array_append(shares, null_share); 
+        random_code = testdata.random_code(codes_with_null, shares_with_null);
+    end if;        
+
+    return random_code;
+end
+$$;
+
 /*
 create function testdata.random_timestamp(ts_from timestamp, ts_to timestamp) returns timestamp
     language plpgsql
@@ -132,31 +206,39 @@ $$;
 drop table if exists testdata.model_parms;
 drop table if exists testdata.countries;
 drop table if exists testdata.langs;
-drop table if exists testdata.countries_langs;
+drop table if exists testdata.countries__langs;
 drop table if exists testdata.oss;
 drop table if exists testdata.browsers;
-drop table if exists testdata.oss_browsers;
+drop table if exists testdata.oss__browsers;
 drop table if exists testdata.genres;
 drop table if exists testdata.product_groups;
 drop table if exists testdata.product_subgroups;
 drop table if exists testdata.kinds;
 drop table if exists testdata.products;
 drop table if exists testdata.aspects;
-drop table if exists testdata.genres_aspects;
+drop table if exists testdata.genres__aspects;
 drop table if exists testdata.subjects;
+drop table if exists testdata.gtopics__subjects;
+drop index if exists testdata.gtopics__subjects__topic_code__subject_code__idx;
 drop table if exists testdata.locals;
 drop table if exists testdata.online_docs;
 drop table if exists testdata.online_doc_vers;
 drop table if exists testdata.topics;
+drop index if exists testdata.topics__code__lang_code__idx;
 drop table if exists testdata.topic_vers;
 drop table if exists testdata.readers;
-drop table if exists testdata.readers_products;
+drop table if exists testdata.readers__products;
 
 create table testdata.model_parms (
-    code                varchar,
-    n_readers           int,
-    period_of_modeling  interval,
-    is_active           boolean
+    code                    varchar,
+    n_readers               int,
+    period_of_modeling      interval,
+    max_subjects_per_topic  int,
+    max_vers_per_online_doc int,
+    max_sessions_per_reader int,
+    max_topics_per_session  int,
+    source_lang_coode       varchar,
+    is_active               boolean
 );
 
 create table testdata.countries (
@@ -168,7 +250,7 @@ create table testdata.langs (
     code    varchar,
     title   varchar);
 
-create table testdata.countries_langs (
+create table testdata.countries__langs (
     country_code    varchar,
     lang_code       varchar,
     lang_share      real);
@@ -182,7 +264,7 @@ create table testdata.browsers (
     code    varchar,
     title   varchar);
 
-create table testdata.oss_browsers (
+create table testdata.oss__browsers (
     os_code             varchar,
     browser_code        varchar,
     browser_share       real);
@@ -219,13 +301,22 @@ create table testdata.aspects (
     infotype    varchar,
     scope       varchar);
 
-create table testdata.genres_aspects(
+create table testdata.genres__aspects(
     genre_code  varchar,
     aspect_code varchar);
 
 create table testdata.subjects (
     code        varchar,
     title       varchar);
+
+create table testdata.gtopics_subjects (
+    topic_code      varchar,
+    subject_code    varchar
+)
+
+create unique index 
+    testdata.gtopics__subjects__topic_code__subject_code__idx 
+    on testdata.gtopics_subjects(topic_code, subject_code);
 
 create table testdata.locals (
     lang_code           varchar,
@@ -263,6 +354,10 @@ create table testdata.topics (
     quality_trend       real,
     demand_trend        real);
 
+create unique index 
+    testdata.topics__code__lang_code__idx 
+    on tesdata.topics(code, lang_code); 
+
 create table testdata.topic_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
     topic_uuid          uuid,
@@ -279,7 +374,7 @@ create table readers (
     intelligence        real,
     irritability        real);
 
-create table readers_products (
+create table readers__products (
     reader_uuid         uuid,
     product_code        varchar
 );
@@ -293,19 +388,28 @@ truncate table testdata.product_groups;
 truncate table testdata.product_subgroups;
 truncate table testdata.kinds;
 truncate table testdata.aspects;
-truncate table testdata.genres_aspects;
+truncate table testdata.genres__aspects;
 truncate table testdata.locals;
 truncate table testdata.online_docs;
 truncate table testdata.online_doc_vers;
 truncate table testdata.topics;
 truncate table testdata.topic_vers;
 truncate table testdata.readers;
-truncate table testdata.readers_products;
+truncate table testdata.readers__products;
 
 /* Cinfiguring parameters of the model */
 insert
-    into testdata.model_parms (code, n_readers, period_of_modeling, is_active)
-    values ('default', 10000, '6 months', true);
+    into testdata.model_parms (
+        code, 
+        n_readers, 
+        period_of_modeling, 
+        max_subjects_per_topic,
+        max_vers_per_online_doc,
+        max_sessions_per_reader,
+        max_topics_per_session,
+        source_lang_coode,
+        is_active)
+    values ('default', 10000, '6 months', 2, 5, 10, 5, 'en', true);
 
 
 /* Producing directories */
@@ -333,24 +437,24 @@ insert into testdata.langs (code, title) values ('ru', 'Russian');
 insert into testdata.langs (code, title) values ('es', 'Spainish');
 insert into testdata.langs (code, title) values ('ua', 'Ukrainian');
 
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ar', 'es', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('es', 'es', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('de', 'de', 0.95);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('gh', 'en', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'de', 0.05);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'he', 0.5);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'ru', 0.2);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('il', 'sp', 0.1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('jp', 'jp', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('kr', 'kr', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ru', 'ru', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ua', 'ru', 0.5);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('ua', 'ua', 0.5);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('uk', 'en', 1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('us', 'en', 0.7);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('us', 'es', 0.2);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('us', 'ru', 0.1);
-insert into testdata.countries_langs (country_code, lang_code, lang_share) values ('za', 'ar', 0.3);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('ar', 'es', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('es', 'es', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('de', 'de', 0.95);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('gh', 'en', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('il', 'de', 0.05);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('il', 'he', 0.5);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('il', 'ru', 0.2);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('il', 'sp', 0.1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('jp', 'jp', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('kr', 'kr', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('ru', 'ru', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('ua', 'ru', 0.5);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('ua', 'ua', 0.5);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('uk', 'en', 1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('us', 'en', 0.7);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('us', 'es', 0.2);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('us', 'ru', 0.1);
+insert into testdata.countries__langs (country_code, lang_code, lang_share) values ('za', 'ar', 0.3);
 
 insert into testdata.oss (code, title, os_share) values ('android', 'Android', 0.3);
 insert into testdata.oss (code, title, os_share) values ('ios', 'iOS', 0.1);
@@ -364,22 +468,22 @@ insert into testdata.browsers (code, title) values ('ffox', 'FireFox');
 insert into testdata.browsers (code, title) values ('opera', 'Opera');
 insert into testdata.browsers (code, title) values ('safari', 'Safari');
 
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('android', 'chrome', 0.8);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('android', 'ffox', 0.1);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('android', 'opera', 0.1);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('ios', 'chrome', 0.3);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('ios', 'ffox', 0.3);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('ios', 'safari', 0.4);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('linux', 'chrome', 0.2);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('linux', 'ffox', 0.6);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('linux', 'opera', 0.2);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('macos', 'chrome', 0.3);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('macos', 'ffox', 0.1);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('macos', 'safari', 0.6);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'chrome', 0.5);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'edge', 0.1);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'ffox', 0.3);
-insert into testdata.oss_browsers (os_code, browser_code, browser_share) values ('windows', 'opera', 0.1);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('android', 'chrome', 0.8);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('android', 'ffox', 0.1);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('android', 'opera', 0.1);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('ios', 'chrome', 0.3);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('ios', 'ffox', 0.3);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('ios', 'safari', 0.4);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('linux', 'chrome', 0.2);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('linux', 'ffox', 0.6);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('linux', 'opera', 0.2);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('macos', 'chrome', 0.3);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('macos', 'ffox', 0.1);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('macos', 'safari', 0.6);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('windows', 'chrome', 0.5);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('windows', 'edge', 0.1);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('windows', 'ffox', 0.3);
+insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('windows', 'opera', 0.1);
 
 insert into testdata.genres (code, title) values ('ug', 'Quick Oparation Guide');
 insert into testdata.genres (code, title) values ('mg', 'Maintenance Guide');
@@ -412,31 +516,31 @@ insert into testdata.aspects (code, title, infotype, scope) values ('supressing'
 insert into testdata.aspects (code, title, infotype, scope) values ('resuming', 'Resuming', 'task', 'product');
 insert into testdata.aspects (code, title, infotype, scope) values ('resetting', 'Resetting', 'task', 'product');
 
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'understanding');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'intro');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'basics');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'planning');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'fun');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'safety');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'appending');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'activating');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'using');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'deactivating');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'removing');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'configuring');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('ug', 'sharing');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'basics');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'safety');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'verifying');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'updating');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'troubleshooting');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'protecting');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'respassw');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'repairing');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'maintaining');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'supressing');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'resuming');
-insert into testdata.genres_aspects(genre_code, aspect_code) values ('mg', 'resetting');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'understanding');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'intro');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'basics');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'planning');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'fun');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'safety');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'appending');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'activating');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'using');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'deactivating');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'removing');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'configuring');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('ug', 'sharing');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'basics');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'safety');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'verifying');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'updating');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'troubleshooting');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'protecting');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'respassw');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'repairing');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'maintaining');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'supressing');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'resuming');
+insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'resetting');
 
 insert into testdata.kinds (code, title) values ('biotech', 'Biotech');
 insert into testdata.kinds (code, title) values ('robotic', 'Robotic');
@@ -475,6 +579,12 @@ insert into testdata.product_subgroups (code, title, pg_code) values ('psychos',
 insert into testdata.product_subgroups (code, title, pg_code) values ('enemies', 'Enemies', 'persons');
 insert into testdata.product_subgroups (code, title, pg_code) values ('partners', 'Partners', 'persons');
 insert into testdata.product_subgroups (code, title, pg_code) values ('strangers', 'Strangers', 'persons');
+
+insert into testdata.subjects(code, title) values ('green', 'Green practice');
+insert into testdata.subjects(code, title) values ('gndeq', 'Gender equality');
+insert into testdata.subjects(code, title) values ('mlhlt', 'Mental health');
+insert into testdata.subjects(code, title) values ('socmb', 'Social mobility');
+insert into testdata.subjects(code, title) values ('wrklf', 'Work-life balance');
 
 
 /* Producing products */
@@ -602,6 +712,58 @@ insert into
         topic_protos tp,
         locals l;
 
+
+/* Associating global topics with subjects */
+
+create function testdata.assign_subjects_to_topics(topic_code varchar) returns void
+language plpgsql
+as
+$$
+declare
+    subject_codes varchar array;
+    subject_shares real array;
+    max_subjects int;
+    n_subjects int;
+    i int;
+begin
+
+    select 
+        array_agg(code), array_agg(subject_share) 
+        into subject_codes, subject_shares
+    from 
+        testdata.subjects;
+
+    select 
+        max_subjects_per_topic 
+        into max_subjects 
+        from testdata.model_parms 
+        where is_active;    
+
+    n_subjects = random_int(0, max_subjects);
+
+    i = 1;
+    while i <= n_subjects
+    loop
+        new_subject_code = random_code_or_null(subject_codes, subject_shares, 0.8);
+        select count(topic_code) into ctc from gtopics__subjects where subject_code = new_subject_code;
+        if ctc = 0 then
+            insert 
+                into gtopics__subjects (topic_code, subject_code)
+                values (topic_code, subject_code);
+            i = i + 1;
+        end if;
+    end loop;
+end
+$$
+
+select 
+    testdata.assign_subjects_to_topics(t.code) 
+    from 
+        testdata.topics t, 
+        model_parms m
+    where
+        t.lang_code = m.source_lang_coode;        
+
 /* TBD */
 /*
 create function testdata.produce_online_doc_vers(online_doc_code varchar, ts_from timestamp) returns boolean
@@ -625,41 +787,6 @@ $$;*/
 
 /* Producing readers */
 
-create function testdata.random_code(codes varchar array, shares real array) returns varchar
-language plpgsql
-as
-$$
-    declare
-        max_total real;
-        dice real;
-        total real;
-        i int;
-        random_code varchar;
-begin
-    max_total = 0;
-    for i in 1..coalesce(cardinality(shares), 0)
-    loop
-        if shares[i] is not null then
-            max_total = max_total + shares[i];
-        end if;
-    end loop;
-
-    dice = random()*max_total;
-
-    i = 1;
-    total = shares[1];
-    while total < dice
-    loop
-        i = i + 1;
-        total = total + shares[i];
-    end loop;
-
-    random_code = codes[i];
-
-    return random_code;
-end
-$$;
-
 create function testdata.random_lang_code(target_country_code varchar) returns varchar
 language plpgsql
 as
@@ -672,7 +799,7 @@ begin
         into
             lang_codes, lang_shares
         from
-            testdata.countries_langs cl
+            testdata.countries__langs cl
         where
             cl.country_code = target_country_code;
 
@@ -693,7 +820,7 @@ begin
         into
             browser_codes, browser_shares
         from
-             testdata.oss_browsers ob
+             testdata.oss__browsers ob
         where
               ob.os_code = target_os_code;
 
@@ -774,8 +901,8 @@ end
 $$;
 
 insert into
-    readers_products (reader_uuid, product_code)
+    readers__products (reader_uuid, product_code)
     select
         u.uuid, random_product_code() from readers u;
 
-select product_code, count(reader_uuid) from readers_products group by product_code;
+select product_code, count(reader_uuid) from readers__products group by product_code;

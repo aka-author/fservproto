@@ -1,0 +1,2939 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<row>
+  <topic_code>verifying_virtual_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_wombats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_cats</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_cats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_aconds</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_shared_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_robotic_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_robotic_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_robotic_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_hamsters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_enemies</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>verifying_biotech_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_virtual_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_virtual_horses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_virtual_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_virtual_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_dogs</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_cows</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_shared_adherents</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>using_robotic_teapots</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_robotic_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_robotic_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_robotic_dogs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_robotic_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_toasters</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_strangers</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_psychos</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_horses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>using_biotech_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_toasters</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_neighbours</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_mgrinders</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>updating_virtual_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_relatives</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_friends</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_classmates</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_shared_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_phones</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_phones</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_enemies</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_elephants</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_robotic_cats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_horses</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_horses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>updating_biotech_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_virtual_wmachines</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_virtual_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_virtual_mgrinders</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_virtual_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_virtual_aconds</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_shared_strangers</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_shared_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_shared_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_shared_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_rhinoceroses</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_psychos</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_fridges</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_robotic_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>troubleshooting_biotech_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_psychos</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_platypuses</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_partners</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_hamsters</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_dogs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_virtual_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_wmachines</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_platypuses</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_shared_adherents</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_neighbours</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_fridges</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_robotic_cats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_psychos</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_friends</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>supressing_biotech_classmates</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_wombats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_virtual_enemies</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>sharing_shared_routers</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>sharing_shared_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_shared_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_shared_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>sharing_shared_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_shared_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_partners</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_friends</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_robotic_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_biotech_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_biotech_routers</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>sharing_biotech_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>sharing_biotech_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>sharing_biotech_hookahs</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>sharing_biotech_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_wombats</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_rhinoceroses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_hamsters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_friends</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_fridges</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_virtual_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_wombats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_phones</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_shared_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_robotic_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_toasters</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_horses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>safety_biotech_horses</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_teapots</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_enemies</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_elephants</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_cats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_virtual_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_сolleagues</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_elephants</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_shared_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_vcleaners</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_hamsters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_hamsters</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_friends</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_cats</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resuming_robotic_adherents</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_mgrinders</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resuming_biotech_elephants</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_virtual_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_virtual_сolleagues</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_virtual_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_virtual_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_virtual_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_virtual_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_wmachines</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_wmachines</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_rabbits</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_shared_elephants</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_psychos</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_mgrinders</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_elephants</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_dogs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_dogs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_classmates</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_robotic_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_routers</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_rhinoceroses</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_friends</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_fridges</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_dogs</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>respassw_biotech_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_virtual_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_virtual_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_virtual_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_virtual_mgrinders</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_virtual_friends</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_virtual_friends</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_phones</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_friends</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_shared_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_сolleagues</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_strangers</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_psychos</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_phones</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_elephants</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_robotic_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_vcleaners</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_elephants</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>resetting_biotech_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_relatives</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_virtual_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_dogs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_shared_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_robotic_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_robotic_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_biotech_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>repairing_biotech_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_biotech_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>repairing_biotech_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_strangers</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_rabbits</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_partners</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_elephants</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_aconds</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_virtual_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_сolleagues</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_wombats</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_friends</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_elephants</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_shared_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_wmachines</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_wmachines</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_neighbours</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_robotic_adherents</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_rhinoceroses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_fridges</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_dogs</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>removing_biotech_dogs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_wmachines</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_teapots</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_phones</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_phones</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_virtual_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_wmachines</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_strangers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_relatives</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_enemies</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_adherents</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_shared_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_сolleagues</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_vcleaners</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_teapots</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_fridges</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_dogs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_robotic_dogs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_strangers</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_phones</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_enemies</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>protecting_biotech_adherents</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_adherents</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_virtual_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_сolleagues</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_vcleaners</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_routers</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_shared_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_mgrinders</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_robotic_aconds</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>planning_biotech_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>planning_biotech_rabbits</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>planning_biotech_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>planning_biotech_aconds</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>planning_biotech_aconds</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_virtual_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_virtual_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_virtual_friends</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_virtual_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_virtual_enemies</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_shared_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_shared_toasters</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_shared_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_shared_fridges</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_shared_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_robotic_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_robotic_neighbours</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_horses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>maintaining_biotech_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>intro_neighbours</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>intro_neighbours</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>intro_dogs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>intro_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>intro_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_vcleaners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_friends</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_fridges</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_virtual_dogs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_strangers</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_psychos</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_horses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_hamsters</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_classmates</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_classmates</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_shared_aconds</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_wombats</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_fridges</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_dogs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_robotic_dogs</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>fun_biotech_psychos</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>fun_biotech_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_biotech_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>fun_biotech_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>fun_biotech_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_enemies</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_cows</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_virtual_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_wombats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_shared_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_robotic_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_robotic_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_robotic_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_biotech_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_biotech_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_biotech_platypuses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_biotech_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>deactivating_biotech_adherents</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_phones</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_phones</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_neighbours</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_hamsters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_virtual_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_сolleagues</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_rhinoceroses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_psychos</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_phones</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_shared_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_wmachines</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_wmachines</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_relatives</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_robotic_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_wmachines</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_teapots</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_phones</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_hookahs</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>configuring_biotech_classmates</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_rhinoceroses</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_virtual_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_сolleagues</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_platypuses</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_shared_cows</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_wombats</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_teapots</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_phones</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_hookahs</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_dogs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_cows</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_robotic_cows</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_biotech_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_biotech_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_biotech_phones</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>basics_biotech_phones</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>basics_biotech_horses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>appending_virtual_toasters</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_teapots</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_elephants</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_shared_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_сolleagues</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_сolleagues</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_wombats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_teapots</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_rabbits</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_rabbits</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_partners</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_horses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_robotic_adherents</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_vcleaners</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_vcleaners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_strangers</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_strangers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_routers</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_psychos</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_psychos</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_platypuses</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_platypuses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_phones</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_mgrinders</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_mgrinders</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_friends</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_friends</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_enemies</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_enemies</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_elephants</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_elephants</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_adherents</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>appending_biotech_adherents</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_toasters</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_toasters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_routers</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_routers</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_relatives</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_relatives</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_partners</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_neighbours</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_mgrinders</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_shared_hamsters</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_rabbits</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_phones</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_partners</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_partners</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_neighbours</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_neighbours</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_mgrinders</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_hookahs</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_hookahs</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_friends</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_fridges</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_robotic_aconds</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_rhinoceroses</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_rhinoceroses</topic_code>
+  <subject_code>gndeq</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_neighbours</topic_code>
+  <subject_code>socmb</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_neighbours</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_elephants</topic_code>
+  <subject_code>mlhlt</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_cats</topic_code>
+  <subject_code>green</subject_code>
+</row>
+<row>
+  <topic_code>activating_biotech_cats</topic_code>
+  <subject_code>wrklf</subject_code>
+</row>
+</data>

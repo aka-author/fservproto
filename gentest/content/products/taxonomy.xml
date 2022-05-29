@@ -46,4 +46,11 @@
       <subjectdef keys="Shared"/>
       <subjectdef keys="Virtual"/>
    </subjectdef>
+   <subjectdef keys="Subjects">
+      <subjectdef keys="Green practice"/>
+      <subjectdef keys="Gender equality"/>
+      <subjectdef keys="Mental health"/>
+      <subjectdef keys="Social mobility"/>
+      <subjectdef keys="Work-life balance"/>
+   </subjectdef>
 </subjectScheme>

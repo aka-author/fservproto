@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<row>
+  <code>green</code>
+  <title>Green practice</title>
+</row>
+<row>
+  <code>gndeq</code>
+  <title>Gender equality</title>
+</row>
+<row>
+  <code>mlhlt</code>
+  <title>Mental health</title>
+</row>
+<row>
+  <code>socmb</code>
+  <title>Social mobility</title>
+</row>
+<row>
+  <code>wrklf</code>
+  <title>Work-life balance</title>
+</row>
+</data>

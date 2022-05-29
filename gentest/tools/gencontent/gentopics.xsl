@@ -5,7 +5,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cpm="CPM"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="cpm xs" version="2.0">
 
-    <!-- 
+    <!--
         Input parameters
     -->
 
@@ -112,8 +112,8 @@
         <xsl:value-of select="//product_subgroups//row[code = current()]/title"/>
     </xsl:template>
 
-    <xsl:template match="kind_code" mode="titleByCodeElm">
-        <xsl:value-of select="//kinds//row[code = current()]/title"/>
+    <xsl:template match="technology_code" mode="titleByCodeElm">
+        <xsl:value-of select="//technologies//row[code = current()]/title"/>
     </xsl:template>
 
     <xsl:function name="cpm:titleByCodeElm">
@@ -129,7 +129,7 @@
         <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
     </xsl:template>
 
-    <xsl:template match="kinds//row" mode="ditaTaxonomyOthermeta">
+    <xsl:template match="technologies//row" mode="ditaTaxonomyOthermeta">
         <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
     </xsl:template>
 
@@ -143,18 +143,31 @@
             content="{cpm:titleByCodeElm(ps_code)}"/>
     </xsl:template>
 
-    <xsl:template match="row[cpm:isTopic(.) and kind_code = 'null']" mode="ditaTaxonomyTechnology">
-        <xsl:apply-templates select="//kinds//row" mode="ditaTaxonomyOthermeta"/>
+    <xsl:template match="row[cpm:isTopic(.) and technology_code = 'null']"
+        mode="ditaTaxonomyTechnology">
+        <xsl:apply-templates select="//technologies//row" mode="ditaTaxonomyOthermeta"/>
     </xsl:template>
 
-    <xsl:template match="row[cpm:isTopic(.) and kind_code != 'null']" mode="ditaTaxonomyTechnology">
-        <othermeta name="Technology" props="{kind_code}" otherprops="taxonomy"
-            content="{cpm:titleByCodeElm(kind_code)}"/>
+    <xsl:template match="row[cpm:isTopic(.) and technology_code != 'null']"
+        mode="ditaTaxonomyTechnology">
+        <othermeta name="Technology" props="{technology_code}" otherprops="taxonomy"
+            content="{cpm:titleByCodeElm(technology_code)}"/>
+    </xsl:template>
+
+    <xsl:function name="cpm:isRelated" as="xs:boolean">
+        <xsl:param name="rowTopic"/>
+        <xsl:sequence select="true()"/>
+    </xsl:function>
+
+    <xsl:template match="row[cpm:isTopic(.)]" mode="ditaTaxonomySubject">
+        <xsl:apply-templates select="//gtopics_subjects/row[cpm:isRelated(current())]"
+            mode="dataTaxonomy"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaTaxonomy">
         <xsl:apply-templates select="." mode="ditaTaxonomyProduct"/>
         <xsl:apply-templates select="." mode="ditaTaxonomyTechnology"/>
+        <xsl:apply-templates select="." mode="ditaTaxonomySubject"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaProlog">
@@ -193,12 +206,22 @@
         </subjectdef>
     </xsl:template>
 
-    <xsl:template match="kinds//row" mode="ditaTaxonomy">
+    <xsl:template match="technologies//row" mode="ditaTaxonomy">
         <subjectdef keys="{cpm:ditaKeys(.)}"/>
     </xsl:template>
 
-    <xsl:template match="kinds" mode="ditaTaxonomy">
+    <xsl:template match="technologies" mode="ditaTaxonomy">
         <subjectdef keys="Technologies">
+            <xsl:apply-templates select=".//row" mode="ditaTaxonomy"/>
+        </subjectdef>
+    </xsl:template>
+
+    <xsl:template match="subjects//row" mode="ditaTaxonomy">
+        <subjectdef keys="{cpm:ditaKeys(.)}"/>
+    </xsl:template>
+
+    <xsl:template match="subjects" mode="ditaTaxonomy">
+        <subjectdef keys="Subjects">
             <xsl:apply-templates select=".//row" mode="ditaTaxonomy"/>
         </subjectdef>
     </xsl:template>
@@ -206,7 +229,8 @@
     <xsl:template match="taxonomy" mode="ditaSubjectMap">
         <subjectScheme>
             <xsl:apply-templates select="//product_groups" mode="ditaTaxonomy"/>
-            <xsl:apply-templates select="//kinds" mode="ditaTaxonomy"/>
+            <xsl:apply-templates select="//technologies" mode="ditaTaxonomy"/>
+            <xsl:apply-templates select="//subjects" mode="ditaTaxonomy"/>
         </subjectScheme>
     </xsl:template>
 
@@ -250,7 +274,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isGroupTopic" as="xs:boolean">
-        <xsl:value-of select="pg_code != 'null' and ps_code = 'null' and kind_code = 'null'"/>
+        <xsl:value-of select="pg_code != 'null' and ps_code = 'null' and technology_code = 'null'"/>
     </xsl:template>
 
     <xsl:function name="cpm:isGroupTopic" as="xs:boolean">
@@ -266,7 +290,8 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isSubgroupTopic" as="xs:boolean">
-        <xsl:value-of select="pg_code != 'null' and ps_code != 'null' and kind_code = 'null'"/>
+        <xsl:value-of select="pg_code != 'null' and ps_code != 'null' and technology_code = 'null'"
+        />
     </xsl:template>
 
     <xsl:function name="cpm:isSubgroupTopic" as="xs:boolean">
@@ -282,7 +307,8 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="isProductTopic" as="xs:boolean">
-        <xsl:value-of select="pg_code != 'null' and ps_code != 'null' and kind_code != 'null'"/>
+        <xsl:value-of select="pg_code != 'null' and ps_code != 'null' and technology_code != 'null'"
+        />
     </xsl:template>
 
     <xsl:function name="cpm:isProductTopic" as="xs:boolean">
@@ -339,7 +365,7 @@
     </xsl:template>
 
     <xsl:template match="row[cpm:isProductTopic(.)]" mode="outPath">
-        <xsl:value-of select="concat(lang_code, '/', pg_code, '/', ps_code, '/', kind_code)"/>
+        <xsl:value-of select="concat(lang_code, '/', pg_code, '/', ps_code, '/', technology_code)"/>
     </xsl:template>
 
     <xsl:function name="cpm:productPath">

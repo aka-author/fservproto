@@ -9,7 +9,10 @@
     <!ENTITY topics SYSTEM "topics.xml">
     <!ENTITY product_groups SYSTEM "product_groups.xml">
     <!ENTITY product_subgroups SYSTEM "product_subgroups.xml">
-    <!ENTITY kinds SYSTEM "kinds.xml">
+    <!ENTITY technologies SYSTEM "technologies.xml">
+    <!ENTITY subjects SYSTEM "subjects.xml">
+    <!ENTITY gtopics_subjects SYSTEM "gtopics_subjects.xml">
+    
 ]>
 <database>
     <genres_aspects>&genres_aspects;</genres_aspects>
@@ -18,6 +21,8 @@
     <taxonomy>
         <product_groups>&product_groups;</product_groups>
         <product_subgroups>&product_subgroups;</product_subgroups>
-        <kinds>&kinds;</kinds>
+        <technologies>&technologies;</technologies>
+        <subjects>&subjects;</subjects>
+        <gtopics_subjects>&gtopics_subjects;</gtopics_subjects>
     </taxonomy>
 </database>
