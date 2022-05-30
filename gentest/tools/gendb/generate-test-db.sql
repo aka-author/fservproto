@@ -401,6 +401,7 @@ create table testdata.online_docs (
 create table testdata.online_doc_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
     online_doc_code     varchar,
+    lang_code           varchar,
     released_at         timestamp,
     ver_no              int);
 
@@ -900,8 +901,8 @@ begin
         for ver_idx in 1..n_vers
         loop
             insert
-                into online_doc_vers (online_doc_code, released_at, ver_no)
-                values (online_doc_codes[online_doc_idx], ver_ats[ver_idx], timestamp_rank(ver_ats, ver_ats[ver_idx]));
+                into online_doc_vers (online_doc_code, lang_code, released_at, ver_no)
+                values (online_doc_codes[online_doc_idx], slc, ver_ats[ver_idx], timestamp_rank(ver_ats, ver_ats[ver_idx]));
         end loop;
 
     end loop;
@@ -909,19 +910,28 @@ begin
 end
 $$;
 
-truncate testdata.online_doc_vers;
+
 select testdata.produce_source_online_doc_vers();
 
-drop function if exists testdata.produce_translations_online_doc_vers;
+with
+    sources
+         as
+    (select
+        online_doc_code, l.lang_code as translation_lang_code, released_at, ver_no
+        from
+             testdata.online_doc_vers o,
+             testdata.locals l,
+             testdata.model_params mp
+        where
+              l.lang_code <> mp.source_lang_code)
+    insert
+        into
+            testdata.online_doc_vers (online_doc_code, lang_code, released_at, ver_no)
+            select
+                online_doc_code, translation_lang_code, released_at, ver_no
+                from
+                    sources;
 
-create or replace function testdata.produce_translations_online_doc_vers() returns void
-language plpgsql
-as
-$$
-begin
-    
-end;
-$$;
 
 /* Producing readers */
 
