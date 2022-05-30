@@ -106,7 +106,13 @@
 
     <!-- Representing metadata in topics -->
 
+    <!-- Retrieving titles -->
+
     <xsl:template match="*" mode="titleByCodeElm"/>
+
+    <xsl:template match="pg_code" mode="titleByCodeElm">
+        <xsl:value-of select="//product_groups//row[code = current()]/title"/>
+    </xsl:template>
 
     <xsl:template match="ps_code" mode="titleByCodeElm">
         <xsl:value-of select="//product_subgroups//row[code = current()]/title"/>
@@ -121,6 +127,8 @@
         <xsl:apply-templates select="$codeElement" mode="titleByCodeElm"/>
     </xsl:function>
 
+    <!-- Assigning taxonomy to a topic: product groups & subgroups -->
+
     <xsl:template match="product_groups//row" mode="ditaTaxonomyOthermeta">
         <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
     </xsl:template>
@@ -129,18 +137,20 @@
         <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
     </xsl:template>
 
-    <xsl:template match="technologies//row" mode="ditaTaxonomyOthermeta">
-        <othermeta name="Product" props="{code}" otherprops="taxonomy" content="{title}"/>
-    </xsl:template>
-
     <xsl:template match="row[cpm:isTopic(.) and ps_code = 'null']" mode="ditaTaxonomyProduct">
         <xsl:apply-templates select="//product_groups//row[code = current()/pg_code]"
             mode="ditaTaxonomyOthermeta"/>
     </xsl:template>
-
+    
     <xsl:template match="row[cpm:isTopic(.) and ps_code != 'null']" mode="ditaTaxonomyProduct">
         <othermeta name="Product" props="{ps_code}" otherprops="taxonomy"
             content="{cpm:titleByCodeElm(ps_code)}"/>
+    </xsl:template>
+
+    <!-- Assigning taxonomy to a topic: technologies -->
+    
+    <xsl:template match="technologies//row" mode="ditaTaxonomyOthermeta">
+        <othermeta name="Technology" props="{code}" otherprops="taxonomy" content="{title}"/>
     </xsl:template>
 
     <xsl:template match="row[cpm:isTopic(.) and technology_code = 'null']"
@@ -150,19 +160,32 @@
 
     <xsl:template match="row[cpm:isTopic(.) and technology_code != 'null']"
         mode="ditaTaxonomyTechnology">
+
+        <xsl:apply-templates select="//technologies//row[code = current()/technology_code]"
+            mode="ditaTaxonomyOthermeta"/>
+        <!--
         <othermeta name="Technology" props="{technology_code}" otherprops="taxonomy"
             content="{cpm:titleByCodeElm(technology_code)}"/>
+        -->
     </xsl:template>
+
+    <!-- Assigning taxonome to a topic: subjects -->
 
     <xsl:function name="cpm:isRelated" as="xs:boolean">
         <xsl:param name="rowTopic"/>
-        <xsl:sequence select="true()"/>
+        <xsl:param name="rowSubject"/>
+        <xsl:sequence
+            select="exists(root($rowTopic)//gtopics_subjects//row[topic_code = $rowTopic/code and subject_code = $rowSubject/code])"
+        />
     </xsl:function>
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaTaxonomySubject">
-        <xsl:apply-templates select="//gtopics_subjects/row[cpm:isRelated(current())]"
-            mode="dataTaxonomy"/>
+        <xsl:for-each select="//subjects//row[cpm:isRelated(current(), .)]">
+            <othermeta name="Subject" props="{code}" otherprops="taxonomy" content="{title}"/>
+        </xsl:for-each>
     </xsl:template>
+
+    <!-- Assigning taxonomy to a topic: all the kinds -->
 
     <xsl:template match="row[cpm:isTopic(.)]" mode="ditaTaxonomy">
         <xsl:apply-templates select="." mode="ditaTaxonomyProduct"/>
