@@ -1,25 +1,69 @@
 /* Creating test database for the feedback server */
 
-/* Functions */
+/* Common functions */
+
+/*  Managing arrays */
+
+drop function if exists testdata.array_total;
+
+create function testdata.array_total(numbers real array) returns real
+language plpgsql
+as
+$$
+declare
+    total real;
+    i int;
+begin
+    total = 0;
+    for i in 1..coalesce(cardinality(numbers), 0)
+    loop
+        if numbers[i] is not null then
+            total = total + numbers[i];
+        end if;
+    end loop;
+
+    return total;
+end
+$$;
+
+create function testdata.timestamp_rank(tss timestamp array, ts timestamp) returns int
+language plpgsql
+as
+$$
+declare
+    i int;
+    rank int;
+begin
+    rank = 1;
+
+    for i in 1..coalesce(cardinality(tss), 0)
+    loop
+        if ts > tss[i] then
+            rank = rank + 1;
+        end if;
+    end loop;
+
+    return rank;
+end
+$$;
+
+select timestamp_rank(array['2022-04-03'::timestamp,'2022-02-03'::timestamp,'2022-01-03'::timestamp,'2022-06-03'::timestamp], '2022-02-03'::timestamp);
+
+/* Randomization */
+
+drop function if exists testdata.random_int;
+
+create function testdata.random_int(min int, max int) returns int
+    language plpgsql
+as
+$$
+begin
+    return min + (max - min)*random();
+end
+$$;
+
 
 drop function if exists testdata.random_normal;
-drop function if exists testdata.random_normal_int;
-drop function if exists testdata.random_quasi_normal;
-drop function if exists testdata.random_quasi_normal_int;
-drop function if exists testdata.random_normal_20x80;
-drop function if exists testdata.random_hyper;
-drop function if exists testdata.random_timestamp;
-drop function if exists testdata.code2;
-drop function if exists testdata.title2;
-drop function if exists testdata.online_doc_title;
-drop function if exists testdata.topic_title;
-drop function if exists testdata.random_code;
-drop function if exists testdata.random_lang_code;
-drop function if exists testdata.random_browser_code;
-drop function if exists assign_subjects_to_topics;
-drop function if exists testdata.produce_readers;
-drop function if exists testdata.random_product_code;
-
 
 create function testdata.random_normal(min real, max real) returns real
     language plpgsql
@@ -30,6 +74,9 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.random_normal_int;
+
 create function testdata.random_normal_int(min int, max int) returns int
     language plpgsql
 as
@@ -38,6 +85,9 @@ begin
     return round(random_normal(min, max));
 end
 $$;
+
+
+drop function if exists testdata.random_quasi_normal;
 
 create function testdata.random_quasi_normal(min real, max real) returns real
     language plpgsql
@@ -48,6 +98,9 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.random_quasi_normal_int;
+
 create function testdata.random_quasi_normal_int(min int, max int) returns int
 language plpgsql
 as
@@ -57,6 +110,9 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.random_hyper;
+
 create function testdata.random_hyper(min real, max real) returns real
     language plpgsql
 as
@@ -65,6 +121,9 @@ begin
     return min + (max - min)*(1/random());
 end
 $$;
+
+
+drop function if exists testdata.random_normal_20x80;
 
 create function testdata.random_normal_20x80(
     share_high real, low_min real, low_max real, high_min real, high_max real) returns real
@@ -80,25 +139,20 @@ begin
 end
 $$;
 
-create function testdata.array_total(numbers real array) returns real
-language plpgsql
+
+drop function if exists testdata.random_timestamp;
+
+create function testdata.random_timestamp(ts_from timestamp, ts_to timestamp) returns timestamp
+    language plpgsql
 as
 $$
-    declare
-        total real;
-        i int;
 begin
-    total = 0;
-    for i in 1..coalesce(cardinality(numbers), 0)
-    loop
-        if numbers[i] is not null then
-            total = total + numbers[i];
-        end if;
-    end loop;
-
-    return total;
+    return ts_from + (ts_to - ts_from)*random();
 end
-$$    
+$$;
+
+
+drop function if exists testdata.random_code;
 
 create function testdata.random_code(codes varchar array, shares real array) returns varchar
 language plpgsql
@@ -127,6 +181,9 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.random_code_or_null;
+
 create function testdata.random_code_or_null(
     codes varchar array, shares real array, null_probability real) returns varchar
 language plpgsql
@@ -145,27 +202,21 @@ begin
         total = testdata.array_total(shares);
         null_share = null_probability*total/(1 - null_probability);
         codes_with_null = array_append(codes, null);
-        shares_with_null = array_append(shares, null_share); 
+        shares_with_null = array_append(shares, null_share);
         random_code = testdata.random_code(codes_with_null, shares_with_null);
-    end if;        
+    end if;
 
     return random_code;
 end
 $$;
 
-/*
-create function testdata.random_timestamp(ts_from timestamp, ts_to timestamp) returns timestamp
-    language plpgsql
-as
-$$
-begin
-    return round(random_quasi_normal(min, max));
-end
-$$;*/
 
+/* Assembling codes and titles */
+
+drop function if exists testdata.code2;
 
 create function testdata.code2(code1 varchar, code2 varchar) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
 begin
@@ -173,8 +224,11 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.title2;
+
 create function testdata.title2(title1 varchar, title2 varchar) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
 begin
@@ -182,8 +236,11 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.online_doc_title;
+
 create function testdata.online_doc_title(subject_title varchar, genre_title varchar) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
 begin
@@ -191,8 +248,11 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.topic_title;
+
 create function testdata.topic_title(subject_title varchar, aspect_title varchar) returns varchar
-    language plpgsql
+language plpgsql
 as
 $$
 begin
@@ -203,7 +263,7 @@ $$;
 
 /* Tables */
 
-drop table if exists testdata.model_parms;
+drop table if exists testdata.model_params;
 drop table if exists testdata.countries;
 drop table if exists testdata.langs;
 drop table if exists testdata.countries__langs;
@@ -213,7 +273,7 @@ drop table if exists testdata.oss__browsers;
 drop table if exists testdata.genres;
 drop table if exists testdata.product_groups;
 drop table if exists testdata.product_subgroups;
-drop table if exists testdata.kinds;
+drop table if exists testdata.technologies;
 drop table if exists testdata.products;
 drop table if exists testdata.aspects;
 drop table if exists testdata.genres__aspects;
@@ -229,16 +289,19 @@ drop table if exists testdata.topic_vers;
 drop table if exists testdata.readers;
 drop table if exists testdata.readers__products;
 
-create table testdata.model_parms (
-    code                    varchar,
-    n_readers               int,
-    period_of_modeling      interval,
-    max_subjects_per_topic  int,
-    max_vers_per_online_doc int,
-    max_sessions_per_reader int,
-    max_topics_per_session  int,
-    source_lang_coode       varchar,
-    is_active               boolean
+create table testdata.model_params (
+    code                            varchar,
+    n_readers                       int,
+    period_of_modeling              interval,
+    max_subjects_per_topic          int,
+    share_of_topics_with_subjects   real,
+    max_vers_per_online_doc         int,
+    max_sessions_per_reader         int,
+    max_topics_per_session          int,
+    source_lang_code                varchar,
+    start_modeling_at               timestamp,
+    finish_modeling_at              timestamp,
+    is_active                       boolean
 );
 
 create table testdata.countries (
@@ -282,41 +345,42 @@ create table testdata.product_subgroups (
     title    varchar,
     pg_code  varchar);
 
-create table testdata.kinds (
+create table testdata.technologies (
     code    varchar,
     title   varchar);
 
 create table testdata.products (
-    code        varchar,
-    title       varchar,
-    pg_code     varchar,
-    ps_code     varchar,
-    kind_code   varchar,
-    demand      real,
-    clarity     real);
+    code                varchar,
+    title               varchar,
+    pg_code             varchar,
+    ps_code             varchar,
+    technology_code     varchar,
+    demand              real,
+    clarity             real);
 
 create table testdata.aspects (
-    code        varchar,
-    title       varchar,
-    infotype    varchar,
-    scope       varchar);
+    code                varchar,
+    title               varchar,
+    infotype            varchar,
+    scope               varchar);
 
 create table testdata.genres__aspects(
-    genre_code  varchar,
-    aspect_code varchar);
+    genre_code          varchar,
+    aspect_code         varchar);
 
 create table testdata.subjects (
-    code        varchar,
-    title       varchar);
+    code                varchar,
+    title               varchar,
+    subject_share       real);
 
-create table testdata.gtopics_subjects (
-    topic_code      varchar,
-    subject_code    varchar
-)
+create table testdata.gtopics__subjects (
+    topic_code          varchar,
+    subject_code        varchar
+);
 
-create unique index 
-    testdata.gtopics__subjects__topic_code__subject_code__idx 
-    on testdata.gtopics_subjects(topic_code, subject_code);
+create unique index
+    gtopics__subjects__topic_code__subject_code__idx
+    on testdata.gtopics__subjects(topic_code, subject_code);
 
 create table testdata.locals (
     lang_code           varchar,
@@ -331,14 +395,14 @@ create table testdata.online_docs (
     product_code        varchar,
     pg_code             varchar,
     ps_code             varchar,
-    kind_code           varchar,
+    technology_code     varchar,
     genre_code          varchar);
 
 create table testdata.online_doc_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
-    online_doc_uuid     uuid,
-    ver_no              int,
-    ver_date            timestamp);
+    online_doc_code     varchar,
+    released_at         timestamp,
+    ver_no              int);
 
 create table testdata.topics (
     uuid                uuid default gen_random_uuid() not null primary key,
@@ -348,15 +412,15 @@ create table testdata.topics (
     product_code        varchar,
     pg_code             varchar,
     ps_code             varchar,
-    kind_code           varchar,
+    technology_code     varchar,
     aspect_code         varchar,
     initial_quality     real,
     quality_trend       real,
     demand_trend        real);
 
-create unique index 
-    testdata.topics__code__lang_code__idx 
-    on tesdata.topics(code, lang_code); 
+create unique index
+    topics__code__lang_code__idx
+    on testdata.topics(code, lang_code);
 
 create table testdata.topic_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
@@ -364,7 +428,7 @@ create table testdata.topic_vers (
     ver_no              int,
     ver_date            timestamp);
 
-create table readers (
+create table testdata.readers (
     uuid                uuid default gen_random_uuid() not null primary key,
     country_code        varchar,
     lang_code           varchar,
@@ -374,7 +438,7 @@ create table readers (
     intelligence        real,
     irritability        real);
 
-create table readers__products (
+create table testdata.readers__products (
     reader_uuid         uuid,
     product_code        varchar
 );
@@ -382,11 +446,11 @@ create table readers__products (
 
 /* Data */
 
-truncate table testdata.model_parms;
+truncate table testdata.model_params;
 truncate table testdata.genres;
 truncate table testdata.product_groups;
 truncate table testdata.product_subgroups;
-truncate table testdata.kinds;
+truncate table testdata.technologies;
 truncate table testdata.aspects;
 truncate table testdata.genres__aspects;
 truncate table testdata.locals;
@@ -397,19 +461,23 @@ truncate table testdata.topic_vers;
 truncate table testdata.readers;
 truncate table testdata.readers__products;
 
-/* Cinfiguring parameters of the model */
+
+/* Configuring parameters of the model */
+
 insert
-    into testdata.model_parms (
-        code, 
-        n_readers, 
-        period_of_modeling, 
+    into testdata.model_params (
+        code,
+        n_readers,
+        period_of_modeling,
         max_subjects_per_topic,
+        share_of_topics_with_subjects,
         max_vers_per_online_doc,
         max_sessions_per_reader,
         max_topics_per_session,
-        source_lang_coode,
+        source_lang_code,
+        start_modeling_at, finish_modeling_at,
         is_active)
-    values ('default', 10000, '6 months', 2, 5, 10, 5, 'en', true);
+    values ('default', 10000, '6 months', 2, 0.2, 5, 10, 5, 'en', '2022-01-01', '2022-05-30', true);
 
 
 /* Producing directories */
@@ -542,10 +610,10 @@ insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'sup
 insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'resuming');
 insert into testdata.genres__aspects(genre_code, aspect_code) values ('mg', 'resetting');
 
-insert into testdata.kinds (code, title) values ('biotech', 'Biotech');
-insert into testdata.kinds (code, title) values ('robotic', 'Robotic');
-insert into testdata.kinds (code, title) values ('shared', 'Shared');
-insert into testdata.kinds (code, title) values ('virtual', 'Virtual');
+insert into testdata.technologies (code, title) values ('biotech', 'Biotech');
+insert into testdata.technologies (code, title) values ('robotic', 'Robotic');
+insert into testdata.technologies (code, title) values ('shared', 'Shared');
+insert into testdata.technologies (code, title) values ('virtual', 'Virtual');
 
 insert into testdata.product_subgroups (code, title, pg_code) values ('rabbits', 'Rabbits', 'animals');
 insert into testdata.product_subgroups (code, title, pg_code) values ('wombats', 'Wombats', 'animals');
@@ -580,11 +648,11 @@ insert into testdata.product_subgroups (code, title, pg_code) values ('enemies',
 insert into testdata.product_subgroups (code, title, pg_code) values ('partners', 'Partners', 'persons');
 insert into testdata.product_subgroups (code, title, pg_code) values ('strangers', 'Strangers', 'persons');
 
-insert into testdata.subjects(code, title) values ('green', 'Green practice');
-insert into testdata.subjects(code, title) values ('gndeq', 'Gender equality');
-insert into testdata.subjects(code, title) values ('mlhlt', 'Mental health');
-insert into testdata.subjects(code, title) values ('socmb', 'Social mobility');
-insert into testdata.subjects(code, title) values ('wrklf', 'Work-life balance');
+insert into testdata.subjects(code, title, subject_share) values ('green', 'Green practice', 0.8);
+insert into testdata.subjects(code, title, subject_share) values ('gndeq', 'Gender equality', 0.1);
+insert into testdata.subjects(code, title, subject_share) values ('mlhlt', 'Mental health', 0.3);
+insert into testdata.subjects(code, title, subject_share) values ('socmb', 'Social mobility', 0.1);
+insert into testdata.subjects(code, title, subject_share) values ('wrklf', 'Work-life balance', 0.8);
 
 
 /* Producing products */
@@ -592,7 +660,7 @@ insert into testdata.subjects(code, title) values ('wrklf', 'Work-life balance')
 insert into
     products (
         code, title,
-        pg_code, ps_code, kind_code,
+        pg_code, ps_code, technology_code,
         demand, clarity)
     select
         testdata.code2(k.code, ps.code), testdata.title2(k.title,  ps.title),
@@ -601,7 +669,7 @@ insert into
         from
             testdata.product_groups pg,
             testdata.product_subgroups ps,
-            testdata.kinds k
+            testdata.technologies k
         where
              ps.pg_code = pg.code;
 
@@ -622,12 +690,12 @@ insert into
     online_docs (
         code, lang_code,
         title,
-        product_code, pg_code, ps_code, kind_code,
+        product_code, pg_code, ps_code, technology_code,
         genre_code)
     select
         testdata.code2(p.code, g.code), l.lang_code,
         testdata.online_doc_title(p.title, g.title),
-        p.code, p.pg_code, p.ps_code, p.kind_code,
+        p.code, p.pg_code, p.ps_code, p.technology_code,
         g.code
         from
             testdata.products p,
@@ -640,7 +708,7 @@ insert into
 with
     product_group_topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code,
+        product_code, pg_code, ps_code, technology_code,
         aspect_code,
         initial_quality, quality_trend, demand_trend)
         as
@@ -656,7 +724,7 @@ with
             a.scope = 'product_group'),
     product_subgroup_topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code,
+        product_code, pg_code, ps_code, technology_code,
         aspect_code,
         initial_quality, quality_trend, demad_trend)
         as
@@ -672,13 +740,13 @@ with
             a.scope = 'product_subgroup'),
     product_topics (
         code, title,
-        product_code, pg_code, ps_code, kind_code,
+        product_code, pg_code, ps_code, technology_code,
         aspect_code,
         initial_quality, quality_trend, demad_trend)
         as
     (select
         testdata.code2(a.code, p.code), testdata.topic_title(p.title, a.title),
-        p.code, p.pg_code, p.ps_code, p.kind_code,
+        p.code, p.pg_code, p.ps_code, p.technology_code,
         a.code,
         testdata.random_normal(0, 1), testdata.random_normal(-1, 1), testdata.random_normal(-1, 1)
         from
@@ -697,14 +765,14 @@ insert into
     topics (
         code, lang_code,
         title,
-        product_code, pg_code, ps_code, kind_code,
+        product_code, pg_code, ps_code, technology_code,
         aspect_code,
         initial_quality, quality_trend,
         demand_trend)
     select
-        code, lang_code,
+        code, l.lang_code,
         title,
-        product_code, pg_code, ps_code, kind_code,
+        product_code, pg_code, ps_code, technology_code,
         aspect_code,
         tp.initial_quality*l.initial_quality, tp.quality_trend*l.quality_trend,
         demand_trend
@@ -715,77 +783,149 @@ insert into
 
 /* Associating global topics with subjects */
 
-create function testdata.assign_subjects_to_topics(topic_code varchar) returns void
+drop function if exists assign_subjects_to_topics;
+
+create or replace function testdata.assign_subjects_to_topics() returns void
 language plpgsql
 as
 $$
 declare
+    target_gtopic_codes varchar array;
     subject_codes varchar array;
     subject_shares real array;
-    max_subjects int;
+    mspt int;
+    stws real;
+    slc varchar;
     n_subjects int;
-    i int;
+    target_subject_code varchar;
+    count_duplicated int;
+    gtopic_idx int;
+    subject_idx int;
 begin
+    select
+        max_subjects_per_topic, share_of_topics_with_subjects, source_lang_code
+        into mspt, stws, slc
+        from testdata.model_params
+        where is_active;
 
-    select 
-        array_agg(code), array_agg(subject_share) 
+    select
+        array_agg(code)
+        into target_gtopic_codes
+        from testdata.topics
+        where lang_code = slc;
+
+    select
+        array_agg(code), array_agg(subject_share)
         into subject_codes, subject_shares
-    from 
-        testdata.subjects;
+        from testdata.subjects;
 
-    select 
-        max_subjects_per_topic 
-        into max_subjects 
-        from testdata.model_parms 
-        where is_active;    
-
-    n_subjects = random_int(0, max_subjects);
-
-    i = 1;
-    while i <= n_subjects
+    for gtopic_idx in 1..coalesce(cardinality(target_gtopic_codes), 0)
     loop
-        new_subject_code = random_code_or_null(subject_codes, subject_shares, 0.8);
-        select count(topic_code) into ctc from gtopics__subjects where subject_code = new_subject_code;
-        if ctc = 0 then
-            insert 
-                into gtopics__subjects (topic_code, subject_code)
-                values (topic_code, subject_code);
-            i = i + 1;
+
+        if random() < stws then
+
+            n_subjects = testdata.random_int(1, mspt);
+            subject_idx = 1;
+            while subject_idx <= n_subjects
+            loop
+                target_subject_code = testdata.random_code(subject_codes, subject_shares);
+                select count(gt.topic_code)
+                    into count_duplicated
+                    from testdata.gtopics__subjects gt
+                    where gt.topic_code = target_gtopic_codes[gtopic_idx] and gt.subject_code = target_subject_code;
+                if count_duplicated = 0 then
+                    insert
+                        into testdata.gtopics__subjects (topic_code, subject_code)
+                        values (target_gtopic_codes[gtopic_idx], target_subject_code);
+                    subject_idx = subject_idx + 1;
+                end if;
+            end loop;
+
         end if;
+
     end loop;
 end
+$$;
+
+select  testdata.assign_subjects_to_topics();
+
+
+drop function if exists testdata.produce_source_online_doc_vers;
+
+create or replace function testdata.produce_source_online_doc_vers() returns void
+language plpgsql
+as
 $$
+declare
+    slc varchar;
+    mvpod int;
+    sma timestamp;
+    fma timestamp;
+    online_doc_codes varchar array;
+    online_doc_idx int;
+    n_vers int;
+    ver_ats timestamp array;
+    ver_idx int;
+    new_released_at timestamp;
+    new_ver_no int;
+begin
 
-select 
-    testdata.assign_subjects_to_topics(t.code) 
-    from 
-        testdata.topics t, 
-        model_parms m
-    where
-        t.lang_code = m.source_lang_coode;        
+    select
+        source_lang_code,
+        max_vers_per_online_doc,
+        start_modeling_at, finish_modeling_at
+        into
+            slc,
+            mvpod,
+            sma, fma
+        from testdata.model_params
+        where is_active;
 
-/* TBD */
-/*
-create function testdata.produce_online_doc_vers(online_doc_code varchar, ts_from timestamp) returns boolean
-    language plpgsql
+    select
+        array_agg(code)
+        into online_doc_codes
+        from testdata.online_docs
+        where lang_code = slc;
+
+    for online_doc_idx in 1..coalesce(cardinality(online_doc_codes), 0)
+    loop
+        n_vers = testdata.random_int(1, mvpod);
+
+        ver_ats = array[]::timestamp[];
+        for ver_idx in 1..n_vers
+        loop
+            ver_ats[ver_idx] = testdata.random_timestamp(sma, fma);
+        end loop;
+
+        for ver_idx in 1..n_vers
+        loop
+            insert
+                into online_doc_vers (online_doc_code, released_at, ver_no)
+                values (online_doc_codes[online_doc_idx], ver_ats[ver_idx], timestamp_rank(ver_ats, ver_ats[ver_idx]));
+        end loop;
+
+    end loop;
+
+end
+$$;
+
+truncate testdata.online_doc_vers;
+select testdata.produce_source_online_doc_vers();
+
+drop function if exists testdata.produce_translations_online_doc_vers;
+
+create or replace function testdata.produce_translations_online_doc_vers() returns void
+language plpgsql
 as
 $$
 begin
-    nvers = random(1, 10);
-    for i in 1..nvers
-    loop
-        ts_ver = ts_from + testdata.random_duration(7, 30);
-        insert into testdata.online_doc_vers (
-            online_doc_code, ver_timestamp)
-        values (
-            online_doc_code, ts_ver);
-    end loop;
-    return true;
-end
-$$;*/
-
+    
+end;
+$$;
 
 /* Producing readers */
+
+drop function if exists testdata.random_lang_code;
 
 create function testdata.random_lang_code(target_country_code varchar) returns varchar
 language plpgsql
@@ -805,7 +945,10 @@ begin
 
     return random_code(lang_codes, lang_shares);
 end
-$$
+$$;
+
+
+drop function if exists testdata.random_browser_code;
 
 create function testdata.random_browser_code(target_os_code varchar) returns varchar
 language plpgsql
@@ -828,6 +971,9 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.produce_readers;
+
 create function produce_readers(n_readers int) returns boolean
 language plpgsql
 as
@@ -842,26 +988,26 @@ begin
     loop
         select
             testdata.random_code(array_agg(code), array_agg(pop_size))
-            into 
-                country_code 
-            from 
+            into
+                country_code
+            from
                 testdata.countries;
-        
-        select 
-            random_lang_code(country_code) 
+
+        select
+            random_lang_code(country_code)
             into
                 lang_code;
 
-        select 
-            testdata.random_code(array_agg(code), array_agg(os_share)) 
-            into 
-                os_code 
-            from 
+        select
+            testdata.random_code(array_agg(code), array_agg(os_share))
+            into
+                os_code
+            from
                 testdata.oss;
-        
-        select 
-            random_browser_code(os_code) 
-            into 
+
+        select
+            random_browser_code(os_code)
+            into
                 browser_code;
 
         insert
@@ -879,7 +1025,10 @@ begin
 end
 $$;
 
-select produce_readers(n_readers) from model_parms;
+select produce_readers(n_readers) from model_params;
+
+
+drop function if exists testdata.random_product_code;
 
 create function testdata.random_product_code() returns varchar
 language plpgsql
