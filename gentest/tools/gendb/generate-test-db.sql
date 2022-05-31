@@ -26,6 +26,9 @@ begin
 end
 $$;
 
+
+drop function if exists testdata.timestamp_rank;
+
 create function testdata.timestamp_rank(tss timestamp array, ts timestamp) returns int
 language plpgsql
 as
@@ -296,6 +299,7 @@ create table testdata.model_params (
     max_subjects_per_topic          int,
     share_of_topics_with_subjects   real,
     max_vers_per_online_doc         int,
+    new_topic_ver_probability       real,
     max_sessions_per_reader         int,
     max_topics_per_session          int,
     source_lang_code                varchar,
@@ -425,9 +429,10 @@ create unique index
 
 create table testdata.topic_vers (
     uuid                uuid default gen_random_uuid() not null primary key,
-    topic_uuid          uuid,
+    topic_code          varchar,
+    lang_code           varchar,
     ver_no              int,
-    ver_date            timestamp);
+    released_at         timestamp);
 
 create table testdata.readers (
     uuid                uuid default gen_random_uuid() not null primary key,
@@ -473,12 +478,13 @@ insert
         max_subjects_per_topic,
         share_of_topics_with_subjects,
         max_vers_per_online_doc,
+        new_topic_ver_probability,
         max_sessions_per_reader,
         max_topics_per_session,
         source_lang_code,
         start_modeling_at, finish_modeling_at,
         is_active)
-    values ('default', 10000, '6 months', 2, 0.2, 5, 10, 5, 'en', '2022-01-01', '2022-05-30', true);
+    values ('default', 10000, '6 months', 2, 0.2, 5, 0.2, 10, 5, 'en', '2022-01-01', '2022-05-30', true);
 
 
 /* Producing directories */
@@ -554,7 +560,7 @@ insert into testdata.oss__browsers (os_code, browser_code, browser_share) values
 insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('windows', 'ffox', 0.3);
 insert into testdata.oss__browsers (os_code, browser_code, browser_share) values ('windows', 'opera', 0.1);
 
-insert into testdata.genres (code, title) values ('ug', 'Quick Oparation Guide');
+insert into testdata.genres (code, title) values ('ug', 'Quick Operation Guide');
 insert into testdata.genres (code, title) values ('mg', 'Maintenance Guide');
 
 insert into testdata.product_groups (code, title) values ('animals', 'Animals');
@@ -851,6 +857,8 @@ $$;
 select  testdata.assign_subjects_to_topics();
 
 
+/* Producing versions for source online documents */
+
 drop function if exists testdata.produce_source_online_doc_vers;
 
 create or replace function testdata.produce_source_online_doc_vers() returns void
@@ -910,8 +918,10 @@ begin
 end
 $$;
 
-
 select testdata.produce_source_online_doc_vers();
+
+
+/* Producing versions for translated versions of online documents */
 
 with
     sources
@@ -924,13 +934,94 @@ with
              testdata.model_params mp
         where
               l.lang_code <> mp.source_lang_code)
-    insert
-        into
-            testdata.online_doc_vers (online_doc_code, lang_code, released_at, ver_no)
-            select
-                online_doc_code, translation_lang_code, released_at, ver_no
-                from
-                    sources;
+insert
+    into
+        testdata.online_doc_vers (online_doc_code, lang_code, released_at, ver_no)
+        select
+            online_doc_code, translation_lang_code, released_at, ver_no
+            from
+                sources;
+
+
+/* Producing topic versions */
+
+with
+    online_docs__topics
+        as
+    (select o.code as online_doc_code, t.code as topic_code, o.lang_code, o.product_code
+        from
+            testdata.online_docs o,
+            testdata.topics t,
+            testdata.genres__aspects ga
+        where
+            t.product_code = o.product_code
+                and
+            t.aspect_code = ga.aspect_code
+                and
+            o.genre_code = ga.genre_code
+                and
+            t.lang_code = o.lang_code),
+    online_doc_vers__topics
+            as
+    (select odv.online_doc_code, odt.topic_code, odv.lang_code, odv.released_at, odv.ver_no, random() as dice
+        from
+            online_docs__topics odt,
+            online_doc_vers odv
+        where
+            odt.online_doc_code = odv.online_doc_code
+                and
+            odt.lang_code = odv.lang_code),
+    topic_vers_protos
+        as
+    (select *
+        from
+            online_doc_vers__topics odt,
+            testdata.model_params mp
+        where
+            odt.ver_no = 1 or dice < mp.new_topic_ver_probability)
+insert
+    into
+        testdata.topic_vers (topic_code, lang_code, released_at)
+    select
+        topic_code, lang_code, released_at
+    from
+        topic_vers_protos;
+
+
+/* Assinginin numbers to topic versions */
+
+with
+    topic_ver_no_protos
+        as
+    (select
+        tv1.uuid as leading_uuid,
+        tv1.topic_code, tv1.lang_code, tv1.released_at,
+        tv2.topic_code, tv2.lang_code, tv2.released_at
+        from
+            testdata.topic_vers tv1,
+            testdata.topic_vers tv2
+        where
+            tv1.topic_code = tv2.topic_code
+                and
+            tv1.lang_code = tv2.lang_code
+                and
+            tv1.released_at >= tv2.released_at),
+    topic_ver_nos
+        as
+    (select
+        leading_uuid, count(leading_uuid) as calculated_ver_no
+        from
+            topic_ver_no_protos
+        group by
+            leading_uuid)
+update
+    testdata.topic_vers
+    set
+        ver_no = topic_ver_nos.calculated_ver_no
+    from
+        topic_ver_nos
+    where
+        uuid = topic_ver_nos.leading_uuid;
 
 
 /* Producing readers */
@@ -1065,3 +1156,116 @@ insert into
         u.uuid, random_product_code() from readers u;
 
 select product_code, count(reader_uuid) from readers__products group by product_code;
+
+/* Simulation */
+
+create function testdata.simulate_topic_session(reader_uuid, online_doc_uuid, topic_uuid, start_at) returns void
+language plpgsql
+as
+$$
+begin
+
+end;
+$$
+
+
+create function testdata.simulate_online_doc_session(
+    reader_uuid uuid, online_doc_code varchar, start_at timestamp) returns void
+language plpgsql
+as
+$$
+declare
+    topic_uuids uuid array;
+    topic_idx   int;
+begin
+    select array_agg(uuid) 
+        into topic_uuids 
+        from
+            online_docs o,
+            genres__aspects ga,
+            testdata.topics t 
+        where
+            o.genre_code = ga.genre_code
+                and
+            t.aspect_code = ga.aspect_code
+                and
+            o.lang_code = t.lang_code
+
+
+    for topic_idx in 1..coalesce(cardinality(topic_uuids), 0)
+    loop
+        if random() < 0.2 then
+            testdata.simulate_topic_session(reader_uuid, topic_uuids[topic_idx], start_at);
+        end if;
+    end loop; 
+
+end;
+$$
+
+create function testdata.simulate_reader_behavior(
+    user_uuid uuid, start_at timestamp, finish_at timestamp) returns void
+language plpgsql
+as
+$$
+declare
+    max_sessions int;
+    n_sessions int;
+    session_idx int;
+    session_started_at timestamp;
+    session_online_doc_code varchar;
+    online_doc_codes varchar array;
+begin
+    n_sessions = testdata.random_int(1, n_sessions);
+
+    for session_idx in 1..n_sessions
+    loop
+        session_started_at = testdata.random_timestamp(start_at, finish_at);
+        select array_agg(online_doc_code) 
+            into online_doc_codes 
+            from 
+                testdata.readers r, 
+                testdata.readers__products rp, 
+                testdata.online_docs od
+            where
+                r.uuid = rp.reader_uuid
+                    and
+                rp.product_code = od.product_code;
+
+        n_online_docs = coalesce(cardinality(online_doc_codes), 0);
+        if n_online_docs > 0 then
+            online_doc_code = online_doc_codes[testdata.random_int(1, n_online_docs)];
+            testdata.simulate_online_doc_session(user_uuid, online_doc_code, session_started_at);
+        end if;
+
+    end loop;
+end;
+$$
+
+
+drop function if exists testdata.simulate_readers;
+
+create function testdata.simulate_readers() returns void
+language plpgsql
+as
+$$
+declare
+    readers uuid array;
+    reader_idx int;
+    start_at timestamp;
+    finish_at timestamp;
+begin
+    select start_modeling_at, finish_modeling_at 
+        into start_at, finish_at
+        from testdata.model_params 
+        where is_active;
+    
+    select uuid 
+        into readers 
+        from testdata.readers;
+    
+    for reader_idx in 1..coalesce(cardinality(readers), 0)
+    loop
+        testdata.simulate_reader_behavior(start_at, finish_at);    
+    end loop;
+end;
+$$
