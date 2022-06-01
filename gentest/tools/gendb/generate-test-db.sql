@@ -1157,26 +1157,107 @@ insert into
 
 select product_code, count(reader_uuid) from readers__products group by product_code;
 
+
 /* Simulation */
 
-create function testdata.simulate_topic_session(reader_uuid, online_doc_uuid, topic_uuid, start_at) returns void
+create function testdata.random_question() returns varchar
+
+language plpgsql
+as
+$$
+declare
+    dice real;
+    question varchar;
+begin
+    dice = random();
+    if dice < 0.2 
+        question = 'Why this feature is not working?';
+    else if dice < 0.4 then
+        question = 'Is it legal to use this function in USA?';
+    else if dice < 0.6 then
+        question = 'My product version is 4.21, is it obsolete today?';
+    else if dice < 0.8 then
+        question = 'How to prevent my kids from accessing this feature?';
+    else 
+        question = 'Could you please provide more helpful info on this feature?';
+    end if;
+
+    return question;
+end;
+$$;
+
+create function testdata.commit_reader_activity(
+    online_doc_uuid, topic_uuid, session_final, 'DISLIKE', null) returns void
 language plpgsql
 as
 $$
 begin
+    insert into testdata.reader_activities (
+        accepted_at, type_code, online_doc_code, )
+end;
+$$;
 
+
+create function testdata.simulate_reader_topic_session(
+    reader_uuid uuid, online_doc_uuid uuid, topic_uuid uuid, 
+    session_start timestamp, 
+    mp testdata.model_params) returns timestamp
+language plpgsql
+as
+$$
+declare
+    session_final timestamp;
+    dislike boolean;
+
+begin
+    session_final = session_start;
+
+    /* Confirming a visit */
+    testdata.commit_reader_activity(online_doc_uuid, topic_uuid, session_final, 'LOAD', null);
+
+    /* Bounce? */
+    if random() < 0.2 then
+        session_final = session_final + '10 sec'::interval;
+        testdata.commit_reader_activity(online_doc_uuid, topic_uuid, session_final, 'BOUNCE', null);
+    else
+        /* Dislake? */
+        if random() < 0.2 then
+            session_final = session_final + '30 sec'::interval;
+            testdata.commit_reader_activity(online_doc_uuid, topic_uuid, session_final, 'DISLIKE', null);
+        end if
+
+        /* Ask question? */
+        if random() 0.2 then
+            session_final = session_final + '1 min'::interval;
+            question = random_question(); 
+            testdata.commit_reader_activity(online_doc_uuid, topic_uuid, session_final, 'MESSAGE', question);
+        end if;
+
+        session_final = session_final + '2 min'::interval; 
+
+        testdata.commit_reader_activity(online_doc_uuid, topic_uuid, session_final, 'LEAVE', null);
+
+    end if;
+
+
+
+    return session_final;
 end;
 $$
 
 
-create function testdata.simulate_online_doc_session(
-    reader_uuid uuid, online_doc_code varchar, start_at timestamp) returns void
+create function testdata.simulate_reader_online_doc_session(
+    reader_uuid uuid, online_doc_uuid uuid, 
+    session_start timestamp, 
+    mp testdata.model_params) returns void
 language plpgsql
 as
 $$
 declare
     topic_uuids uuid array;
-    topic_idx   int;
+    topic_idx int;
+    topic_session_start timestamp;
+
 begin
     select array_agg(uuid) 
         into topic_uuids 
@@ -1185,17 +1266,23 @@ begin
             genres__aspects ga,
             testdata.topics t 
         where
+            o.uuid = online_doc_uuid
+                and
+            o.product_code = t.product_code
+                and
             o.genre_code = ga.genre_code
                 and
             t.aspect_code = ga.aspect_code
                 and
             o.lang_code = t.lang_code
 
+    topic_session_start = session_start;
 
     for topic_idx in 1..coalesce(cardinality(topic_uuids), 0)
     loop
         if random() < 0.2 then
-            testdata.simulate_topic_session(reader_uuid, topic_uuids[topic_idx], start_at);
+            topic_session_start = testdata.simulate_reader_topic_session(
+                reader_uuid, online_doc_uuid, topic_uuids[topic_idx], topic_session_start);
         end if;
     end loop; 
 
@@ -1203,38 +1290,40 @@ end;
 $$
 
 create function testdata.simulate_reader_behavior(
-    user_uuid uuid, start_at timestamp, finish_at timestamp) returns void
+    reader_uuid uuid, mp testdata.model_params) returns void
 language plpgsql
 as
 $$
 declare
-    max_sessions int;
     n_sessions int;
     session_idx int;
-    session_started_at timestamp;
-    session_online_doc_code varchar;
     online_doc_codes varchar array;
+    session_start timestamp;
+    session_online_doc_code varchar;
+    
 begin
-    n_sessions = testdata.random_int(1, n_sessions);
+    n_sessions = testdata.random_int(1, mp.max_sessions_per_reader);
 
     for session_idx in 1..n_sessions
     loop
-        session_started_at = testdata.random_timestamp(start_at, finish_at);
         select array_agg(online_doc_code) 
             into online_doc_codes 
             from 
                 testdata.readers r, 
                 testdata.readers__products rp, 
-                testdata.online_docs od
+                testdata.online_docs o
             where
                 r.uuid = rp.reader_uuid
                     and
-                rp.product_code = od.product_code;
+                rp.product_code = o.product_code;
+
+        session_start = testdata.random_timestamp(mp.simulation_start, mp.simulation_final);
 
         n_online_docs = coalesce(cardinality(online_doc_codes), 0);
+
         if n_online_docs > 0 then
             online_doc_code = online_doc_codes[testdata.random_int(1, n_online_docs)];
-            testdata.simulate_online_doc_session(user_uuid, online_doc_code, session_started_at);
+            testdata.simulate_reader_online_doc_session(reader_uuid, online_doc_code, session_start);
         end if;
 
     end loop;
@@ -1249,23 +1338,25 @@ language plpgsql
 as
 $$
 declare
-    readers uuid array;
+    mp testdata.model_params%rowtype; 
+    reader_uuids uuid array;
     reader_idx int;
-    start_at timestamp;
-    finish_at timestamp;
+    simulation_start timestamp;
+    simulation_final timestamp;
+
 begin
-    select start_modeling_at, finish_modeling_at 
-        into start_at, finish_at
+    select *
+        into mp 
         from testdata.model_params 
         where is_active;
     
-    select uuid 
-        into readers 
+    select array_agg(uuid) 
+        into reader_uuids 
         from testdata.readers;
     
-    for reader_idx in 1..coalesce(cardinality(readers), 0)
+    for reader_idx in 1..coalesce(cardinality(reader_uuids), 0)
     loop
-        testdata.simulate_reader_behavior(start_at, finish_at);    
+        testdata.simulate_reader_behavior(reader_uuid, mp);    
     end loop;
 end;
 $$
