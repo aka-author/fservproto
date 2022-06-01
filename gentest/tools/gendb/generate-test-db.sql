@@ -291,6 +291,7 @@ drop index if exists testdata.topics__code__lang_code__idx;
 drop table if exists testdata.topic_vers;
 drop table if exists testdata.readers;
 drop table if exists testdata.readers__products;
+drop table if exists testdata.reader_activities;
 
 create table testdata.model_params (
     code                            varchar,
@@ -450,8 +451,23 @@ create table testdata.readers (
 
 create table testdata.readers__products (
     reader_uuid         uuid,
-    product_code        varchar
-);
+    product_code        varchar);
+
+create table testdata.reader_activities (
+    uuid                    uuid default gen_random_uuid() not null primary key,
+    online_doc_code         varchar, 
+    online_doc_lang_code    varchar, 
+    online_doc_ver_no       int,
+    topic_code              varchar, 
+    topic_ver_no            int,
+    reader_country_code     varchar, 
+    reader_lang_code        varchar, 
+    reader_os_code          varchar, 
+    reader_browser_code     varchar,
+    accepted_at             timestamp, 
+    activity_type_code      varchar, 
+    message_type_code       varchar, 
+    message_text            varchar);
 
 
 /* Data */
@@ -470,7 +486,7 @@ truncate table testdata.topics;
 truncate table testdata.topic_vers;
 truncate table testdata.readers;
 truncate table testdata.readers__products;
-
+truncate table testdata.reader_activities;
 
 /* Configuring parameters of the model */
 
@@ -1208,7 +1224,7 @@ as
 $$
 begin
     insert into testdata.reader_activities (
-        online_doc_code, online_doc_lang_code, online_doc_ver_no
+        online_doc_code, online_doc_lang_code, online_doc_ver_no,
         topic_code, topic_ver_no,
         reader_country_code, reader_lang_code, reader_os_code, reader_browser_code,
         accepted_at, activity_type_code, message_type_code, message_text)
@@ -1224,7 +1240,8 @@ $$;
 drop function if exists testdata.simulate_reader_topic_session;
 
 create function testdata.simulate_reader_topic_session(
-    reader testdata.reader, online_doc_uuid uuid, topic_uuid uuid, 
+    reader testdata.reader, 
+    online_doc testdata.online_docs, online_doc_ver_no, topic testdata.topics, 
     session_start timestamp, 
     mp testdata.model_params) returns timestamp
 language plpgsql
@@ -1232,35 +1249,55 @@ as
 $$
 declare
     session_final timestamp;
-    dislike boolean;
+    topic_ver_no int;
 
 begin
     session_final = session_start;
 
+    select ver_no into topic_ver_no
+        from testdata.topic_vers v
+        where
+            v.topic_code = topic_code
+                and
+            v.lang_code = topic_lang_code
+                and     
+            v.released_at < session_final 
+        order by v.released_at desc limit 1;
+
     /* Confirming a visit */
-    testdata.commit_reader_activity(reader, online_doc_uuid, topic_uuid, session_final, 'LOAD', null);
+    testdata.commit_reader_activity(
+        reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+        session_final, 'LOAD', null, null);
 
     /* Bounce? */
     if random() < mp.bounce_probability then
         session_final = session_final + '10 sec'::interval;
-        testdata.commit_reader_activity(reader, online_doc_uuid, topic_uuid, session_final, 'BOUNCE', null);
+        testdata.commit_reader_activity(
+            reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+            session_final, 'BOUNCE', null, null);
     else
         /* Dislake? */
         if random() < mp.dislike_probability then
             session_final = session_final + '30 sec'::interval;
-            testdata.commit_reader_activity(reader, online_doc_uuid, topic_uuid, session_final, 'DISLIKE', null);
+            testdata.commit_reader_activity(
+                reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+                session_final, 'DISLIKE', null, null);
         end if
 
         /* Ask question? */
         if random() < mp.message_probability then
             session_final = session_final + '1 min'::interval;
             question = random_question(); 
-            testdata.commit_reader_activity(reader, online_doc_uuid, topic_uuid, session_final, 'MESSAGE', question);
+            testdata.commit_reader_activity(
+                reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+                session_final, 'MESSAGE', 'QIESTION', question);
         end if;
 
         session_final = session_final + '2 min'::interval; 
 
-        testdata.commit_reader_activity(reader, online_doc_uuid, topic_uuid, session_final, 'LEAVE', null);
+        testdata.commit_reader_activity(
+            reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+            session_final, 'LEAVE', null, null);
 
     end if;
 
@@ -1283,6 +1320,7 @@ declare
     topic_idx int;
     topic testdata.topics;
     topic_session_start timestamp;
+    online_doc_ver_no int;
 
 begin
     select array_agg(uuid) 
@@ -1301,6 +1339,16 @@ begin
             t.aspect_code = ga.aspect_code
                 and
             o.lang_code = t.lang_code
+
+    select ver_no into online_doc_ver_no
+        from testdata.online_doc_vers v
+        where
+            v.online_doc_code = online_doc.code
+                and 
+            v.lang_code = online_doc.lang_code
+                and    
+            v.released_at < session_final 
+        order by v.released_at desc limit 1;
 
     topic_session_start = session_start;
 
