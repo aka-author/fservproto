@@ -455,18 +455,18 @@ create table testdata.readers__products (
 
 create table testdata.reader_activities (
     uuid                    uuid default gen_random_uuid() not null primary key,
-    online_doc_code         varchar, 
-    online_doc_lang_code    varchar, 
+    online_doc_code         varchar,
+    online_doc_lang_code    varchar,
     online_doc_ver_no       int,
-    topic_code              varchar, 
+    topic_code              varchar,
     topic_ver_no            int,
-    reader_country_code     varchar, 
-    reader_lang_code        varchar, 
-    reader_os_code          varchar, 
+    reader_country_code     varchar,
+    reader_lang_code        varchar,
+    reader_os_code          varchar,
     reader_browser_code     varchar,
-    accepted_at             timestamp, 
-    activity_type_code      varchar, 
-    message_type_code       varchar, 
+    accepted_at             timestamp,
+    activity_type_code      varchar,
+    message_type_code       varchar,
     message_text            varchar);
 
 
@@ -501,13 +501,13 @@ insert
         simulation_start, simulation_final,
         is_active)
     values (
-        'default', 10000, 
-        2, 0.2, 
-        5, 0.2, 
+        'default', 10000,
+        2, 0.2,
+        5, 0.2,
         10, 5, 0.2,
-        0.1, 0.05, 0.01, 
-        'en', 
-        '2022-01-01', '2022-05-30', 
+        0.1, 0.05, 0.01,
+        'en',
+        '2022-01-01', '2022-05-30',
         true);
 
 
@@ -906,7 +906,7 @@ begin
     select
         source_lang_code,
         max_vers_per_online_doc,
-        start_modeling_at, finish_modeling_at
+        simulation_start, simulation_final
         into
             slc,
             mvpod,
@@ -1195,15 +1195,15 @@ declare
     question varchar;
 begin
     dice = random();
-    if dice < 0.2 
+    if dice < 0.2 then
         question = 'Why this feature is not working?';
-    else if dice < 0.4 then
+    elseif dice < 0.4 then
         question = 'Is it legal to use this function in USA?';
-    else if dice < 0.6 then
+    elseif dice < 0.6 then
         question = 'My product version is 4.21, is it obsolete today?';
-    else if dice < 0.8 then
+    elseif dice < 0.8 then
         question = 'How to prevent my kids from accessing this feature?';
-    else 
+    else
         question = 'Could you please provide more helpful info on this feature?';
     end if;
 
@@ -1215,10 +1215,10 @@ $$;
 drop function if exists testdata.commit_reader_activity;
 
 create function testdata.commit_reader_activity(
-    reader testdata.reader, 
-    online_doc testdata.online_doc, online_doc_ver_no, 
-    topic testdata.topic, topic_ver_no, 
-    accepted_at, activety_type_code, message_type_code, message_text) returns void
+    reader testdata.readers,
+    online_doc testdata.online_docs, topic testdata.topics,
+    online_doc_ver_no int, topic_ver_no int,
+    accepted_at timestamp, activity_type_code varchar, message_type_code varchar, message_text varchar) returns void
 language plpgsql
 as
 $$
@@ -1240,9 +1240,9 @@ $$;
 drop function if exists testdata.simulate_reader_topic_session;
 
 create function testdata.simulate_reader_topic_session(
-    reader testdata.reader, 
-    online_doc testdata.online_docs, online_doc_ver_no, topic testdata.topics, 
-    session_start timestamp, 
+    reader testdata.readers,
+    online_doc testdata.online_docs, online_doc_ver_no int, topic testdata.topics,
+    session_start timestamp,
     mp testdata.model_params) returns timestamp
 language plpgsql
 as
@@ -1250,6 +1250,7 @@ $$
 declare
     session_final timestamp;
     topic_ver_no int;
+    question varchar;
 
 begin
     session_final = session_start;
@@ -1257,46 +1258,46 @@ begin
     select ver_no into topic_ver_no
         from testdata.topic_vers v
         where
-            v.topic_code = topic_code
+            v.topic_code = topic.code
                 and
-            v.lang_code = topic_lang_code
-                and     
-            v.released_at < session_final 
+            v.lang_code = topic.lang_code
+                and
+            v.released_at < session_final
         order by v.released_at desc limit 1;
 
     /* Confirming a visit */
-    testdata.commit_reader_activity(
-        reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+    select testdata.commit_reader_activity(
+        reader, online_doc, online_doc.lang_code, online_doc_ver_no, topic, topic_ver_no,
         session_final, 'LOAD', null, null);
 
     /* Bounce? */
     if random() < mp.bounce_probability then
         session_final = session_final + '10 sec'::interval;
-        testdata.commit_reader_activity(
-            reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+        select testdata.commit_reader_activity(
+            reader, online_doc, online_doc_ver_no, topic, topic_ver_no,
             session_final, 'BOUNCE', null, null);
     else
         /* Dislake? */
         if random() < mp.dislike_probability then
             session_final = session_final + '30 sec'::interval;
-            testdata.commit_reader_activity(
-                reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+            select testdata.commit_reader_activity(
+                reader, online_doc, online_doc_ver_no, topic, topic_ver_no,
                 session_final, 'DISLIKE', null, null);
-        end if
+        end if;
 
         /* Ask question? */
         if random() < mp.message_probability then
             session_final = session_final + '1 min'::interval;
-            question = random_question(); 
-            testdata.commit_reader_activity(
-                reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+            question = random_question();
+            select testdata.commit_reader_activity(
+                reader, online_doc, online_doc_ver_no, topic, topic_ver_no,
                 session_final, 'MESSAGE', 'QIESTION', question);
         end if;
 
-        session_final = session_final + '2 min'::interval; 
+        session_final = session_final + '2 min'::interval;
 
-        testdata.commit_reader_activity(
-            reader, online_doc, online_doc_ver_no, topic, topic_ver_no, 
+        select testdata.commit_reader_activity(
+            reader, online_doc, online_doc_ver_no, topic, topic_ver_no,
             session_final, 'LEAVE', null, null);
 
     end if;
@@ -1309,8 +1310,8 @@ $$
 drop function if exists testdata.simulate_reader_online_doc_session;
 
 create function testdata.simulate_reader_online_doc_session(
-    reader testdata.readers, online_doc testdata.online_doc, 
-    session_start timestamp, 
+    reader testdata.readers, online_doc testdata.online_docs,
+    session_start timestamp,
     mp testdata.model_params) returns void
 language plpgsql
 as
@@ -1323,12 +1324,12 @@ declare
     online_doc_ver_no int;
 
 begin
-    select array_agg(uuid) 
-        into topic_uuids 
+    select array_agg(t.uuid)
+        into topic_uuids
         from
             online_docs o,
             genres__aspects ga,
-            testdata.topics t 
+            testdata.topics t
         where
             o.uuid = online_doc.uuid
                 and
@@ -1338,16 +1339,16 @@ begin
                 and
             t.aspect_code = ga.aspect_code
                 and
-            o.lang_code = t.lang_code
+            o.lang_code = t.lang_code;
 
     select ver_no into online_doc_ver_no
         from testdata.online_doc_vers v
         where
             v.online_doc_code = online_doc.code
-                and 
+                and
             v.lang_code = online_doc.lang_code
-                and    
-            v.released_at < session_final 
+                and
+            v.released_at < session_start
         order by v.released_at desc limit 1;
 
     topic_session_start = session_start;
@@ -1355,11 +1356,11 @@ begin
     for topic_idx in 1..coalesce(cardinality(topic_uuids), 0)
     loop
         if random() < mp.topic_view_probability then
-            select * into topic from testdata.topics where uuid = topic_uuids[topic_idx]; 
+            select * into topic from testdata.topics where uuid = topic_uuids[topic_idx];
             topic_session_start = testdata.simulate_reader_topic_session(
                 reader, online_doc, topic, topic_session_start, mp);
         end if;
-    end loop; 
+    end loop;
 
 end;
 $$
@@ -1374,20 +1375,20 @@ $$
 declare
     lc varchar;
 begin
-    select 
-        lang_code into lc 
-    from 
-        testdata.readers r, testdata.locals l 
+    select
+        r.lang_code into lc
+    from
+        testdata.readers r, testdata.locals l
     where
-        r.lang_code = l.lang_code; 
+        r.lang_code = l.lang_code;
 
     if lc is null then
-        select 
-            source_lang_code into lc 
-        from 
-            testdata.model_params 
-        where 
-            is_active; 
+        select
+            source_lang_code into lc
+        from
+            testdata.model_params
+        where
+            is_active;
     end if;
 
     return lc;
@@ -1408,10 +1409,11 @@ declare
     reader testdata.readers;
     reader_preferred_lang_code varchar;
     online_doc_uuids varchar array;
+    n_online_docs int;
     session_start timestamp;
-    online_doc_code varchar;
+    online_doc_uuid uuid;
     online_doc testdata.online_docs;
-    
+
 begin
     n_sessions = testdata.random_int(1, mp.max_sessions_per_reader);
 
@@ -1419,26 +1421,26 @@ begin
 
     for session_idx in 1..n_sessions
     loop
-        select array_agg(online_doc_uuids) 
+        select array_agg(uuid)
             into online_doc_uuids
-            from  
-                testdata.readers__products rp, 
+            from
+                testdata.readers__products rp,
                 testdata.online_docs o
             where
                 reader.uuid = rp.reader_uuid
                     and
-                o.product_code = rp.product_code 
+                o.product_code = rp.product_code
                     and
                 o.lang_code = reader_preferred_lang_code;
 
         session_start = testdata.random_timestamp(mp.simulation_start, mp.simulation_final);
 
-        n_online_docs = coalesce(cardinality(online_doc_codes), 0);
+        n_online_docs = coalesce(cardinality(online_doc_uuids), 0);
 
         if n_online_docs > 0 then
-            online_doc_code = online_doc_codes[testdata.random_int(1, n_online_docs)];
-            select * into online_doc from testdata.online_docs where code = online_doc_code;
-            testdata.simulate_reader_online_doc_session(reader, online_doc, session_start);
+            online_doc_uuid = online_doc_uuids[testdata.random_int(1, n_online_docs)];
+            select * into online_doc from testdata.online_docs where uuid = online_doc_uuid;
+            select testdata.simulate_reader_online_doc_session(reader, online_doc, session_start);
         end if;
 
     end loop;
@@ -1453,25 +1455,25 @@ language plpgsql
 as
 $$
 declare
-    mp testdata.model_params%rowtype; 
+    mp testdata.model_params%rowtype;
     reader_uuids uuid array;
     reader_idx int;
     reader testdata.readers;
 
 begin
     select *
-        into mp 
-        from testdata.model_params 
+        into mp
+        from testdata.model_params
         where is_active;
-    
-    select array_agg(uuid) 
-        into reader_uuids 
+
+    select array_agg(uuid)
+        into reader_uuids
         from testdata.readers;
-    
+
     for reader_idx in 1..coalesce(cardinality(reader_uuids), 0)
     loop
         select * into reader from testdata.readers where readers.uuid = reader_uuids[reader_idx];
-        testdata.simulate_reader_behavior(reader, mp);    
+        select testdata.simulate_reader_behavior(reader, mp);
     end loop;
 end;
 $$
