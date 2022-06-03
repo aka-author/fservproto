@@ -10,6 +10,7 @@
 # # ## ### ##### ######## ############# #####################
 
 import cgi
+from distutils.command.config import config
 import io
 import os
 import sys
@@ -65,8 +66,6 @@ def get_db_connection_params():
 def connect_db():
 
     dcp = get_db_connection_params()
-
-    print(dcp)
 
     db_connection = psycopg2.connect(
         dbname=dcp["database"],
@@ -133,7 +132,7 @@ def password_hash(password):
 
 def assemble_token():
 
-    return str(uuid.uuid4())
+    return uuid.uuid4()
 
 
 def check_credentials(req_user, req_password):
@@ -165,28 +164,31 @@ def process_request():
         
         db_connecton, db_cursor = connect_db()
 
+        session_uuid = str(assemble_token())
+        host = os.environ["HTTP_HOST"] if "HTTP_HOST" in os.environ else ""  
         timestamp = datetime.now()
+        timeout = get_cms_session_timeout()
         timeout = timestamp + timedelta(seconds=60)
 
-        query = "insert into auth.sessions (started_at, timeout) values (" \
-                + "'" + datetime.strftime(timestamp, "%Y-%M-%d %H:%M:%S.%f") + "'"\
-                + ", " \
-                + "'" + datetime.strftime(timeout, "%Y-%M-%d %H:%M:%S.%f") + "'" \
+        query = "insert into auth.sessions " \
+                + "(uuid, user_name, user_host, started_at, expires_at) values ("\
+                + "'" + session_uuid + "', "  \
+                + "'" + req_user + "', "  \
+                + "'" + host + "', "  \
+                + "'" + datetime.strftime(timestamp, "%Y-%m-%d %H:%M:%S.%f") + "', "\
+                + "'" + datetime.strftime(timeout, "%Y-%m-%d %H:%M:%S.%f") + "'" \
                 + ");"
 
-        print(query)
         db_cursor.execute(query)
+
         db_connecton.commit()
         db_connecton.close()
 
-        print(format_body(0, "Access is allowed", assemble_token()))
+        print(format_body(0, "Access is allowed", session_uuid))
 
     else:
         print(format_body(1, "Access is denied", ""))
-        timestamp = datetime.now()
-        timeout = timestamp + timedelta(seconds=60)
     
-
 
 #
 # Main
