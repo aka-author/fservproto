@@ -2,6 +2,7 @@
 #encoding: utf-8
 
 import cgi
+from distutils.command.config import config
 #from requests import request
 import io
 import os
@@ -14,25 +15,27 @@ import configparser
 import psycopg2
 from datetime import datetime
 
+sys.path.append("modules")
+from modules import fservconfig
+from modules import fservdb
+
+
 def check_access_permissions():
 
-    if "HTTP_USER_AGENT" in os.environ: 
-        print("USER AGENT:",  os.environ["HTTP_USER_AGENT"])
-             
-    if "HTTP_PRAGMA" in os.environ: 
-        print("AUTH:",  os.environ["HTTP_PRAGMA"])   
+    print(os.environ)
 
-    #request = Request()     
+    fc = fservconfig.FservConfig("config/fserv.ini")
 
-    #header = request.environ.get('HTTP_AUTHORIZATION')
+    _, db_cursor = fservdb.FservDB(fc.get_db_connection_params())
+
+
     
-    #print(header)
+    
 
-    print(os.environ)    
+     
 
 
 def process_request():
-
 
     print("Content-type: application/json\n")
 
