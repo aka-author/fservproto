@@ -1,3 +1,11 @@
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  FservCfg.py
+# Func:    Retrieving a feedback server configuration (\(\                                                                                                                      
+#                                                     (^.^)
+# # ## ### ##### ######## ############# #####################
+
 import configparser
 
 

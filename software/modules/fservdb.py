@@ -1,3 +1,11 @@
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  FservDB.py
+# Func:    Accessing a feedback database       (\(\                                                       
+#                                              (^.^)
+# # ## ### ##### ######## ############# #####################
+
 import psycopg2
 
 

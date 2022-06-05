@@ -2,11 +2,11 @@
 #encoding: utf-8
 
 # # ## ### ##### ######## ############# #####################
-# Online Docs Feedback Server
-# Letting a CMS to access ODFS reports
-#                                                     
-#                                              (\(\          
-#                                              (^.^)
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  login.py
+# Func:    Authorizing a CMS as a feedback serv. user  (\(\                                                                                                            
+#                                                      (^.^)
 # # ## ### ##### ######## ############# #####################
 
 import cgi

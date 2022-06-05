@@ -1,3 +1,11 @@
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  FservAuth.py
+# Func:    Managing user sessions            (\(\                                                                                                
+#                                            (^.^)
+# # ## ### ##### ######## ############# #####################
+
 import os
 import sys
 import hashlib
