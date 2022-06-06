@@ -1,7 +1,7 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  DataObject.py                            (\(\
+# Module:  DataObj.py                               (\(\
 # Func:    Managing data objects                    (^.^)
 # # ## ### ##### ######## ############# #####################
 

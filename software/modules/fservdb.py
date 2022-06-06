@@ -69,8 +69,8 @@ class FservDB:
         
         query = query_template.format(\
                     session_record["token"], session_record["user"], session_record["host"], \
-                    datetime.strftime(session_record["started_at"], "%Y-%m-%d %H:%M:%S.%f"), \
-                    datetime.strftime(session_record["expires_at"], "%Y-%m-%d %H:%M:%S.%f"))
+                    utils.timestamp2str(session_record["started_at"]), \
+                    utils.timestamp2str(session_record["expires_at"]))
 
         db_cursor.execute(query)
 

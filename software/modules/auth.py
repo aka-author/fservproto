@@ -130,9 +130,4 @@ class Auth:
 
     def check_session(self, token):
 
-        query_template = """select count(uuid) from auth.sessions where """
-
-        pass
-
-
-
+        return self.get_db().check_session(token)
