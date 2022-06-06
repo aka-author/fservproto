@@ -8,17 +8,31 @@
 from datetime import datetime
 import psycopg2
 
+import utils
+
 
 class FservDB:
 
     def __init__(self, connection_params):
 
         self.connection_params = connection_params
+        self.query_templates = {}
 
 
     def get_connection_params(self):
 
         return self.connection_params
+
+
+    def get_query_template(self, name):
+
+        if not name in self.query_templates:
+            query_name = "sql/" + name + ".sql"
+            query_file = open(query_name, "r")
+            self.query_templates[name] = query_file.read()
+            query_file.close()
+
+        return self.query_templates[name]
 
 
     def connect(self):
@@ -36,6 +50,13 @@ class FservDB:
         return db_connection, db_cursor 
 
 
+    def terminate_expired_sessions(self, db_cursor):
+
+        query_template = self.get_query_template("terminate-session")
+        query = query_template.format(utils.timestamp2str(datetime.now()))
+        db_cursor.execute(query)
+
+
     def insert_session(self, session):
 
         session_fields = ["token", "user", "host", "started_at", "expires_at"]
@@ -44,9 +65,7 @@ class FservDB:
 
         db_connecton, db_cursor = self.connect()
 
-        query_template = """insert into auth.sessions  
-                    (token, login, host, started_at, expires_at) 
-                    values ('{0}', '{1}', '{2}', '{3}', '{4}');"""
+        query_template = self.get_query_template("insert-session")
         
         query = query_template.format(\
                     session_record["token"], session_record["user"], session_record["host"], \
@@ -55,5 +74,24 @@ class FservDB:
 
         db_cursor.execute(query)
 
+        self.terminate_expired_sessions(db_cursor)
+
         db_connecton.commit()
         db_connecton.close()
+
+
+    def check_session(self, token):
+
+        query_template = self.get_query_template("check-session")
+        
+        query = query_template.format(utils.timestamp2str(token, datetime.now()))
+
+        db_connecton, db_cursor = self.connect()
+        
+        db_cursor.execute(query)
+
+        result = db_cursor.fetchall()
+
+        db_connecton.close()
+
+        return len(result) > 0

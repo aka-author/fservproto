@@ -13,8 +13,8 @@ import sys
 
 sys.path.append("modules")
 from modules import fservcfg
-from modules import fservauth
-from modules import fservresp
+from modules import auth
+from modules import httpresp
 
 
 #
@@ -34,12 +34,12 @@ def get_req_credencials():
 def process_request():
 
     cfg = fservcfg.FservCfg("config/fserv.ini")
-    req_user, req_password = "ditatoo", "verniteBibi" #get_req_credencials()
+    req_user, req_password = get_req_credencials()
 
-    auth = fservauth.FservAuth(cfg)
-    session_info = auth.init_session(req_user, req_password)
+    auth_agent = auth.Auth(cfg)
+    session_info = auth_agent.init_session(req_user, req_password)
     
-    resp = fservresp.FservHttpResponse()
+    resp = httpresp.HttpResponse()
     resp.set_body(session_info)
 
     print(resp.serialize())

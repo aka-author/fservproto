@@ -1,6 +1,6 @@
 import json
 
-class FservHttpResponse: 
+class HttpResponse: 
 
     def __init__(self):
 

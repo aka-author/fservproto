@@ -1,7 +1,7 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  FservAuth.py                             (\(\
+# Module:  auth.py                                  (\(\
 # Func:    Managing user sessions                   (^.^)                                                                                                                                            
 # # ## ### ##### ######## ############# #####################
 
@@ -11,11 +11,11 @@ import uuid
 from datetime import datetime, timedelta
 
 import utils
-import dataobject
+import dataobj
 import fservdb
 
 
-class Session(dataobject.DataObject): 
+class Session(dataobj.DataObject): 
 
     def __init__(self, token, user, host, started_at, duration):
 
@@ -45,7 +45,7 @@ class Session(dataobject.DataObject):
         return dto
 
 
-class FservAuth:
+class Auth:
 
     def __init__(self, cfg):
 
@@ -129,6 +129,8 @@ class FservAuth:
 
 
     def check_session(self, token):
+
+        query_template = """select count(uuid) from auth.sessions where """
 
         pass
 
