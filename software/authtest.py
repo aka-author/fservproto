@@ -28,13 +28,7 @@ def check_access_permissions():
 
     _, db_cursor = fservdb.FservDB(fc.get_db_connection_params())
 
-
     
-    
-
-     
-
-
 def process_request():
 
     print("Content-type: application/json\n")

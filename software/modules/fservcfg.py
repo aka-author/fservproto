@@ -1,9 +1,8 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  FservCfg.py
-# Func:    Retrieving a feedback server configuration (\(\                                                                                                                      
-#                                                     (^.^)
+# Module:  FservCfg.py                                  (\(\
+# Func:    Retrieving a feedback server configuration   (^.^)                                                                                                                                                                        
 # # ## ### ##### ######## ############# #####################
 
 import configparser
@@ -55,3 +54,11 @@ class FservCfg:
         duration = self.get_param_value("CMS_SESSION", "duration")
 
         return int(duration) if duration is not None else 60     
+
+
+    def get_cms_credentials(self):
+
+        cms_user = self.get_param_value("CMS_USER", "user")
+        cms_password = self.get_param_value("CMS_USER", "password")    
+
+        return cms_user, cms_password
