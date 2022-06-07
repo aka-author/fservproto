@@ -82,6 +82,16 @@ class ModelField:
         return str(value)    
 
 
+    def filter_for_sql(self, internal_value):
+
+        return internal_value
+
+
+    def filter_for_dto(self, internal_value):
+
+        return internal_value
+
+
 class StringModelField(ModelField):
 
     def __init__(self, field_name):
@@ -103,7 +113,17 @@ class UuidModelField(ModelField):
 
     def parse(self, serialized_value):
 
-        return uuid.UUID(serialized_value).hex      
+        return uuid.UUID(serialized_value).hex
+
+
+    def filter_for_sql(self, internal_value):
+
+        return str(internal_value)
+
+
+    def filter_for_dto(self, internal_value):
+
+        return str(internal_value)      
 
 
 class IntModelField(ModelField):
@@ -136,6 +156,16 @@ class TimstampField(ModelField):
     def publish(self, value):
 
         return datetime.strftime(value, self.get_publish_format())
+
+
+    def filter_for_sql(self, internal_value):
+
+        return self.serialize(internal_value)
+
+
+    def filter_for_dto(self, internal_value):
+
+        return self.serialize(internal_value)
 
 
 class DurationSecField(ModelField):

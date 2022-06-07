@@ -24,6 +24,11 @@ class Model(bureaucrat.Bureaucrat):
         self.reset_field_values()
 
 
+    def get_model_name(self):
+
+        return self.model_name
+
+
     def append_field(self, field, key_mode=None):
 
         field_name = field.get_field_name() 
@@ -49,18 +54,28 @@ class Model(bureaucrat.Bureaucrat):
         pass
 
 
-    def set_value(self, field_name, raw_value):
+    def set_field_value(self, field_name, raw_value):
 
         val = self.fields[field_name].filter_value_before_set(raw_value) 
 
         self.field_values[field_name] = val
             
 
-    def get_value(self, field_name):
+    def get_field_value(self, field_name):
 
         val = self.field_values[field_name]
 
         return self.fields[field_name].filter_value_before_get(val)
+
+
+    def get_sql_value(self, field_name):
+        val = self.field_values[field_name]
+        return self.fields[field_name].sql_value(val)
+
+
+    def get_dto_value(self, field_name):
+        val = self.field_values[field_name]
+        return self.fields[field_name].dto_value(val)
 
 
     def reset_field_values(self):
@@ -68,27 +83,20 @@ class Model(bureaucrat.Bureaucrat):
         for field_name in self.fields:
             empty_value = self.fields[field_name].get_empty_value()
             self.set_field_value(field_name, empty_value) 
-
-
-
-
-
-    def get_model_name(self):
-
-        return self.model_name
-        
+     
 
     def is_valid(self):
 
         return True
 
 
-    def configure(self):
+    def configure(self, field_values):
 
-        pass
+        for field_name in field_values:
+            self.set_field_value(field_name field_valuesp[field_name])
 
 
-    def insert_to_db(self):
+    def insert_into_db(self):
 
         self.get_db().insert_entity(self)
 
@@ -100,27 +108,25 @@ class Model(bureaucrat.Bureaucrat):
 
     def select_from_db(self):
 
-        data = self.get_db().select_entity(self)
+        record = self.get_db().select_entity(self)
 
-
-    def import_dto(self, dto):
-
-        self.field_values = dto
-
-
-    def assemble_empty_dto(self):
-
-        return {}
-
-
-    def assemble_dto(self):
-
-        return self.field_values
+        if record is not None:
+            self.configure(record)
 
 
     def export_dto(self):
 
-        return assemble_dto if self.is_valid() else assemble_empty_dto(self)
+        dto = {}
+
+        for field_name in self.fields:
+            dto[field_name] = self.get_dto_field_value(field_name)
+
+        return dto
+
+
+    def import_from_dto(self, dto):
+
+        self.field_values = dto
 
 
     def field_name(self, db_field_name):
