@@ -1,9 +1,9 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  bureaucrat.py                                (\(\
-# Func:    Providing the application core architecture  (^.^)
-# # ## ### ##### ######## ############# #####################
+# Module:  bureaucrat.py                               (\(\
+# Func:    Giving a pattern for all the objects here   (^.^)
+# # ## ### ##### ######## ############# ##################### 
 
 import uuid
 
@@ -17,6 +17,7 @@ class Bureaucrat:
         self.app = None
         self.cfg = None
         self.db = None
+        self.req = None
 
 
     def get_id(self):
@@ -51,4 +52,14 @@ class Bureaucrat:
 
     def get_db(self):
 
-        return self.db if self.db is not None else self.get_chief().get_db()     
+        return self.db if self.db is not None else self.get_chief().get_db()   
+
+    
+    def set_http_request(self, http_request):
+
+        self.req = http_request
+
+
+    def get_http_request(self):
+
+        return self.req if self.req is not None else self.get_chief().get_http_req()

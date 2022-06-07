@@ -2,12 +2,16 @@
 import fservcfg
 import fservdb
 import controller
+import httpreq
+
 
 class App(controller.Controller):
 
     def __init__(self):
 
         super().__init__(None, "app")
+
+        self.set_http_request(httpreq.HttpRequest())
 
         self.set_cfg(fservcfg.FservCfg("config/fserv.ini"))
 

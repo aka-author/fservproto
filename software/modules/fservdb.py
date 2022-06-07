@@ -95,3 +95,50 @@ class FservDB:
         db_connecton.close()
 
         return len(result) > 0
+
+    def generic_insert_entity(self, entity):
+
+        pass
+
+
+    def generic_update_entity(self, entity):
+
+        pass
+
+
+    def generic_select_entity(self, entity):
+
+        pass
+
+
+    def insert_entity(self, entity):
+
+        en = entity.get_entity_name()
+
+        if en == "session":
+            self.insert_session(entity)
+        else:
+            self.generic_insert_entity(entity)
+
+
+    def update_entity(self, entity):
+
+        en = entity.get_entity_name()
+
+        if en == "session":
+            self.update_session(entity)
+        else:
+            self.generic_update_entity(entity)
+    
+
+    def select_entity(self, entity):
+
+        en = entity.get_entity_name()
+
+        if en == "session":
+            db_data = self.select_session(entity)
+        else:
+            db_data = self.default_select_entity(entity)
+
+        return db_data
+

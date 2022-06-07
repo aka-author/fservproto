@@ -5,26 +5,46 @@
 # Func:    Impersonating user sessions                 (^.^)                                                                                                                                            
 # # ## ### ##### ######## ############# #####################
 
-from datetime import datetime, timedelta
+from datetime import timedelta
+import uuid
 
 import utils
+import mfield
 import model
-import fservdb
-import controller
 
 
 class Session(model.Model): 
 
-    def __init__(self, token, user, host, started_at, duration):
+    def __init__(self, token_payload):
 
-        super().__init__(None, token)
+        super().__init__("session", None, self.assemble_token(token_payload))
 
-        expires_at = started_at + timedelta(seconds=duration)
 
-        dto = {"token": token, "user": user, "host": host, 
-               "startedAt": started_at, "duration": duration, "expiresAt": expires_at}
+    def setup_fields(self):
+        
+        self.append_field(mfield.StringModelField("uuid"))
+        self.append_field(mfield.StringModelField("user"))
+        self.append_field(mfield.StringModelField("host"))
+        self.append_field(mfield.TimestampModelField("started_at"))
+        self.append_field(mfield.DurationModelField("duration"))
+        self.append_field(mfield.TimestampModelField("expires_at"))
+        self.append_field(mfield.TimestampModelField("terminated_at"))
 
-        self.import_dto(dto)  
+
+    def assemble_token(self, payload):
+
+        token = str(uuid.uuid4())
+
+        return token  
+
+
+    def configure(self, user, host, started_at, duration):
+
+        self.set_field_value("user", user)
+        self.set_field_value("host", host) 
+        self.set_field_value("startedAt", started_at), 
+        self.set_field_value("duration", duration)
+        self.set_field_value("expiresAt", started_at + timedelta(seconds=duration))
 
 
     def is_valid(self):

@@ -12,7 +12,6 @@ import cgi
 import sys
 
 sys.path.append("modules")
-from modules import fservcfg
 from modules import auth
 from modules import httpresp
 from modules import app
@@ -31,20 +30,20 @@ class LoginApp(app.App):
 
     def get_req_credencials(self):
 
-        args = cgi.FieldStorage()
+        req = self.get_http_request()
 
-        req_user = args["user"].value if "user" in args else ""
-        req_password = args["password"].value if "password" in args else ""
+        req_user = req.get_field_value("user") 
+        req_pass = req.get_field_value("password")
 
-        return "ditatoo", "verniteBibi" #req_user, req_password
+        return "ditatoo", "verniteBibi" #req_user, req_pass
 
 
     def process_request(self):
 
-        req_user, req_password = self.get_req_credencials()
+        req_user, req_pass = self.get_req_credencials()
 
         auth_agent = auth.Auth(self)
-        session_info = auth_agent.init_session(req_user, req_password)
+        session_info = auth_agent.init_session(req_user, req_pass)
         
         resp = httpresp.HttpResponse()
         resp.set_body(session_info)

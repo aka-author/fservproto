@@ -5,9 +5,7 @@
 # Func:    Managing user sessions                   (^.^)                                                                                                                                            
 # # ## ### ##### ######## ############# #####################
 
-import os
 import hashlib
-import uuid
 from datetime import datetime, timedelta
 
 import controller
@@ -40,23 +38,9 @@ class Auth(controller.Controller):
         return req_user == cms_user and req_password_hash == cms_password_hash
 
 
-    def get_http_header(self, header_name):
+    def assemble_session_info(self, user_session):
 
-        envname = ("http_" + header_name).upper()
-
-        return os.environ[envname] if envname in os.environ else None  
-
-
-    def assemble_token(self, data):
-
-        token = str(uuid.uuid4())
-
-        return token  
-
-
-    def assemble_session_info(self, session):
-
-        if session.get_field_value("token") is not None:
+        if user_session.is_valid():
             status_code = 0
             message = "The credentials are accepted; the session is available."
         else:       
@@ -71,21 +55,25 @@ class Auth(controller.Controller):
         return session_info
 
 
-    def init_session(self, req_user, req_password):
+    def init_session(self, req_user, req_pass):
 
-        access_allowed = self.check_credentials(req_user, req_password)
-        token = self.assemble_token(None) if access_allowed else None
-            
-        user_session = session.Session(
-                        token, req_user, self.get_http_header("Host"),  
-                        datetime.now(), self.get_cms_session_duration())
+        user_session = session.Session(self) 
+
+        if self.check_credentials(req_user, req_pass):
+
+            user_session.configure(
+                req_user, self.get_http_request().get_header_value("Host"),  
+                datetime.now(), self.get_cms_session_duration())
         
-        if user_session.is_valid():
-            self.get_db().insert_session(user_session)
+            user_session.insert_to_db()
             
         return self.assemble_session_info(user_session)
 
 
-    def check_session(self, token):
+    def check_session(self, session_uuid):
 
-        return self.get_db().check_session(token)
+        user_session = session.Session(self, session_uuid)
+
+        user_session.select_from_db()
+
+        return session.is_active()

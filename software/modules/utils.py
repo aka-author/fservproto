@@ -8,6 +8,16 @@
 from datetime import datetime
 
 
+def davnone(dic, key):
+
+    return dic[key] if key in dic else None
+
+
+def govnone(func, val):
+
+    return func(val) if val is not None else None
+
+
 def get_default_timestamp_format():
 
     return "%Y-%m-%d %H:%M:%S.%f"
