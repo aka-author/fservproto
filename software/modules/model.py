@@ -49,11 +49,28 @@ class Model(bureaucrat.Bureaucrat):
         pass
 
 
+    def set_value(self, field_name, raw_value):
+
+        val = self.fields[field_name].filter_value_before_set(raw_value) 
+
+        self.field_values[field_name] = val
+            
+
+    def get_value(self, field_name):
+
+        val = self.field_values[field_name]
+
+        return self.fields[field_name].filter_value_before_get(val)
+
+
     def reset_field_values(self):
 
         for field_name in self.fields:
             empty_value = self.fields[field_name].get_empty_value()
             self.set_field_value(field_name, empty_value) 
+
+
+
 
 
     def get_model_name(self):

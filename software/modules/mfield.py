@@ -37,6 +37,16 @@ class ModelField:
         return None
         
 
+    def filter_value_before_set(self, raw_value):
+
+        return raw_value
+
+
+    def filter_value_before_get(self, internal_value):
+
+        return internal_value
+
+
     def set_serialize_format(self, format):
 
         self.serialize_format = format
@@ -138,7 +148,7 @@ class DurationSecField(ModelField):
         self.set_publish_format(utils.get_default_timestamp_format())
 
 
-    def before_set_value(value):
+    def filter_value_before_set(value):
 
         return value.total_seconds()
 
