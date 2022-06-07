@@ -27,7 +27,7 @@ class FservDB:
     def get_query_template(self, name):
 
         if not name in self.query_templates:
-            query_name = "sql/" + name + ".sql"
+            query_name = "sql/" + name
             query_file = open(query_name, "r")
             self.query_templates[name] = query_file.read()
             query_file.close()
@@ -52,7 +52,7 @@ class FservDB:
 
     def terminate_expired_sessions(self, db_cursor):
 
-        query_template = self.get_query_template("terminate-session")
+        query_template = self.get_query_template("terminate-session.sql")
         query = query_template.format(utils.timestamp2str(datetime.now()))
         db_cursor.execute(query)
 
@@ -65,7 +65,7 @@ class FservDB:
 
         db_connecton, db_cursor = self.connect()
 
-        query_template = self.get_query_template("insert-session")
+        query_template = self.get_query_template("insert-session.sql")
         
         query = query_template.format(\
                     session_record["token"], session_record["user"], session_record["host"], \
@@ -82,7 +82,7 @@ class FservDB:
 
     def check_session(self, token):
 
-        query_template = self.get_query_template("check-session")
+        query_template = self.get_query_template("check-session.sql")
         
         query = query_template.format(utils.timestamp2str(token, datetime.now()))
 

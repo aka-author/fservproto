@@ -1,3 +1,10 @@
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  HTTPResp.py                                (\(\
+# Func:    Assembling text for an HTTP responce       (^.^)                                                                                                                                            
+# # ## ### ##### ######## ############# #####################
+
 import json
 
 class HttpResponse: 

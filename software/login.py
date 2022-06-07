@@ -15,38 +15,45 @@ sys.path.append("modules")
 from modules import fservcfg
 from modules import auth
 from modules import httpresp
+from modules import app
 
 
 #
 # Processing a request
 #
 
-def get_req_credencials():
+class LoginApp(app.App):
 
-    args = cgi.FieldStorage()
+    def __init__(self):
 
-    req_user = args["user"].value if "user" in args else ""
-    req_password = args["password"].value if "password" in args else ""
-
-    return req_user, req_password
+        super().__init__()
 
 
-def process_request():
+    def get_req_credencials(self):
 
-    cfg = fservcfg.FservCfg("config/fserv.ini")
-    req_user, req_password = get_req_credencials()
+        args = cgi.FieldStorage()
 
-    auth_agent = auth.Auth(cfg)
-    session_info = auth_agent.init_session(req_user, req_password)
-    
-    resp = httpresp.HttpResponse()
-    resp.set_body(session_info)
+        req_user = args["user"].value if "user" in args else ""
+        req_password = args["password"].value if "password" in args else ""
 
-    print(resp.serialize())
+        return "ditatoo", "verniteBibi" #req_user, req_password
+
+
+    def process_request(self):
+
+        req_user, req_password = self.get_req_credencials()
+
+        auth_agent = auth.Auth(self)
+        session_info = auth_agent.init_session(req_user, req_password)
+        
+        resp = httpresp.HttpResponse()
+        resp.set_body(session_info)
+
+        print(resp.serialize())
 
 
 #
 # Main
 #
 
-process_request()
+LoginApp().process_request()

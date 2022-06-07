@@ -1,18 +1,20 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  DataObj.py                               (\(\
-# Func:    Managing data objects                    (^.^)
+# Module:  model.py                                   (\(\
+# Func:    Impersonating subject area entities        (^.^)
 # # ## ### ##### ######## ############# #####################
 
 import utils
 
-class DataObject:
+import bureaucrat
 
-    def __init__(self, dto):
 
-        self.dto = dto
-        self.import_dto(dto)
+class Model(bureaucrat.Bureaucrat):
+
+    def __init__(self, chief, id=None):
+
+        super().__init__(chief, id)
         
 
     def import_dto(self, dto):
