@@ -35,7 +35,7 @@ class LoginApp(app.App):
         req_user = req.get_field_value("user") 
         req_pass = req.get_field_value("password")
 
-        return "ditatoo", "verniteBibi" #req_user, req_pass
+        return req_user, req_pass
 
 
     def process_request(self):

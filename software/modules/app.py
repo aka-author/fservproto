@@ -1,3 +1,9 @@
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  app.py                                    (\(\
+# Func:    The main program behavior                 (^.^)                                                                                                                                            
+# # ## ### ##### ######## ############# #####################
 
 import fservcfg
 import fservdb

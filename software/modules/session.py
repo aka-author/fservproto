@@ -9,7 +9,7 @@ from datetime import timedelta
 import uuid
 
 import utils
-import mfield
+import modelfield
 import model
 
 
@@ -17,51 +17,31 @@ class Session(model.Model):
 
     def __init__(self, token_payload):
 
-        super().__init__("session", None, self.assemble_token(token_payload))
+        super().__init__("session", None, None)
 
 
-    def setup_fields(self):
+    def define_fields(self):
         
-        self.append_field(mfield.StringModelField("uuid"))
-        self.append_field(mfield.StringModelField("user"))
-        self.append_field(mfield.StringModelField("host"))
-        self.append_field(mfield.TimestampModelField("started_at"))
-        self.append_field(mfield.DurationModelField("duration"))
-        self.append_field(mfield.TimestampModelField("expires_at"))
-        self.append_field(mfield.TimestampModelField("terminated_at"))
+        self.define_field(modelfield.UuidModelField("uuid"))
+        self.define_field(modelfield.StringModelField("user"))
+        self.define_field(modelfield.StringModelField("host"))
+        self.define_field(modelfield.TimestampModelField("openedAt"))
+        self.define_field(modelfield.TimestampModelField("expireAt"))
+        self.define_field(modelfield.TimestampModelField("closedAt"))
 
 
-    def assemble_token(self, payload):
+    def set_uuid(self):
 
-        token = str(uuid.uuid4())
-
-        return token  
+        self.set_field_value("uuid", uuid.uuid4())
 
 
-    def configure(self, user, host, started_at, duration):
+    def set_expire_at(self, duration):
 
-        self.set_field_value("user", user)
-        self.set_field_value("host", host) 
-        self.set_field_value("startedAt", started_at), 
-        self.set_field_value("duration", duration)
-        self.set_field_value("expiresAt", started_at + timedelta(seconds=duration))
+        expire_at = self.get_field_value("openedAt") + timedelta(seconds=duration)
+
+        self.set_field_value("expireAt", expire_at)
 
 
     def is_valid(self):
         
-        return self.get_field_value("token") is not None
-
-
-    def export_dto(self):
-        
-        dto = {
-            "token": self.get_field_value("token"),
-            "user": self.get_field_value("user"),
-            "host": self.get_field_value("host"),
-            "startedAt": utils.timestamp2str(self.get_field_value("startedAt")),
-            "duration": self.get_field_value("duration"),
-            "expiresAt": utils.timestamp2str(self.get_field_value("expiresAt"))}
-
-        return dto
-
-
+        return self.get_field_value("uuid") is not None

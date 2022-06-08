@@ -62,4 +62,4 @@ class Bureaucrat:
 
     def get_http_request(self):
 
-        return self.req if self.req is not None else self.get_chief().get_http_req()
+        return self.req if self.req is not None else self.get_chief().get_http_request()

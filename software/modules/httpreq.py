@@ -1,8 +1,15 @@
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  httpreq.py                                  (\(\
+# Func:    Accessing HTTP request data                 (^.^)                                                                                                                                            
+# # ## ### ##### ######## ############# #####################
 
 import os
 import sys
 import cgi
 import json
+
 
 class HttpRequest:
 

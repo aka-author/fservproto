@@ -1,12 +1,11 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  model.py                                    (\(\
-# Func:    Impersonating the subject area entities     (^.^)
+# Module:  model.py                                  (\(\
+# Func:    Processing subject area data              (^.^)
 # # ## ### ##### ######## ############# #####################
 
 import utils
-
 import bureaucrat
 
 
@@ -17,26 +16,18 @@ class Model(bureaucrat.Bureaucrat):
         super().__init__(chief, id)
 
         self.model_name = model_name
-        self.fields = []
-        self.key_names = []
 
-        self.setup_fields()
-        self.reset_field_values()
+        self.fields = {}
+        self.key_names = []
+        self.define_fields()
+
+        self.field_values = {}
+        self.clear_field_values()
 
 
     def get_model_name(self):
 
         return self.model_name
-
-
-    def append_field(self, field, key_mode=None):
-
-        field_name = field.get_field_name() 
-        self.fields[field_name] = field
-
-        if key_mode is not None:
-            field.set_key_mode(key_mode)
-            self.key_names.append(field_name)
 
 
     def get_key_names(self):
@@ -49,69 +40,75 @@ class Model(bureaucrat.Bureaucrat):
         return field_name in self.key_names
 
 
-    def setup_fields(self):
+    # Defining fields
+
+    def define_field(self, field, key_mode=None):
+
+        field_name = field.get_field_name() 
+        self.fields[field_name] = field
+
+        if key_mode is not None:
+            field.set_key_mode(key_mode)
+            self.key_names.append(field_name)
+
+
+    def has_field(self, field_name):
+
+        return field_name in self.fields
+
+
+    def define_fields(self):
 
         pass
 
 
-    def set_field_value(self, field_name, raw_value):
+    # Setting, getting, checking field values
 
-        val = self.fields[field_name].filter_value_before_set(raw_value) 
+    def set_field_value(self, field_name, native_value):
 
-        self.field_values[field_name] = val
+        self.field_values[field_name] = native_value
             
 
     def get_field_value(self, field_name):
 
-        val = self.field_values[field_name]
-
-        return self.fields[field_name].filter_value_before_get(val)
+        return self.field_values[field_name]
 
 
-    def get_sql_value(self, field_name):
-        val = self.field_values[field_name]
-        return self.fields[field_name].sql_value(val)
-
-
-    def get_dto_value(self, field_name):
-        val = self.field_values[field_name]
-        return self.fields[field_name].dto_value(val)
-
-
-    def reset_field_values(self):
+    def clear_field_values(self):
 
         for field_name in self.fields:
             empty_value = self.fields[field_name].get_empty_value()
             self.set_field_value(field_name, empty_value) 
-     
 
     def is_valid(self):
 
         return True
 
 
-    def configure(self, field_values):
+    # Working with DTOs
 
-        for field_name in field_values:
-            self.set_field_value(field_name field_valuesp[field_name])
+    def field_name_native2dto(self, native_name):
 
-
-    def insert_into_db(self):
-
-        self.get_db().insert_entity(self)
+        return native_name
 
 
-    def update_in_db(self):
+    def field_name_dto2native(self, dto_name):
 
-        self.get_db().update_entity(self)    
+        return dto_name
 
 
-    def select_from_db(self):
+    def set_field_value_from_dto(self, field_name, dto_ready_value):
 
-        record = self.get_db().select_entity(self)
+        native_value = self.fields[field_name].repair_from_dto(dto_ready_value)
 
-        if record is not None:
-            self.configure(record)
+        self.set_field_value(native_value)
+
+
+    def get_dto_ready_field_value(self, field_name):
+
+        native_value = self.field_values[field_name]
+        
+        return utils.govnone(self.fields[field_name].prepare_for_dto, native_value)
 
 
     def export_dto(self):
@@ -119,52 +116,15 @@ class Model(bureaucrat.Bureaucrat):
         dto = {}
 
         for field_name in self.fields:
-            dto[field_name] = self.get_dto_field_value(field_name)
+            dto_field_value = self.field_name_native2dto(field_name)
+            dto[dto_field_value] = self.get_dto_ready_field_value(field_name)
 
         return dto
 
 
-    def import_from_dto(self, dto):
+    def import_dto(self, dto):
 
-        self.field_values = dto
-
-
-    def field_name(self, db_field_name):
-
-        return utils.snake_to_camel(db_field_name)
-
-
-    def get_field_value(self, field_name):
-
-        return utils.davnone(self.field_values, field_name)
-
-
-    def serialize_field_value(self, field_name):
-
-        val = self.get_field_value(field_name)
-
-        return utils.govnone(self.fields[field_name].serialize, val) 
-
-    
-    def publish_field_value(self, field_name):
-
-        val = self.get_field_value(field_name)
-
-        return utils.govnone(self.fields[field_name].publish, val)
-
-
-    def assemble_db_field_value(self, field_name):
-
-        return self.get_field_value(field_name)
-
-
-    def export_db_record(self, db_field_names):
-
-        db_record = {}    
-
-        for db_field_name in db_field_names:
-            field_name = self.field_name(db_field_name)
-            db_field_value = self.assemble_db_field_value(field_name)
-            db_record[db_field_name] = db_field_value
-
-        return db_record
+        for dto_field_name in dto:
+            field_name = self.field_name_dto2native(dto_field_name)
+            if self.has_field(field_name):                
+                self.set_field_value_from_dto(field_name, dto[dto_field_name])
