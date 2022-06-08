@@ -22,6 +22,7 @@ class ModelField:
         self.serialize_format = ""
         self.publish_format = ""
 
+
     # Core properties
 
     def get_field_name(self):
@@ -43,6 +44,7 @@ class ModelField:
 
         return None
 
+
     # Serializing and parsing values
 
     def set_serialize_format(self, format):
@@ -55,14 +57,15 @@ class ModelField:
         return self.serialize_format
 
 
-    def serialize(self, native_value):
+    def serialize(self, native_value, custom_format=None):
 
         return str(native_value)
 
 
-    def parse(self, serialized_value):
+    def parse(self, serialized_value, custom_format=None):
 
         return serialized_value
+
 
     # Publishing values
 
@@ -76,9 +79,10 @@ class ModelField:
         return self.publish_format
 
 
-    def publish(self, value):
+    def publish(self, value, custom_format=None):
 
         return str(value)    
+
 
     # Exchanging data via DTOs
 
@@ -125,7 +129,7 @@ class UuidModelField(DTONotReadyModelField):
         super().__init__(field_name, "uuid") 
 
 
-    def parse(self, serialized_value):
+    def parse(self, serialized_value, custom_format=None):
 
         return uuid.UUID(serialized_value).hex
 
@@ -137,7 +141,7 @@ class IntModelField(ModelField):
         super().__init__(field_name, "int")
 
 
-    def parse(self, serialized_value):
+    def parse(self, serialized_value, custom_format=None):
 
         return int(serialized_value)
     
@@ -152,11 +156,11 @@ class TimestampModelField(DTONotReadyModelField):
         self.set_publish_format(utils.get_default_timestamp_format())
 
 
-    def serialize(self, native_value):
+    def serialize(self, native_value, custom_format=None):
 
         return datetime.strftime(native_value, self.get_serialize_format())
 
 
-    def publish(self, native_value):
+    def publish(self, native_value, custom_format=None):
 
         return datetime.strftime(native_value, self.get_publish_format())

@@ -15,15 +15,15 @@ import model
 
 class Session(model.Model): 
 
-    def __init__(self, token_payload):
+    def __init__(self, chief, uuid=None):
 
-        super().__init__("session", None, None)
+        super().__init__("session", chief, uuid)
 
 
     def define_fields(self):
         
         self.define_field(modelfield.UuidModelField("uuid"))
-        self.define_field(modelfield.StringModelField("user"))
+        self.define_field(modelfield.StringModelField("login"))
         self.define_field(modelfield.StringModelField("host"))
         self.define_field(modelfield.TimestampModelField("openedAt"))
         self.define_field(modelfield.TimestampModelField("expireAt"))

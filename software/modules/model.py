@@ -74,11 +74,33 @@ class Model(bureaucrat.Bureaucrat):
         return self.field_values[field_name]
 
 
+    def serialize_field_value(self, field_name, custom_format=None):
+
+        native_value = self.get_field_value(field_name)
+
+        return self.fields[field_name].serialize(native_value, custom_format)
+
+
+    def parse_field_value(self, field_name, serialized_value, custom_format=None):
+
+        native_value = self.fields[field_name].parse(serialized_value, custom_format)
+
+        return self.set_field_value(field_name, native_value)
+
+
+    def publish_field_value(self, field_name, custom_format=None):
+
+        native_value = self.get_field_value(field_name)
+
+        return self.fields[field_name].publish(native_value, custom_format)
+
+
     def clear_field_values(self):
 
         for field_name in self.fields:
             empty_value = self.fields[field_name].get_empty_value()
             self.set_field_value(field_name, empty_value) 
+
 
     def is_valid(self):
 

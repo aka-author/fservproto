@@ -6,6 +6,7 @@
 # # ## ### ##### ######## ############# #####################
 
 from datetime import datetime
+import uuid
 import psycopg2
 
 import utils
@@ -18,6 +19,8 @@ class FservDB:
         self.connection_params = connection_params
         self.query_templates = {}
 
+
+    # Dealing with the DB itself 
 
     def get_connection_params(self):
 
@@ -50,6 +53,8 @@ class FservDB:
         return db_connection, db_cursor 
 
 
+    # Working with entities
+
     def terminate_expired_sessions(self, db_cursor):
 
         query_template = self.get_query_template("terminate-session.sql")
@@ -57,20 +62,18 @@ class FservDB:
         db_cursor.execute(query)
 
 
-    def insert_session(self, session):
-
-        session_fields = ["token", "user", "host", "started_at", "expires_at"]
+    def insert_session(self, user_session):
         
-        session_record = session.export_db_record(session_fields)
-
         db_connecton, db_cursor = self.connect()
 
         query_template = self.get_query_template("insert-session.sql")
         
         query = query_template.format(\
-                    session_record["token"], session_record["user"], session_record["host"], \
-                    utils.timestamp2str(session_record["started_at"]), \
-                    utils.timestamp2str(session_record["expires_at"]))
+                    user_session.serialize_field_value("uuid"),
+                    user_session.get_field_value("login"),
+                    user_session.get_field_value("host"),
+                    user_session.serialize_field_value("openedAt"),
+                    user_session.serialize_field_value("expireAt"))
 
         db_cursor.execute(query)
 
@@ -80,14 +83,12 @@ class FservDB:
         db_connecton.close()
 
 
-    def check_session(self, token):
+    def check_session(self, uuid):
 
         query_template = self.get_query_template("check-session.sql")
-        
-        query = query_template.format(utils.timestamp2str(token, datetime.now()))
+        query = query_template.format(str(uuid), utils.timestamp2str(datetime.now()))
 
         db_connecton, db_cursor = self.connect()
-        
         db_cursor.execute(query)
 
         result = db_cursor.fetchall()
@@ -95,50 +96,3 @@ class FservDB:
         db_connecton.close()
 
         return len(result) > 0
-
-    def generic_insert_entity(self, entity):
-
-        pass
-
-
-    def generic_update_entity(self, entity):
-
-        pass
-
-
-    def generic_select_entity(self, entity):
-
-        pass
-
-
-    def insert_entity(self, entity):
-
-        en = entity.get_entity_name()
-
-        if en == "session":
-            self.insert_session(entity)
-        else:
-            self.generic_insert_entity(entity)
-
-
-    def update_entity(self, entity):
-
-        en = entity.get_entity_name()
-
-        if en == "session":
-            self.update_session(entity)
-        else:
-            self.generic_update_entity(entity)
-    
-
-    def select_entity(self, entity):
-
-        en = entity.get_entity_name()
-
-        if en == "session":
-            db_data = self.select_session(entity)
-        else:
-            db_data = self.default_select_entity(entity)
-
-        return db_data
-

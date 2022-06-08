@@ -1,8 +1,8 @@
 select uuid  
     from auth.sessions
     where 
-        token = '{0}' 
+        uuid = '{0}' 
             and 
-        terminated_at is null 
+        closed_at is null 
             and 
-        expires_at >= '{1}';
+        expire_at >= '{1}';

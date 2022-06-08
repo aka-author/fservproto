@@ -38,23 +38,6 @@ class Auth(controller.Controller):
         return req_user == cms_user and req_password_hash == cms_password_hash
 
 
-    def init_session(self, req_user, req_pass):
-
-        user_session = session.Session(self) 
-
-        if self.check_credentials(req_user, req_pass):
-
-            user_session.set_uuid()
-            user_session.set_field_value("user", req_user)
-            user_session.set_field_value("host", self.get_http_request().get_header_value("Host"))
-            user_session.set_field_value("openedAt", datetime.now())
-            user_session.set_expire_at(self.get_cms_session_duration())
-        
-            # user_session.insert_to_db()
-            
-        return self.assemble_session_info(user_session)
-
-
     def assemble_session_info(self, user_session):
 
         if user_session.is_valid():
@@ -72,12 +55,25 @@ class Auth(controller.Controller):
         return session_info
 
 
-    def check_session(self, session_uuid):
+    def init_session(self, req_login, req_passw):
 
-        # user_session = session.Session(self, session_uuid)
+        user_session = session.Session(self) 
 
-        # user_session.select_from_db()
+        if self.check_credentials(req_login, req_passw):
 
-        # return session.is_active()
+            user_session.set_uuid()
+            user_session.set_field_value("login", req_login)
+            user_session.set_field_value("host", self.get_http_request().get_header_value("Host"))
+            user_session.set_field_value("openedAt", datetime.now())
+            user_session.set_expire_at(self.get_cms_session_duration())
+        
+            self.get_db().insert_session(user_session)
 
-        pass
+            print(self.check_session(user_session.get_field_value("uuid")))
+            
+        return self.assemble_session_info(user_session)
+
+
+    def check_session(self, uuid):
+
+        return self.get_db().check_session(uuid)

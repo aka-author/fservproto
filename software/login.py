@@ -32,18 +32,18 @@ class LoginApp(app.App):
 
         req = self.get_http_request()
 
-        req_user = req.get_field_value("user") 
-        req_pass = req.get_field_value("password")
+        req_login = req.get_field_value("user") 
+        req_passw = req.get_field_value("password")
 
-        return req_user, req_pass
+        return req_login, req_passw
 
 
     def process_request(self):
 
-        req_user, req_pass = self.get_req_credencials()
+        req_login, req_passw = self.get_req_credencials()
 
         auth_agent = auth.Auth(self)
-        session_info = auth_agent.init_session(req_user, req_pass)
+        session_info = auth_agent.init_session(req_login, req_passw)
         
         resp = httpresp.HttpResponse()
         resp.set_body(session_info)
