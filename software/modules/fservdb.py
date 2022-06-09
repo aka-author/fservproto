@@ -9,6 +9,7 @@ from datetime import datetime
 import uuid
 import psycopg2
 
+import status
 import utils
 
 
@@ -40,33 +41,48 @@ class FservDB:
 
     def connect(self):
 
+        status_code = status.OK
+        db_cursor = None
+        db_cursor = None
+
         dcp = self.get_connection_params()
 
-        db_connection = psycopg2.connect(
-            dbname=dcp["database"],
-            host=dcp["host"],
-            user=dcp["user"],
-            password=dcp["password"])
+        try:
+            db_connection = psycopg2.connect(
+                dbname=dcp["database"],
+                host=dcp["host"],
+                user=dcp["user"],
+                password=dcp["password"])
 
-        db_cursor = db_connection.cursor()
+            db_cursor = db_connection.cursor()
+        except:
+            status_code = status.ERR_DB_CONNECTION_FAILED
 
-        return db_connection, db_cursor 
+        return status_code, db_connection, db_cursor 
 
 
     # Working with entities
 
-    def terminate_expired_sessions(self, db_cursor):
+    def close_expired_sessions(self, db_cursor):
 
-        query_template = self.get_query_template("terminate-session.sql")
+        status_code = status.OK
+
+        query_template = self.get_query_template("close_expired_sessions.sql")
         query = query_template.format(utils.timestamp2str(datetime.now()))
-        db_cursor.execute(query)
+
+        try:
+            db_cursor.execute(query)
+        except:
+            status_code = status.ERR_DB_QUERY_FAILED
+
+        return status_code 
 
 
-    def insert_session(self, user_session):
-        
-        db_connecton, db_cursor = self.connect()
+    def open_session(self, user_session):
 
-        query_template = self.get_query_template("insert-session.sql")
+        status_code = status.OK
+
+        query_template = self.get_query_template("open_session.sql")
         
         query = query_template.format(\
                     user_session.serialize_field_value("uuid"),
@@ -75,24 +91,64 @@ class FservDB:
                     user_session.serialize_field_value("openedAt"),
                     user_session.serialize_field_value("expireAt"))
 
-        db_cursor.execute(query)
+        connect_status_code, db_connecton, db_cursor = self.connect()
 
-        self.terminate_expired_sessions(db_cursor)
+        if connect_status_code == status.OK:
+            
+            try:
+                db_cursor.execute(query)
+                self.close_expired_sessions(db_cursor)
+                db_connecton.commit()
+                db_connecton.close()
+            except:
+                status_code = status.ERR_DB_QUERY_FAILED
 
-        db_connecton.commit()
-        db_connecton.close()
+        return status_code
 
 
     def check_session(self, uuid):
 
-        query_template = self.get_query_template("check-session.sql")
+        status_code = status.OK
+        is_session_active = False
+
+        query_template = self.get_query_template("check_session.sql")
         query = query_template.format(str(uuid), utils.timestamp2str(datetime.now()))
 
-        db_connecton, db_cursor = self.connect()
-        db_cursor.execute(query)
+        connect_status_code, db_connecton, db_cursor = self.connect()
+        
+        if connect_status_code == status.OK:
+            
+            try:
+                db_cursor.execute(query)
+                result = db_cursor.fetchall()
+                is_session_active = len(result) > 0
+            except:
+                status_code = status.ERR_DB_QUERY_FAILED
+            
+            db_connecton.close()
+        else:
+            status_code = connect_status_code
 
-        result = db_cursor.fetchall()
+        return status_code, is_session_active
 
-        db_connecton.close()
 
-        return len(result) > 0
+    def close_session(self, uuid):
+
+        status_code = status.OK
+
+        query_template = self.get_query_template("close_session.sql")
+        query = query_template.format(str(uuid), utils.strnow())
+
+        connect_status_code, db_connection, db_cursor = self.connect()
+        
+        if connect_status_code == status.OK:
+
+            try:
+                db_cursor.execute(query)
+                db_connection.commit()
+            except:
+                status_code = status.ERR_DB_QUERY_FAILED
+
+            db_connection.close()
+
+        return status_code

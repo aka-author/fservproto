@@ -8,6 +8,7 @@
 import hashlib
 from datetime import datetime
 
+import status
 import controller
 import session
 
@@ -55,7 +56,7 @@ class Auth(controller.Controller):
         return session_info
 
 
-    def init_session(self, req_login, req_passw):
+    def open_session(self, req_login, req_passw):
 
         user_session = session.Session(self) 
 
@@ -67,13 +68,22 @@ class Auth(controller.Controller):
             user_session.set_field_value("openedAt", datetime.now())
             user_session.set_expire_at(self.get_cms_session_duration())
         
-            self.get_db().insert_session(user_session)
+            status_code = self.get_db().open_session(user_session)
 
-            print(self.check_session(user_session.get_field_value("uuid")))
+            if status_code != status.OK:
+                user_session.clear_field_values()
             
         return self.assemble_session_info(user_session)
 
 
     def check_session(self, uuid):
 
-        return self.get_db().check_session(uuid)
+        status_code, is_session_active = self.get_db().check_session(uuid)
+
+        return status_code == status.OK and is_session_active
+
+
+    def close_session(self, uuid):
+
+        return self.get_db().close_session(uuid)
+

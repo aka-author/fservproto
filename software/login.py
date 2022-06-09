@@ -35,7 +35,7 @@ class LoginApp(app.App):
         req_login = req.get_field_value("user") 
         req_passw = req.get_field_value("password")
 
-        return req_login, req_passw
+        return "ditatoo", "verniteBibi" # req_login, req_passw
 
 
     def process_request(self):
@@ -43,7 +43,7 @@ class LoginApp(app.App):
         req_login, req_passw = self.get_req_credencials()
 
         auth_agent = auth.Auth(self)
-        session_info = auth_agent.init_session(req_login, req_passw)
+        session_info = auth_agent.open_session(req_login, req_passw)
         
         resp = httpresp.HttpResponse()
         resp.set_body(session_info)

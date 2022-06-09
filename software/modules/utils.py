@@ -52,3 +52,8 @@ def timestamp2str(timestamp, custom_format=None):
     format = ravnone(custom_format, get_default_timestamp_format())
 
     return datetime.strftime(timestamp, format) if timestamp is not None else None
+
+
+def strnow():
+
+    return timestamp2str(datetime.now())
