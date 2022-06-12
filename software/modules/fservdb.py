@@ -6,11 +6,9 @@
 # # ## ### ##### ######## ############# #####################
 
 from datetime import datetime
-import uuid
 import psycopg2
 
-import status
-import utils
+import status, utils
 
 
 class FservDB:
@@ -91,17 +89,18 @@ class FservDB:
                     user_session.serialize_field_value("openedAt"),
                     user_session.serialize_field_value("expireAt"))
 
-        connect_status_code, db_connecton, db_cursor = self.connect()
+        connect_status_code, db_connection, db_cursor = self.connect()
 
         if connect_status_code == status.OK:
             
             try:
                 db_cursor.execute(query)
                 self.close_expired_sessions(db_cursor)
-                db_connecton.commit()
-                db_connecton.close()
+                db_connection.commit()
             except:
                 status_code = status.ERR_DB_QUERY_FAILED
+
+            db_connection.close()
 
         return status_code
 
@@ -114,18 +113,18 @@ class FservDB:
         query_template = self.get_query_template("check_session.sql")
         query = query_template.format(str(uuid), utils.timestamp2str(datetime.now()))
 
-        connect_status_code, db_connecton, db_cursor = self.connect()
+        connect_status_code, db_connection, db_cursor = self.connect()
         
         if connect_status_code == status.OK:
             
             try:
                 db_cursor.execute(query)
-                result = db_cursor.fetchall()
-                is_session_active = len(result) > 0
+                records = db_cursor.fetchall()
+                is_session_active = len(records) > 0
             except:
                 status_code = status.ERR_DB_QUERY_FAILED
             
-            db_connecton.close()
+            db_connection.close()
         else:
             status_code = connect_status_code
 
@@ -145,6 +144,8 @@ class FservDB:
 
             try:
                 db_cursor.execute(query)
+                if db_cursor.rowcount == 0:
+                    status_code = status.ERR_NOT_FOUND
                 db_connection.commit()
             except:
                 status_code = status.ERR_DB_QUERY_FAILED

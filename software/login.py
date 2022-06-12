@@ -4,17 +4,14 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  login.py                                     (\(\
-# Func:    Authorizing a CMS as a feedback serv. user   (^.^)                                                                                                                                                                  
+# Module:  login.py                                    (\(\
+# Func:    Authorizing a CMS as a feedback serv. user  (^.^)                                                                                                                                                                  
 # # ## ### ##### ######## ############# #####################
 
-import cgi
 import sys
 
 sys.path.append("modules")
-from modules import auth
-from modules import httpresp
-from modules import app
+from modules import httpreq, httpresp, auth, app
 
 
 #
@@ -23,29 +20,13 @@ from modules import app
 
 class LoginApp(app.App):
 
-    def __init__(self):
+    def process_request(self, http_req):
 
-        super().__init__()
-
-
-    def get_req_credencials(self):
-
-        req = self.get_http_request()
-
-        req_login = req.get_field_value("user") 
-        req_passw = req.get_field_value("password")
-
-        return "ditatoo", "verniteBibi" # req_login, req_passw
-
-
-    def process_request(self):
-
-        req_login, req_passw = self.get_req_credencials()
-
-        auth_agent = auth.Auth(self)
-        session_info = auth_agent.open_session(req_login, req_passw)
-        
         resp = httpresp.HttpResponse()
+
+        auth_agent = auth.Auth(self, http_req)
+        session_info = auth_agent.open_session()
+        
         resp.set_body(session_info)
 
         print(resp.serialize())
@@ -55,4 +36,4 @@ class LoginApp(app.App):
 # Main
 #
 
-LoginApp().process_request()
+LoginApp().process_request(httpreq.HttpRequest())

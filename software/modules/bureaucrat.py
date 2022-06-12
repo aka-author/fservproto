@@ -7,17 +7,26 @@
 
 import uuid
 
+import utils
+
 
 class Bureaucrat:
 
-    def __init__(self, chief, id=None):
+    def __init__(self, chief):
 
         self.chief = chief
-        self.id = id if id is not None else uuid.uuid4()
+        self.id = uuid.uuid4()
         self.app = None
         self.cfg = None
         self.db = None
         self.req = None
+
+
+    def set_id(self, id):
+
+        self.id = id
+
+        return self
 
 
     def get_id(self):
@@ -37,7 +46,9 @@ class Bureaucrat:
 
     def set_cfg(self, cfg):
 
-        self.cfg = cfg    
+        self.cfg = cfg 
+
+        return self
 
 
     def get_cfg(self):
@@ -47,19 +58,23 @@ class Bureaucrat:
 
     def set_db(self, db):
 
-        self.db = db    
+        self.db = db
+
+        return self    
 
 
     def get_db(self):
 
-        return self.db if self.db is not None else self.get_chief().get_db()   
+        return self.db if self.db is not None else self.get_chief().get_db()  
 
     
-    def set_http_request(self, http_request):
+    def set_req(self, req):
 
-        self.req = http_request
+        self.req = req
+
+        return self
 
 
-    def get_http_request(self):
+    def get_req(self):
 
-        return self.req if self.req is not None else self.get_chief().get_http_request()
+        return self.req if self.req is not None else self.get_chief().get_req()

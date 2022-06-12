@@ -11,9 +11,9 @@ import bureaucrat
 
 class Model(bureaucrat.Bureaucrat):
 
-    def __init__(self, model_name, chief, id=None):
+    def __init__(self, model_name, chief):
 
-        super().__init__(chief, id)
+        super().__init__(chief)
 
         self.model_name = model_name
 

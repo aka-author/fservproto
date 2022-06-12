@@ -25,11 +25,29 @@ class HttpRequest:
         return os.environ[envname] if envname in os.environ else None  
 
 
+    def get_cookie(self):
+
+        return self.get_header_value("Cookie")
+
+
+    def get_host(self):
+
+        return self.get_header_value("Host")
+
+
     def get_field_value(self, field_name):
 
         args = cgi.FieldStorage()
 
         return args[field_name].value if field_name in args else None
+
+
+    def get_credentials(self):
+
+        login = self.get_field_value("user") 
+        passw = self.get_field_value("password")
+
+        return "ditatoo", "verniteBibi" # login, passw
 
 
     def parse_json_body(self):

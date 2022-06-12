@@ -5,6 +5,7 @@
 # Func:    Service functions                      (^.^)
 # # ## ### ##### ######## ############# #####################
 
+import hashlib
 from datetime import datetime
 
 
@@ -38,6 +39,25 @@ def snake_to_camel(snake):
                 camel += snake[idx]      
 
     return camel
+
+
+def md5(str):
+
+    return hashlib.md5(str.encode("utf-8")).hexdigest()
+
+
+# UUID
+
+def str2uuid(str):
+
+    uuid = None
+
+    try:
+        uuid = uuid.UUID(str)
+    except:
+        uuid = None
+
+    return uuid 
 
 
 # Date & time

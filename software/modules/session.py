@@ -8,16 +8,17 @@
 from datetime import timedelta
 import uuid
 
-import utils
-import modelfield
-import model
+import modelfield, model
 
 
 class Session(model.Model): 
 
     def __init__(self, chief, uuid=None):
 
-        super().__init__("session", chief, uuid)
+        super().__init__("session", chief)
+        
+        if uuid is not None:
+            self.set_id(uuid)
 
 
     def define_fields(self):
@@ -27,6 +28,7 @@ class Session(model.Model):
         self.define_field(modelfield.StringModelField("host"))
         self.define_field(modelfield.TimestampModelField("openedAt"))
         self.define_field(modelfield.TimestampModelField("expireAt"))
+        self.define_field(modelfield.IntModelField("duration"))
         self.define_field(modelfield.TimestampModelField("closedAt"))
 
 

@@ -26,9 +26,14 @@ class HttpResponse:
         self.result_wording = wording
 
 
+    def set_result_404(self):
+
+        self.set_result_code(404, "Not found")
+
+
     def serialize_result(self):
 
-        return "HTTP/1.1 " + str(self.result_code) + " " + self.result_wording + "\n"
+        return "Status: " + str(self.result_code) + " " + self.result_wording + "\r\n"
 
 
     # HTTP headers
@@ -87,7 +92,7 @@ class HttpResponse:
 
     def serialize(self):
 
-        response_text = ""
+        response_text = self.serialize_result() #""
 
         for header_name in self.headers:
             response_text += self.serialize_header(header_name)
