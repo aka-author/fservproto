@@ -20,12 +20,12 @@ class LogoutApp(app.App):
 
         resp = httpresp.HttpResponse()
 
-        auth_agent = auth.Auth(self)
+        auth_agent = auth.Auth(self, http_req)
 
-        session_uuid_str = http_req.get_cookie()
-        status_code = auth_agent.close_session(session_uuid_str)
+        result_dto = auth_agent.close_session()
+        resp.set_body(result_dto)
         
-        if status_code != status.OK:
+        if result_dto["statusCode"] != status.OK:
             resp.set_result_404()
         
         print(resp.serialize())

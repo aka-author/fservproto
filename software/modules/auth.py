@@ -38,41 +38,20 @@ class Auth(controller.Controller):
         return req_login == cms_login and req_passw_hash == cms_passw_hash
 
 
-    def assemble_session_info(self, user_session):
-
-        if user_session.is_valid():
-            status_code = status.OK
-            message = status.MSG_LOGIN_OK
-        else:       
-            status_code = status.ERR_LOGIN_FAILED
-            message = status.MSG_LOGIN_FAILED
-
-        session_info = {
-            "statusCode": status_code, 
-            "message": message,
-            "session": user_session.export_dto()}
-
-        return session_info
-
-
     def open_session(self):
 
+        status.code = status.ERR_LOGIN_FAILED
         user_session = session.Session(self) 
 
         http_req = self.get_req()
-
         req_login, req_passw = http_req.get_credentials()
         
         if self.check_credentials(req_login, req_passw):
 
             user_session.set_uuid()
-
             user_session.set_field_value("login", req_login)
-
             user_session.set_field_value("host", http_req.get_host())
-
             user_session.set_field_value("openedAt", datetime.now())
-
             duration = self.get_cms_session_duration()
             user_session.set_field_value("duration", duration)
             user_session.set_expire_at(duration)
@@ -81,8 +60,8 @@ class Auth(controller.Controller):
 
             if status_code != status.OK:
                 user_session.clear_field_values()
-            
-        return self.assemble_session_info(user_session)
+
+        return self.export_result_dto(status_code, "session", user_session.export_dto())
 
 
     def check_session(self, session_uuid_str):
@@ -93,7 +72,10 @@ class Auth(controller.Controller):
         return status_code == status.OK and is_session_active
 
 
-    def close_session(self, session_uuid_str):
+    def close_session(self):
 
-        return self.get_db().close_session(utils.str2uuid(session_uuid_str))
+        session_uuid_str = self.get_req().get_cookie()
 
+        status_code = self.get_db().close_session(utils.str2uuid(session_uuid_str))
+
+        return self.export_result_dto(status_code)

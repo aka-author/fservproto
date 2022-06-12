@@ -5,7 +5,7 @@
 # Func:    Service functions                      (^.^)
 # # ## ### ##### ######## ############# #####################
 
-import hashlib
+import hashlib, uuid
 from datetime import datetime
 
 
@@ -50,14 +50,14 @@ def md5(str):
 
 def str2uuid(str):
 
-    uuid = None
+    uuid_ = None
 
     try:
-        uuid = uuid.UUID(str)
+        uuid_ = uuid.UUID(str)
     except:
-        uuid = None
+        uuid_ = None
 
-    return uuid 
+    return uuid_ 
 
 
 # Date & time

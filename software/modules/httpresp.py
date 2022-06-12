@@ -26,6 +26,11 @@ class HttpResponse:
         self.result_wording = wording
 
 
+    def get_result_code(self):
+
+        return self.result_code
+
+
     def set_result_404(self):
 
         self.set_result_code(404, "Not found")
@@ -92,11 +97,13 @@ class HttpResponse:
 
     def serialize(self):
 
-        response_text = self.serialize_result() #""
+        response_text = self.serialize_result() 
 
         for header_name in self.headers:
-            response_text += self.serialize_header(header_name)
+            if header_name != "Content-type" or self.get_result_code() == 200:
+                response_text += self.serialize_header(header_name)
 
-        response_text += self.serialize_body()    
+        if self.get_result_code() == 200:
+            response_text += self.serialize_body()    
 
         return response_text

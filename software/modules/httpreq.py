@@ -47,7 +47,7 @@ class HttpRequest:
         login = self.get_field_value("user") 
         passw = self.get_field_value("password")
 
-        return "ditatoo", "verniteBibi" # login, passw
+        return login, passw
 
 
     def parse_json_body(self):

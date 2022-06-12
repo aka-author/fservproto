@@ -7,8 +7,6 @@
 
 import uuid
 
-import utils
-
 
 class Bureaucrat:
 
