@@ -5,7 +5,7 @@
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
 # Module:  logout.py                            (\(\
-# Func:    Closing a user session               (^.^)                                                                                                                                                                  
+# Func:    Closing a user session               (^.^)
 # # ## ### ##### ######## ############# #####################
 
 import sys

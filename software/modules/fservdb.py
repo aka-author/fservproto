@@ -40,7 +40,7 @@ class FservDB:
     def connect(self):
 
         status_code = status.OK
-        db_cursor = None
+        db_connection = None
         db_cursor = None
 
         dcp = self.get_connection_params()
@@ -89,9 +89,9 @@ class FservDB:
                     user_session.serialize_field_value("openedAt"),
                     user_session.serialize_field_value("expireAt"))
 
-        connect_status_code, db_connection, db_cursor = self.connect()
+        status_code, db_connection, db_cursor = self.connect()
 
-        if connect_status_code == status.OK:
+        if status_code == status.OK:
             
             try:
                 db_cursor.execute(query)
@@ -135,21 +135,48 @@ class FservDB:
 
         status_code = status.OK
 
-        query_template = self.get_query_template("close_session.sql")
-        query = query_template.format(str(uuid), utils.strnow())
-
-        connect_status_code, db_connection, db_cursor = self.connect()
+        status_code, db_connection, db_cursor = self.connect()
         
-        if connect_status_code == status.OK:
+        if status_code == status.OK:
+
+            query_template = self.get_query_template("close_session.sql")
+            query = query_template.format(str(uuid), utils.strnow())
 
             try:
                 db_cursor.execute(query)
-                if db_cursor.rowcount == 0:
-                    status_code = status.ERR_NOT_FOUND
-                db_connection.commit()
+                if db_cursor.rowcount != 0:
+                    db_connection.commit()    
+                else:
+                    status_code = status.ERR_NOT_FOUND    
             except:
                 status_code = status.ERR_DB_QUERY_FAILED
 
             db_connection.close()
 
         return status_code
+
+
+    def fetch_topic_summary(self, topic_code):
+
+        status_code = status.OK
+        report = []
+
+        status_code, db_connection, db_cursor = self.connect()
+        
+        if status_code == status.OK:
+
+            query_template = self.get_query_template("topic_summary.sql")
+            query = query_template.format(topic_code)
+
+            try:
+                db_cursor.execute(query)
+                if db_cursor.rowcount != 0:
+                    report = db_cursor.fetchall()
+                else:
+                    status_code = status.ERR_NOT_FOUND
+            except:
+                status_code = status.ERR_DB_QUERY_FAILED
+
+            db_connection.close()
+
+        return status_code, report

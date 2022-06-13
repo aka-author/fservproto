@@ -31,6 +31,11 @@ class HttpResponse:
         return self.result_code
 
 
+    def set_result_401(self):
+
+        self.set_result_code(401, "Unauthorized")
+        
+
     def set_result_404(self):
 
         self.set_result_code(404, "Not found")
