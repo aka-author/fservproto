@@ -23,7 +23,7 @@ class ReportApp(app.App):
         if auth.Auth(self, http_req).check_session(http_req.get_cookie()):
 
             reporter = topsumrep.TopicSummaryReporter(self)
-            status_code, report = reporter.build_report(http_req.get_field_value("topicCode"))
+            status_code, report = reporter.build_report(http_req.parse_json_body())
             resp.set_body(report)
             
         else:

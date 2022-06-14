@@ -6,7 +6,7 @@
 # # ## ### ##### ######## ############# #####################
 
 from datetime import datetime
-import uuid
+import json, uuid
 
 import utils 
 
@@ -164,3 +164,81 @@ class TimestampModelField(DTONotReadyModelField):
     def publish(self, native_value, custom_format=None):
 
         return datetime.strftime(native_value, self.get_publish_format())
+
+
+class JsonObjectModelField(ModelField):
+
+    def __init__(self, field_name):
+
+        super().__init__(field_name, "jsonObject")
+
+
+    def serialize(self, native_value, custom_format=None):
+
+        return json.dumps(native_value)
+
+
+    def parse(self, serialized_value, custom_format=None):
+
+        return json.load(serialized_value)
+
+
+    def publish(self, native_value, custom_format=None):
+
+        return self.serialize(native_value, custom_format)
+
+
+    def repair_from_dto(self, dto_value):
+
+        return dto_value
+
+
+    def prepare_for_dto(self, native_value):
+
+        return native_value
+
+
+class ModelModelField(ModelField):
+
+    def __init__(self, field_name, model_name=None, model_chief=None):
+
+        super().__init__(field_name, utils.ravnone(model_name, "model"))
+
+        self.set_model_chief(model_chief)
+
+
+    def set_model_chief(self, model_chief):
+
+        self.model_chief = model_chief
+
+    
+    def get_model_chief(self):
+
+        return self.model_chief
+
+
+    def serialize(self, native_value, custom_format=None):
+
+        return native_value.serialize(custom_format)
+
+
+    def parse(self, serialized_value, custom_format=None):
+
+        return self.get_empty_value().parse(serialized_value, custom_format)
+
+
+    def publish(self, native_value, custom_format=None):
+
+        return native_value.publish(custom_format)
+
+
+    def repair_from_dto(self, dto_value):
+
+        return self.get_empty_value().import_dto(dto_value)
+
+
+    def prepare_for_dto(self, native_value):
+
+        return native_value.export_dto()
+
+

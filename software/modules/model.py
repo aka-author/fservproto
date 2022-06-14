@@ -5,13 +5,14 @@
 # Func:    Processing subject area data              (^.^)
 # # ## ### ##### ######## ############# #####################
 
-import utils
-import bureaucrat
+import json
+
+import utils, bureaucrat
 
 
 class Model(bureaucrat.Bureaucrat):
 
-    def __init__(self, model_name, chief):
+    def __init__(self, chief, model_name,):
 
         super().__init__(chief)
 
@@ -119,11 +120,11 @@ class Model(bureaucrat.Bureaucrat):
         return dto_name
 
 
-    def set_field_value_from_dto(self, field_name, dto_ready_value):
+    def set_field_value_from_dto(self, field_name, dto_value):
 
-        native_value = self.fields[field_name].repair_from_dto(dto_ready_value)
+        native_value = self.fields[field_name].repair_from_dto(dto_value)
 
-        self.set_field_value(native_value)
+        self.set_field_value(field_name, native_value)
 
 
     def get_dto_ready_field_value(self, field_name):
@@ -150,3 +151,24 @@ class Model(bureaucrat.Bureaucrat):
             field_name = self.field_name_dto2native(dto_field_name)
             if self.has_field(field_name):                
                 self.set_field_value_from_dto(field_name, dto[dto_field_name])
+
+        return self
+
+
+    # Serializing and parsing
+
+    def serialize(self, custom_format=None):
+
+        return json.dumps(self.export_dto())
+
+
+    def parse(self, serialized_model, custom_format=None):
+
+        return self.import_dto(json.load(serialized_model)) 
+
+
+    # Publishing models
+
+    def publish(self, custom_format=None):
+
+        return self.serialize(custom_format)

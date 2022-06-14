@@ -15,7 +15,7 @@ class Session(model.Model):
 
     def __init__(self, chief, uuid=None):
 
-        super().__init__("session", chief)
+        super().__init__(chief, "session")
         
         if uuid is not None:
             self.set_id(uuid)

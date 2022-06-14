@@ -5,16 +5,23 @@
 # Func:    Reporting topic summaries                (^.^)
 # # ## ### ##### ######## ############# #####################
 
-import status, controller, fservdb
+import status, controller, fservdb, statprof
 
 
 class TopicSummaryReporter(controller.Controller):
 
+    def build_report(self, profile_dto):
 
-    def build_report(self, topic_code):
+        prof = statprof.Profile(self)
+        prof.import_dto(profile_dto)
 
-        status_code, report_recs = self.get_db().fetch_topic_summary(topic_code)
 
-        report = self.export_result_dto(status_code, "report", report_recs)
+        # status_code, report_recs = self.get_db().fetch_topic_summary(topic_code)
+
+        status_code = status.OK
+
+        #report = self.export_result_dto(status_code, "report", prof)
+
+        report = self.export_result_dto(status_code, "report", prof.export_dto())
 
         return status_code, report
