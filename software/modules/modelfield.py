@@ -13,13 +13,14 @@ import utils
 
 class ModelField:
 
-    def __init__(self, field_name, datatype_name="generic"):
+    def __init__(self, field_name, datatype_name="generic", rangetype_name="singular"):
 
         self.field_name = field_name
         self.key_mode = None
         self.datatype_name = datatype_name
-        self.dto_ready = True
+        self.rangetype_name = rangetype_name
         self.serialize_format = ""
+        self.parse_format = ""
         self.publish_format = ""
 
 
@@ -35,9 +36,9 @@ class ModelField:
         return self.datatype_name
 
     
-    def is_dto_ready(self):
+    def get_rangetype_name(self):
 
-        return self.dto_ready
+        return self.datatype_name
         
 
     def get_empty_value(self):
@@ -62,6 +63,16 @@ class ModelField:
         return str(native_value)
 
 
+    def set_parse_format(self, format):
+
+        self.parse_format = format
+
+    
+    def get_parse_format(self):
+
+        return self.parse_format
+
+
     def parse(self, serialized_value, custom_format=None):
 
         return serialized_value
@@ -79,21 +90,140 @@ class ModelField:
         return self.publish_format
 
 
-    def publish(self, value, custom_format=None):
+    def publish(self, native_value, custom_format=None):
 
-        return str(value)    
+        return self.serialize(native_value)
 
 
     # Exchanging data via DTOs
+
+    def prepare_for_dto(self, native_value):
+
+        return native_value
+
 
     def repair_from_dto(self, dto_value):
 
         return dto_value
 
 
+class DTONotReadyModelField(ModelField):
+
+    def repair_from_dto(self, dto_value):
+
+        return self.parse(dto_value)
+
+
     def prepare_for_dto(self, native_value):
 
+        return self.serialize(native_value)  
+
+        
+class RangeModelField(DTONotReadyModelField):
+
+    def __init__(self, field_name, rangetype_name, base_field):
+
+        datatype_name = base_field.get_datatype_name() + "_" + rangetype_name + "_range" 
+
+        super().__init__(field_name, datatype_name)
+        self.rangetype_name = rangetype_name
+        self.base_field = base_field
+
+
+    def get_rangetype_name(self):
+
+        return self.rangetype_name
+
+
+    def get_singular_field(self):
+
+        return self.base_field
+
+
+class BoundedRangeModelField(RangeModelField):
+
+    def __init__(self, field_name, base_field):
+
+        super().__init__(field_name, "bounded", base_field)
+
+
+    def serialize(self, native_value):
+
+        bf = self.get_base_field()
+
+        serialized_min = bf.serialize(native_value["min"])
+        serialized_max = bf.serialize(native_value["max"])
+
+        serialized_value = {"min": serialized_min, "max": serialized_max}
+
+        return serialized_value
+
+
+    def prepare_for_dto(self, native_value):
+        
+        bf = self.get_base_field()
+
+        dto_min_value = bf.prepare_for_dto(native_value["min"])
+        dto_max_value = bf.prepare_for_dto(native_value["max"])
+
+        dto_value = {"min": dto_min_value, "max": dto_max_value}
+
+        return dto_value
+
+
+    def repair_from_dto(self, dto_value):
+        
+        bf = self.get_base_field()
+
+        native_min_value = bf.repair_from_dto(dto_value["min"])
+        native_max_value = bf.repair_from_dto(dto_value["max"])
+
+        native_value = {"min": native_min_value, "max": native_max_value}
+
         return native_value
+
+
+class ListedRangeModelField(RangeModelField):
+
+    def __init__(self, field_name, base_field):
+
+        super().__init__(field_name, "listed", base_field)
+
+
+    def serialize(self, native_value):
+        
+        serialized_value = []
+
+        bf = self.get_base_field()
+
+        for atomic_native_value in native_value:
+            serialized_value.append(bf.serialized_value(atomic_native_value))
+
+        return serialized_value
+
+
+    def repair_from_dto(self, dto_value):
+        
+        native_value = []
+
+        bf = self.get_base_field()
+
+        for atomic_dto_value in dto_value:
+            native_value.append(bf.repair_from_dto(atomic_dto_value))
+
+        return native_value
+
+
+    def prepare_for_dto(self, native_value):
+        
+        dto_value = []
+
+        bf = self.get_base_field()
+
+        for atomic_native_value in native_value:
+            dto_value.append(bf.prepare_for_dto(atomic_native_value))
+
+        return dto_value
 
 
 class StringModelField(ModelField):
@@ -103,23 +233,14 @@ class StringModelField(ModelField):
         super().__init__(field_name, "string")
 
 
-class DTONotReadyModelField(ModelField):
+class StringRangeModelField(ListedRangeModelField):
 
-    def __init__(self, field_name, datatype_name="dtoNotReady"):
+    def __init__(self, field_name):
 
-        super().__init__(field_name, datatype_name)
-
-        self.dto_ready = False
+        super().__init__(field_name, StringModelField("template"))
 
 
-    def repair_from_dto(self, dto_value):
-
-        return self.parse(dto_value)
-
-
-    def prepare_for_dto(self, native_value):
-
-        return self.serialize(native_value)      
+    
 
 
 class UuidModelField(DTONotReadyModelField):
