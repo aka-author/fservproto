@@ -1,134 +1,62 @@
-
-
+# # ## ### ##### ######## ############# #####################
+# Product: Online Docs Feedback Server
+# Stage:   Prototype
+# Module:  statprof.py                               (\(\
+# Func:    Parsing statistical profiles              (^.^)
+# # ## ### ##### ######## ############# #####################
 
 import modelfield, model
 
-"""
-class Range(model.Model):
+# Content scopes
 
-    def __init__(self, chief, rangetype_name, datatype_name="generic"):
+class ContentScope(model.Model):
 
-        super().__init__(chief, "range")
+    def __init__(self, chief):
 
-        self.set_field_value("rangetypeName", rangetype_name)
-        self.set_field_value("datatypeName", datatype_name) 
-
-
-    def define_fields(self):
-
-        self.define_field(modelfield.StringModelField("rangetypeName"))
-
-
-    def get_range_type(self):
-
-        return self.get_field_value("rangetypeName")
-
-
-class ListedRange(Range):
-
-    def __init__(self, chief, datatype_name, values):
-
-        super().__init__(chief, "listed", datatype_name)
-
-
-
-        
-
-
-
-class BoundedRage(Range):
-
-    def __init__(self, chief, datatype_name, min, max):
-
-        super().__init__(chief, "bounded")
-
-        self.set_field_value("datatypeName", datatype_name)
-        self.set_min(min)
-        self.set_max(max) 
-
-
-    def set_min(self, min):
-
-        self.set_field_value("min", min)
-
-
-    def get_min(self):
-
-        return self.get_field_value("min") 
-
-
-    def set_max(self, max):
-
-        self.set_field_value("max", max)
-
-
-    def get_max(self):
-
-        return self.get_field_value("max")    
-
-
-class TimestampBoundedRange(BoundedRage):
-
-    def __init__(self, chief, min, max):
-
-        super().__init__(chief, "timestamp", min, max)
-
-
-    def define_fields(self):
-
-        super().__define_fields__()
-
-        self.define_field(modelfield.TimestampModelField("min"))
-        self.define_field(modelfield.TimestampModelField("max"))
-
-
-
-class RangeModelField(modelfield.ModelModelField):
-
-
-    def get_empty_value(self):
-        
-
-
-
-
-class VariableRange(model.Model):
-
-    def __init__(self, chief, var_name, range):
-
-        super().__init__("variable_name", chief)
+        super().__init__(chief, "contentScope")
 
 
     def define_fields(self):
         
         self.define_field(modelfield.StringModelField("varName"))
-        self.define_field(RangeModelField("range"))
-"""
+        self.define_field(modelfield.StringListModelField("range"))
 
 
-class ContentRangeModelField(modelfield.JsonObjectModelField):
+    def get_sql_conditions(self, col_name):
 
-    def repair_from_dto(self, dto_value):
-
-        return dto_value
+        return self.get_sql_conditions("range", col_name)
 
 
-class TimestampRangeModelField(modelfield.ModelModelField):
+class ContentScopeModelField(modelfield.ModelModelField):
+
+    def get_empty_value(self):
+        
+        return ContentScope(self.get_model_chief())
+
+
+# Time scopes
+
+class TimeScope(model.Model):
+
+    def __init__(self, chief):
+
+        super().__init__(chief, "timeScope")
+
 
     def define_fields(self):
 
-        super().define_fields()
+        self.define_field(modelfield.StringModelField("varName"))
+        self.define_field(modelfield.TimestampSegmentModelField("range"))    
 
+
+class TimeScopeModelField(modelfield.ModelModelField):
 
     def get_empty_value(self):
 
-        mod = model.Model(self.get_model_chief(), "contrntRange")
+        return TimeScope(self.get_model_chief()) 
 
-        mod.define_field(modelfield.StringModelField("varName"))
-        mod.define_field(modelfield.JsonObjectModelField("range"))
 
-        return mod 
-
+# Argument
 
 class ArgumentModelField(modelfield.JsonObjectModelField):
 
@@ -146,7 +74,28 @@ class Profile(model.Model):
 
     def define_fields(self):
 
-        self.define_field(ContentRangeModelField("contentScope", "contentRange", self))
-        self.define_field(TimestampRangeModelField("timeScope"))
+        self.define_field(ContentScopeModelField("contentScope", "contentScope", self))
+        self.define_field(TimeScopeModelField("timeScope", "timeScope", self))
         self.define_field(ArgumentModelField("argument"))
+
+
+    def import_dto(self, dto):
+        
+        super().import_dto(dto)
+
+
+    def get_sql_conditions(self):
+
+        c1 = self.get_field_value("contentScope").get_sql_conditions("topic_code")
+
+        c2 = ""
+
+        # c1 = self.fields["contentScope"]["field_values"]["range"].get_sql_conditions(self.get_field_value("contentScope"), "topic_code")
+        # c2 = self.fields["timeScope"]["field_values"]["range"].get_sql_conditions(self.get_field_value("timeScope"), "accepted_at")
+
+        return "(" + c1 + ") and (" + c2 + ")"
+
+
+
+    
 

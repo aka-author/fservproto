@@ -1,7 +1,7 @@
 # # ## ### ##### ######## ############# #####################
 # Product: Online Docs Feedback Server
 # Stage:   Prototype
-# Module:  ModelField.py                             (\(\
+# Module:  ModelField.py                              (\(\
 # Func:    Processing model field values              (^.^)
 # # ## ### ##### ######## ############# #####################
 
@@ -13,12 +13,14 @@ import utils
 
 class ModelField:
 
-    def __init__(self, field_name, datatype_name="generic", rangetype_name="singular"):
+    def __init__(self, field_name, data_type_name="generic", range_type_name="singular"):
 
         self.field_name = field_name
         self.key_mode = None
-        self.datatype_name = datatype_name
-        self.rangetype_name = rangetype_name
+
+        self.data_type_name = data_type_name
+        self.range_type_name = range_type_name
+
         self.serialize_format = ""
         self.parse_format = ""
         self.publish_format = ""
@@ -31,14 +33,14 @@ class ModelField:
         return self.field_name
 
 
-    def get_datatype_name(self):
+    def get_data_type_name(self):
 
-        return self.datatype_name
+        return self.data_type_name
 
     
-    def get_rangetype_name(self):
+    def get_range_type_name(self):
 
-        return self.datatype_name
+        return self.data_type_name
         
 
     def get_empty_value(self):
@@ -95,6 +97,13 @@ class ModelField:
         return self.serialize(native_value)
 
 
+    # Formatting for SQL
+
+    def sql(self, native_value):
+
+        return self.serialize(native_value)
+
+
     # Exchanging data via DTOs
 
     def prepare_for_dto(self, native_value):
@@ -118,55 +127,90 @@ class DTONotReadyModelField(ModelField):
 
         return self.serialize(native_value)  
 
+
+# Ranges
         
 class RangeModelField(DTONotReadyModelField):
 
-    def __init__(self, field_name, rangetype_name, base_field):
+    def __init__(self, field_name, range_type_name, base_field):
 
-        datatype_name = base_field.get_datatype_name() + "_" + rangetype_name + "_range" 
+        data_type_name = base_field.get_data_type_name() + "_" + range_type_name + "_range" 
 
-        super().__init__(field_name, datatype_name)
-        self.rangetype_name = rangetype_name
+        super().__init__(field_name, data_type_name)
+
+        self.range_type_name = range_type_name
         self.base_field = base_field
 
 
-    def get_rangetype_name(self):
-
-        return self.rangetype_name
-
-
-    def get_singular_field(self):
+    def get_base_field(self):
 
         return self.base_field
 
 
-class BoundedRangeModelField(RangeModelField):
+    def get_sql_conditions(colName):
+
+        return ""
+
+
+class SegmentRangeModelField(RangeModelField):
 
     def __init__(self, field_name, base_field):
 
-        super().__init__(field_name, "bounded", base_field)
+        super().__init__(field_name, "segment", base_field)
+
+
+    def assemble_value(self, min, max):
+
+        return {"rangeTypeName": "segment", "values": {"min": min, "max": max}}
+
+
+    def get_empty_value(self):
+        
+        return self.assemble_value(None, None)
+
+
+    def get_min(self, native_value):
+
+        return native_value["values"]["min"]
+
+    
+    def get_max(self, native_value):
+
+        return native_value["values"]["max"]
 
 
     def serialize(self, native_value):
 
         bf = self.get_base_field()
 
-        serialized_min = bf.serialize(native_value["min"])
-        serialized_max = bf.serialize(native_value["max"])
+        serialized_min = bf.serialize(native_value["values"]["min"])
+        serialized_max = bf.serialize(native_value["values"]["max"])
 
-        serialized_value = {"min": serialized_min, "max": serialized_max}
+        serialized_value = self.assemble_value(serialized_min, serialized_max)
 
         return serialized_value
+
+
+    def sql(self, native_value):
+
+        bf = self.get_base_field()
+
+        sql_min = bf.serialize(native_value["values"]["min"])
+        sql_max = bf.serialize(native_value["values"]["max"])
+
+        sql_value = self.assemble_value(sql_min, sql_max)
+
+        return sql_value
 
 
     def prepare_for_dto(self, native_value):
         
         bf = self.get_base_field()
 
-        dto_min_value = bf.prepare_for_dto(native_value["min"])
-        dto_max_value = bf.prepare_for_dto(native_value["max"])
+        dto_min_value = bf.prepare_for_dto(native_value["values"]["min"])
+        dto_max_value = bf.prepare_for_dto(native_value["values"]["max"])
 
-        dto_value = {"min": dto_min_value, "max": dto_max_value}
+        dto_value = self.assemble_value(dto_min_value, dto_max_value)
 
         return dto_value
 
@@ -175,73 +219,118 @@ class BoundedRangeModelField(RangeModelField):
         
         bf = self.get_base_field()
 
-        native_min_value = bf.repair_from_dto(dto_value["min"])
-        native_max_value = bf.repair_from_dto(dto_value["max"])
+        native_min_value = bf.repair_from_dto(dto_value["values"]["min"])
+        native_max_value = bf.repair_from_dto(dto_value["values"]["max"])
 
-        native_value = {"min": native_min_value, "max": native_max_value}
+        native_value = self.assemble_value(native_min_value, native_max_value)
 
         return native_value
 
 
-class ListedRangeModelField(RangeModelField):
+    def get_sql_conditions(self, native_value, colName):
+        
+        cond = ""
+
+        sql_value = self.sql(native_value)
+        min = sql_value["values"]["min"]
+        max = sql_value["values"]["max"]
+
+        if self.isOpenToRight():
+            cond = min + "<=" + colName
+        elif self.isOpenToLeft():
+            cond = colName + " <= " + max
+        elif self.isClosed():
+            cond = min + "<=" + colName + " and " + colName + "<=" + max
+
+        return cond 
+
+
+class ListRangeModelField(RangeModelField):
 
     def __init__(self, field_name, base_field):
 
-        super().__init__(field_name, "listed", base_field)
+        super().__init__(field_name, "list", base_field)
+
+
+    def assemble_value(self, list):
+
+        return {"rangeTypeName": "list", "values": list}
 
 
     def serialize(self, native_value):
-        
-        serialized_value = []
 
         bf = self.get_base_field()
 
-        for atomic_native_value in native_value:
-            serialized_value.append(bf.serialized_value(atomic_native_value))
+        serialized_values = [bf.serialize(atomic_native_value) for atomic_native_value in native_value["values"]]
 
-        return serialized_value
+        return self.assemble_value(serialized_values)
+
+
+    def sql(self, native_value):
+
+        bf = self.get_base_field()
+
+        sql_values = [bf.sql(atomic_native_value) for atomic_native_value in native_value["values"]]
+
+        return self.assemble_value(sql_values)
+
+
+    def prepare_for_dto(self, native_value):
+
+        bf = self.get_base_field()
+
+        dto_values = [bf.prepare_for_dto(atomic_native_value) for atomic_native_value in native_value["values"]]
+
+        return self.assemble_value(dto_values)
 
 
     def repair_from_dto(self, dto_value):
         
-        native_value = []
-
         bf = self.get_base_field()
 
-        for atomic_dto_value in dto_value:
-            native_value.append(bf.repair_from_dto(atomic_dto_value))
+        native_values = [bf.repair_from_dto(atomic_dto_value) for atomic_dto_value in dto_value["values"]]
 
-        return native_value
+        return self.assemble_value(native_values)
 
 
-    def prepare_for_dto(self, native_value):
+    def get_sql_conditions(self, native_value, col_name):
         
-        dto_value = []
+        cond = ""
+        
+        value_list = ""
 
-        bf = self.get_base_field()
+        for sql_value in self.sql(native_value):
+            value_list += sql_value + ","
 
-        for atomic_native_value in native_value:
-            dto_value.append(bf.prepare_for_dto(atomic_native_value))
+        value_list = value_list[:-1]
 
-        return dto_value
+        cond = col_name + " in (" + value_list + ")"  
+        
+        return cond
 
+
+# Strings
 
 class StringModelField(ModelField):
 
-    def __init__(self, field_name):
+    def __init__(self, field_name="noname"):
 
         super().__init__(field_name, "string")
 
 
-class StringRangeModelField(ListedRangeModelField):
+    def sql(self, native_value):
+
+        return "'" + native_value + "'"
+
+
+class StringListModelField(ListRangeModelField):
 
     def __init__(self, field_name):
 
-        super().__init__(field_name, StringModelField("template"))
+        super().__init__(field_name, StringModelField(field_name))
 
 
-    
-
+# UUIDs
 
 class UuidModelField(DTONotReadyModelField):
 
@@ -255,6 +344,13 @@ class UuidModelField(DTONotReadyModelField):
         return uuid.UUID(serialized_value).hex
 
 
+    def sql(self, native_value):
+
+        return "'" + self.serialize(native_value) + "'"
+
+
+# Numerics
+
 class IntModelField(ModelField):
 
     def __init__(self, field_name):
@@ -266,6 +362,8 @@ class IntModelField(ModelField):
 
         return int(serialized_value)
     
+
+# Date & time
 
 class TimestampModelField(DTONotReadyModelField):
 
@@ -286,6 +384,27 @@ class TimestampModelField(DTONotReadyModelField):
 
         return datetime.strftime(native_value, self.get_publish_format())
 
+
+    def sql(self, native_value):
+
+        return "'" + self.setialize(native_value) + "'"
+
+
+    def repair_from_dto(self, dto_value):
+        
+        timestamp_format = utils.detect_timestamp_fromat(dto_value)
+
+        return datetime.strptime(dto_value, timestamp_format)
+
+
+class TimestampSegmentModelField(SegmentRangeModelField):
+
+    def __init__(self, field_name):
+
+        super().__init__(field_name, TimestampModelField(field_name))
+
+
+# Complex values
 
 class JsonObjectModelField(ModelField):
 
@@ -353,13 +472,16 @@ class ModelModelField(ModelField):
         return native_value.publish(custom_format)
 
 
+    def prepare_for_dto(self, native_value):
+
+        return native_value.export_dto()
+
+
     def repair_from_dto(self, dto_value):
 
         return self.get_empty_value().import_dto(dto_value)
 
 
-    def prepare_for_dto(self, native_value):
-
-        return native_value.export_dto()
+    
 
 

@@ -74,6 +74,21 @@ def timestamp2str(timestamp, custom_format=None):
     return datetime.strftime(timestamp, format) if timestamp is not None else None
 
 
+def detect_timestamp_fromat(str):
+
+    fmt = ""
+
+    l = len(str)
+
+    if l > len("2000-01-01"):
+        fmt = "%Y-%m-%d %H:%M:%S.%f"
+    else:
+        fmt = "%Y-%m-%d"
+
+    return fmt
+
+
+
 def strnow():
 
     return timestamp2str(datetime.now())

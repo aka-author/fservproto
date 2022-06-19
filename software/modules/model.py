@@ -74,6 +74,11 @@ class Model(bureaucrat.Bureaucrat):
 
         return self.field_values[field_name]
 
+    
+    def is_valid(self):
+
+        return True
+
 
     def serialize_field_value(self, field_name, custom_format=None):
 
@@ -101,11 +106,6 @@ class Model(bureaucrat.Bureaucrat):
         for field_name in self.fields:
             empty_value = self.fields[field_name].get_empty_value()
             self.set_field_value(field_name, empty_value) 
-
-
-    def is_valid(self):
-
-        return True
 
 
     # Working with DTOs
@@ -139,8 +139,8 @@ class Model(bureaucrat.Bureaucrat):
         dto = {}
 
         for field_name in self.fields:
-            dto_field_value = self.field_name_native2dto(field_name)
-            dto[dto_field_value] = self.get_dto_ready_field_value(field_name)
+            dto_field_name = self.field_name_native2dto(field_name)
+            dto[dto_field_name] = self.get_dto_ready_field_value(field_name)
 
         return dto
 
@@ -172,3 +172,11 @@ class Model(bureaucrat.Bureaucrat):
     def publish(self, custom_format=None):
 
         return self.serialize(custom_format)
+
+
+
+    # Working with SQL
+
+    def get_sql_conditions(self, field_name, col_name):
+
+        return self.fields[field_name].get_sql_conditions(col_name)

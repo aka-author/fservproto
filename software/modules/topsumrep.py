@@ -22,6 +22,8 @@ class TopicSummaryReporter(controller.Controller):
 
         #report = self.export_result_dto(status_code, "report", prof)
 
-        report = self.export_result_dto(status_code, "report", prof.export_dto())
+        # report = self.export_result_dto(status_code, "report", prof.export_dto())
+
+        report = prof.get_sql_conditions()
 
         return status_code, report
