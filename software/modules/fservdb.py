@@ -156,7 +156,7 @@ class FservDB:
         return status_code
 
 
-    def fetch_topic_summary(self, topic_code):
+    def fetch_topic_summaries(self, where_conditions):
 
         status_code = status.OK
         report = []
@@ -165,8 +165,8 @@ class FservDB:
         
         if status_code == status.OK:
 
-            query_template = self.get_query_template("topic_summary.sql")
-            query = query_template.format(topic_code)
+            query_template = self.get_query_template("topic_summaries.sql")
+            query = query_template.format(where_conditions)
 
             try:
                 db_cursor.execute(query)

@@ -15,15 +15,10 @@ class TopicSummaryReporter(controller.Controller):
         prof = statprof.Profile(self)
         prof.import_dto(profile_dto)
 
-
-        # status_code, report_recs = self.get_db().fetch_topic_summary(topic_code)
-
         status_code = status.OK
 
-        #report = self.export_result_dto(status_code, "report", prof)
-
-        # report = self.export_result_dto(status_code, "report", prof.export_dto())
-
-        report = prof.get_sql_conditions()
+        db = self.get_db()
+        conditions_for_activities = prof.get_sql_conditions()
+        status_code, report = db.fetch_topic_summaries(conditions_for_activities)
 
         return status_code, report

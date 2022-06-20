@@ -7,6 +7,7 @@
 
 import modelfield, model
 
+
 # Content scopes
 
 class ContentScope(model.Model):
@@ -24,7 +25,7 @@ class ContentScope(model.Model):
 
     def get_sql_conditions(self, col_name):
 
-        return self.get_sql_conditions("range", col_name)
+        return super().get_sql_conditions("range", col_name)
 
 
 class ContentScopeModelField(modelfield.ModelModelField):
@@ -46,7 +47,12 @@ class TimeScope(model.Model):
     def define_fields(self):
 
         self.define_field(modelfield.StringModelField("varName"))
-        self.define_field(modelfield.TimestampSegmentModelField("range"))    
+        self.define_field(modelfield.TimestampSegmentModelField("range"))
+
+
+    def get_sql_conditions(self, col_name):
+
+        return super().get_sql_conditions("range", col_name)
 
 
 class TimeScopeModelField(modelfield.ModelModelField):
@@ -86,16 +92,9 @@ class Profile(model.Model):
 
     def get_sql_conditions(self):
 
-        c1 = self.get_field_value("contentScope").get_sql_conditions("topic_code")
+        cond_content = self.get_field_value("contentScope").get_sql_conditions("topic_code")
+        cond_time = self.get_field_value("timeScope").get_sql_conditions("accepted_at")
 
-        c2 = ""
+        return "(" + cond_content + ") and (" + cond_time + ")"
 
-        # c1 = self.fields["contentScope"]["field_values"]["range"].get_sql_conditions(self.get_field_value("contentScope"), "topic_code")
-        # c2 = self.fields["timeScope"]["field_values"]["range"].get_sql_conditions(self.get_field_value("timeScope"), "accepted_at")
-
-        return "(" + c1 + ") and (" + c2 + ")"
-
-
-
-    
 

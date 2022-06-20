@@ -174,9 +174,8 @@ class Model(bureaucrat.Bureaucrat):
         return self.serialize(custom_format)
 
 
-
     # Working with SQL
 
     def get_sql_conditions(self, field_name, col_name):
 
-        return self.fields[field_name].get_sql_conditions(col_name)
+        return self.fields[field_name].get_sql_conditions(self.get_field_value(field_name), col_name)

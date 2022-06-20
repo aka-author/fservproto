@@ -6,7 +6,7 @@ with
         from
             feedback.reader_activities
         where
-            topic_code='{0}'
+            {0}
         group by
             topic_code,
             online_doc_lang_code),
@@ -16,7 +16,7 @@ with
         topic_code, online_doc_lang_code, reader_lang_code, count(uuid) as reader_lang_total
         from feedback.reader_activities
         where
-            topic_code='{0}'
+            {0}
         group by
             topic_code,
             online_doc_lang_code,

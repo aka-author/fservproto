@@ -24,6 +24,7 @@ class ModelField:
         self.serialize_format = ""
         self.parse_format = ""
         self.publish_format = ""
+        self.sql_format = ""
 
 
     # Core properties
@@ -97,13 +98,6 @@ class ModelField:
         return self.serialize(native_value)
 
 
-    # Formatting for SQL
-
-    def sql(self, native_value):
-
-        return self.serialize(native_value)
-
-
     # Exchanging data via DTOs
 
     def prepare_for_dto(self, native_value):
@@ -114,6 +108,23 @@ class ModelField:
     def repair_from_dto(self, dto_value):
 
         return dto_value
+
+
+    # Formatting for SQL
+
+    def set_sql_format(self, format):
+
+        self.sql_format = format
+
+
+    def get_sql_format(self):
+
+        return self.sql_format
+
+
+    def sql(self, native_value):
+
+        return self.serialize(native_value, self.get_sql_format())
 
 
 class DTONotReadyModelField(ModelField):
@@ -178,6 +189,21 @@ class SegmentRangeModelField(RangeModelField):
 
         return native_value["values"]["max"]
 
+    
+    def isOpenToLeft(self, native_value):
+
+        return self.get_min(native_value) is None
+
+
+    def isOpenToRight(self, native_value):
+
+        return self.get_max(native_value) is None
+
+
+    def isClosed(self, native_value):
+
+        return not (self.isOpenToLeft(native_value) or self.isOpenToRight(native_value))
+
 
     def serialize(self, native_value):
 
@@ -189,18 +215,6 @@ class SegmentRangeModelField(RangeModelField):
         serialized_value = self.assemble_value(serialized_min, serialized_max)
 
         return serialized_value
-
-
-    def sql(self, native_value):
-
-        bf = self.get_base_field()
-
-        sql_min = bf.serialize(native_value["values"]["min"])
-        sql_max = bf.serialize(native_value["values"]["max"])
-
-        sql_value = self.assemble_value(sql_min, sql_max)
-
-        return sql_value
 
 
     def prepare_for_dto(self, native_value):
@@ -227,20 +241,34 @@ class SegmentRangeModelField(RangeModelField):
         return native_value
 
 
-    def get_sql_conditions(self, native_value, colName):
+    def sql(self, native_value):
+
+        bf = self.get_base_field()
+
+        sql_min = bf.sql(native_value["values"]["min"])
+        sql_max = bf.sql(native_value["values"]["max"])
+
+        sql_value = self.assemble_value(sql_min, sql_max)
+
+        return sql_value
+
+
+    def get_sql_conditions(self, native_value, col_name):
         
         cond = ""
 
         sql_value = self.sql(native_value)
-        min = sql_value["values"]["min"]
-        max = sql_value["values"]["max"]
+        sql_min = sql_value["values"]["min"]
+        sql_max = sql_value["values"]["max"]
 
-        if self.isOpenToRight():
-            cond = min + "<=" + colName
-        elif self.isOpenToLeft():
-            cond = colName + " <= " + max
-        elif self.isClosed():
-            cond = min + "<=" + colName + " and " + colName + "<=" + max
+        if self.isOpenToRight(native_value):
+            cond = "(" + sql_min + "<=" + col_name + ")"
+        elif self.isOpenToLeft(native_value):
+            cond = "(" + col_name + " <= " + sql_max + ")"
+        elif self.isClosed(native_value):
+            cond = "(" + sql_min + "<=" + col_name \
+                   + " and " \
+                   + col_name + "<=" + sql_max + ")"
 
         return cond 
 
@@ -266,15 +294,6 @@ class ListRangeModelField(RangeModelField):
         return self.assemble_value(serialized_values)
 
 
-    def sql(self, native_value):
-
-        bf = self.get_base_field()
-
-        sql_values = [bf.sql(atomic_native_value) for atomic_native_value in native_value["values"]]
-
-        return self.assemble_value(sql_values)
-
-
     def prepare_for_dto(self, native_value):
 
         bf = self.get_base_field()
@@ -293,13 +312,22 @@ class ListRangeModelField(RangeModelField):
         return self.assemble_value(native_values)
 
 
+    def sql(self, native_value):
+
+        bf = self.get_base_field()
+
+        sql_values = [bf.sql(atomic_native_value) for atomic_native_value in native_value["values"]]
+
+        return self.assemble_value(sql_values)
+
+
     def get_sql_conditions(self, native_value, col_name):
         
         cond = ""
-        
+
         value_list = ""
 
-        for sql_value in self.sql(native_value):
+        for sql_value in self.sql(native_value)["values"]:
             value_list += sql_value + ","
 
         value_list = value_list[:-1]
@@ -385,16 +413,16 @@ class TimestampModelField(DTONotReadyModelField):
         return datetime.strftime(native_value, self.get_publish_format())
 
 
-    def sql(self, native_value):
-
-        return "'" + self.setialize(native_value) + "'"
-
-
     def repair_from_dto(self, dto_value):
         
         timestamp_format = utils.detect_timestamp_fromat(dto_value)
 
         return datetime.strptime(dto_value, timestamp_format)
+
+
+    def sql(self, native_value):
+
+        return "'" + self.serialize(native_value) + "'"
 
 
 class TimestampSegmentModelField(SegmentRangeModelField):
@@ -482,6 +510,9 @@ class ModelModelField(ModelField):
         return self.get_empty_value().import_dto(dto_value)
 
 
+    def get_sql_conditions(self, model_value, field_name, col_name):
+
+        return model_value.get_sql_conditions(field_name, col_name)
     
 
 
