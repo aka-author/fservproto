@@ -6,9 +6,9 @@
 # # ## ### ##### ######## ############# #####################
 
 from datetime import datetime
-import json, uuid
+import sys, json, uuid
 
-import utils 
+import utils, bureaucrat 
 
 
 class ModelField:
@@ -161,6 +161,40 @@ class RangeModelField(DTONotReadyModelField):
     def get_sql_conditions(colName):
 
         return ""
+
+
+class NamedRangeModelField(RangeModelField):
+
+    def __init__(self, field_name):
+
+        super().__init__(field_name, "named", StringListModelField())
+
+
+    def get_name(self, native_value):
+
+        return native_value["values"]["name"].upper()
+
+
+    def prepare_for_dto(self, native_value):
+
+        return native_value["values"]["name"]
+
+
+    def repair_from_dto(self, dto_value):
+
+        return dto_value["values"]["name"]
+
+
+    def get_sql_conditions(self, native_value, col_name):
+
+        cond = "false"
+
+        range_name = self.get_name(native_value)
+
+        if range_name == "any":
+            cond = "true"
+
+        return cond     
 
 
 class SegmentRangeModelField(RangeModelField):
@@ -515,4 +549,110 @@ class ModelModelField(ModelField):
         return model_value.get_sql_conditions(field_name, col_name)
     
 
+# Factories proucing model fields
 
+class RangeFactory(bureaucrat.Bureaucrat):
+
+    def check_data_type_name(self, data_type_name):
+
+        return data_type_name in ["string", "int", "timestamp"]
+
+
+    def check_range_type_name(self, data_type_name):
+
+        return data_type_name in ["named", "segment", "list"]
+
+
+    def get_data_type_name(self, dto):
+
+        data_type_name = None 
+
+        if "dataTypeName" in dto:
+            if self.check_data_type_name(dto["dataTypeName"]):
+                data_type_name = dto["dataTypeName"].lower()
+
+        return data_type_name
+
+
+    def get_range_type_name(self, dto):
+
+        range_type_name = None 
+
+        if "rangeTypeName" in dto:
+            if self.check_range_type_name(dto["rangeTypeName"]):
+                range_type_name = dto["rangeTypeName"].lower()
+
+        # print(":::", str(dto), file=sys.stderr)        
+
+        return range_type_name
+
+
+    def create_named_range(self, dto, field_name):
+
+        range_field = NamedRangeModelField(field_name)
+
+        return range_field
+
+
+    def create_segment_range(self, dto, field_name):
+
+        range_field = None
+
+        data_type_name = self.get_data_type_name(dto)
+        
+        if self.check_data_type_name(data_type_name):
+
+            if data_type_name == "string":
+                range_field = None
+        
+            elif data_type_name == "int": 
+                range_field = None
+        
+            elif data_type_name == "timestamp":   
+                range_field = TimestampSegmentModelField(field_name)
+
+        return range_field
+
+
+    def create_list_range(self, dto, field_name):
+
+        range_field = None
+
+        data_type_name = self.get_data_type_name(dto)
+        
+        if self.check_data_type_name(data_type_name):    
+
+            if data_type_name == "string":
+                range_field = StringListModelField(field_name)
+            
+            elif data_type_name == "int": 
+                range_field = None
+            
+            elif data_type_name == "timestamp":   
+                range_field = None
+
+        return range_field
+
+
+    def create_range(self, dto, field_name):
+
+        range_field = None
+
+        range_type_name = self.get_range_type_name(dto)
+        if self.check_range_type_name(range_type_name):
+        
+            if range_type_name == "named":
+                range_field = self.create_named_range(dto, field_name)
+
+            elif range_type_name == "segment":
+                range_field = self.create_segment_range(dto, field_name)
+
+            elif range_type_name == "list":    
+                range_field = self.create_list_range(dto, field_name)
+
+        return range_field
+
+
+def CreateRangeModelField(chief, field_name, dto):
+
+    return RangeFactory(chief).create_range(dto, field_name)

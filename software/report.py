@@ -22,10 +22,15 @@ class ReportApp(app.App):
 
         if auth.Auth(self, http_req).check_session(http_req.get_cookie()):
 
+            status_code = status.OK
+
             reporter = topsumrep.TopicSummaryReporter(self)
             status_code, report = reporter.build_report(http_req.parse_json_body())
-            resp.set_body(report)
-            
+
+            if status_code == status.OK:
+                resp.set_body(report)
+            else:
+                resp.set_result_401()
         else:
             resp.set_result_401()
 
