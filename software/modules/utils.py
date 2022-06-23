@@ -41,6 +41,16 @@ def snake_to_camel(snake):
     return camel
 
 
+def pars(s):
+
+    return "(" + s + ")" 
+
+
+def apos(s):
+
+    return "'" + s + "'" 
+
+
 def md5(str):
 
     return hashlib.md5(str.encode("utf-8")).hexdigest()

@@ -167,17 +167,17 @@ class NamedRangeModelField(RangeModelField):
 
     def __init__(self, field_name):
 
-        super().__init__(field_name, "named", StringListModelField())
+        super().__init__(field_name, "named", StringListModelField(field_name))
 
 
     def get_name(self, native_value):
 
-        return native_value["values"]["name"].upper()
+        return native_value.lower()
 
 
     def prepare_for_dto(self, native_value):
 
-        return native_value["values"]["name"]
+        return {"name": native_value}
 
 
     def repair_from_dto(self, dto_value):
@@ -296,13 +296,13 @@ class SegmentRangeModelField(RangeModelField):
         sql_max = sql_value["values"]["max"]
 
         if self.isOpenToRight(native_value):
-            cond = "(" + sql_min + "<=" + col_name + ")"
+            cond = utils.pars(sql_min + "<=" + col_name)
         elif self.isOpenToLeft(native_value):
-            cond = "(" + col_name + " <= " + sql_max + ")"
+            cond = utils.pars(col_name + "<=" + sql_max)
         elif self.isClosed(native_value):
-            cond = "(" + sql_min + "<=" + col_name \
+            cond = utils.pars(sql_min + "<=" + col_name \
                    + " and " \
-                   + col_name + "<=" + sql_max + ")"
+                   + col_name + "<=" + sql_max)
 
         return cond 
 
@@ -359,14 +359,9 @@ class ListRangeModelField(RangeModelField):
         
         cond = ""
 
-        value_list = ""
+        value_list = ",".join([sql_value for sql_value in self.sql(native_value)["values"]])
 
-        for sql_value in self.sql(native_value)["values"]:
-            value_list += sql_value + ","
-
-        value_list = value_list[:-1]
-
-        cond = col_name + " in (" + value_list + ")"  
+        cond = col_name + " in " + utils.pars(value_list)  
         
         return cond
 
@@ -382,7 +377,7 @@ class StringModelField(ModelField):
 
     def sql(self, native_value):
 
-        return "'" + native_value + "'"
+        return utils.apos(native_value)
 
 
 class StringListModelField(ListRangeModelField):
@@ -408,7 +403,7 @@ class UuidModelField(DTONotReadyModelField):
 
     def sql(self, native_value):
 
-        return "'" + self.serialize(native_value) + "'"
+        return utils.apos(self.serialize(native_value))
 
 
 # Numerics
@@ -456,7 +451,7 @@ class TimestampModelField(DTONotReadyModelField):
 
     def sql(self, native_value):
 
-        return "'" + self.serialize(native_value) + "'"
+        return utils.apos(self.serialize(native_value))
 
 
 class TimestampSegmentModelField(SegmentRangeModelField):
@@ -581,8 +576,6 @@ class RangeFactory(bureaucrat.Bureaucrat):
         if "rangeTypeName" in dto:
             if self.check_range_type_name(dto["rangeTypeName"]):
                 range_type_name = dto["rangeTypeName"].lower()
-
-        # print(":::", str(dto), file=sys.stderr)        
 
         return range_type_name
 

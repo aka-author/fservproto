@@ -5,24 +5,29 @@
 # Func:    Parsing statistical profiles              (^.^)
 # # ## ### ##### ######## ############# #####################
 
-import modelfield, model
+import sys
+
+import utils, modelfield, model
 
 
 # Profile scopes
 
 class ProfileScope(model.Model):
 
-    def __init__(self, chief, scope_name, dto):
+    def get_profile_dto(self):
 
-        self.dto = dto
+        return self.get_chief().dto
 
-        super().__init__(chief, scope_name)
+
+    def get_range_dto(self):
+
+        return self.get_chief().dto[self.get_model_name()]["range"]
 
 
     def define_fields(self):
         
         self.define_field(modelfield.StringModelField("varName"))
-        self.define_field(modelfield.CreateRangeModelField(self, "range", self.dto))
+        self.define_field(modelfield.CreateRangeModelField(self, "range", self.get_range_dto()))
 
 
     def get_sql_conditions(self, col_name):
@@ -30,70 +35,78 @@ class ProfileScope(model.Model):
         return super().get_sql_conditions("range", col_name)
 
 
-class ProfileScopeModelField(modelfield.ModelModelField):
-
-    def __init__(self, field_name, model_name, model_chief, dto):
-
-        self.dto = dto
-
-        super().__init__(field_name, model_name, model_chief)
-
-
 # Content scopes
 
 class ContentScope(ProfileScope):
 
-    def __init__(self, chief, dto):
+    def __init__(self, chief):
 
-        super().__init__(chief, "contentScope", dto)
+        super().__init__(chief, "contentScope")
 
 
-class ContentScopeModelField(ProfileScopeModelField):
+class ContentScopeModelField(modelfield.ModelModelField):
 
     def get_empty_value(self):
         
-        return ContentScope(self.get_model_chief(), self.dto)
+        return ContentScope(self.get_model_chief())
 
 
 # Language scopes
 
 class LangScope(ProfileScope):
 
-    def __init__(self, chief, dto):
+    def __init__(self, chief):
 
         super().__init__(chief, "langScope")
 
 
-class LangScopeModelField(ProfileScopeModelField):
+class LangScopeModelField(modelfield.ModelModelField):
 
     def get_empty_value(self):
         
-        return LangScope(self.get_model_chief(), self.dto)
+        return LangScope(self.get_model_chief())
 
 
 # Time scopes
 
 class TimeScope(ProfileScope):
 
-    def __init__(self, chief, dto):
+    def __init__(self, chief):
+        print("::: time", file=sys.stderr)
+        super().__init__(chief, "timeScope")
 
-        super().__init__(chief, "timeScope", dto)
 
-
-class TimeScopeModelField(ProfileScopeModelField):
+class TimeScopeModelField(modelfield.ModelModelField):
 
     def get_empty_value(self):
 
-        return TimeScope(self.get_model_chief(), self.dto) 
+        return TimeScope(self.get_model_chief()) 
 
 
 # Argument
 
-class ArgumentModelField(modelfield.JsonObjectModelField):
+class Argument(model.Model):
 
-    def repair_from_dto(self, dto_value):
+    def __init__(self, chief):
+        
+        super().__init__(chief, "argument")
 
-        return dto_value
+
+    def define_fields(self):
+
+        self.define_field(modelfield.JsonObjectModelField("varNames"))
+
+
+    def get_sql_group_by(self):
+
+        return ",".join(self.get_field_value("varNames"))
+
+
+class ArgumentModelField(modelfield.ModelModelField):
+
+    def get_empty_value(self):
+
+        return Argument(self.get_model_chief()) 
 
 
 # Profile
@@ -106,18 +119,15 @@ class Profile(model.Model):
 
         super().__init__(chief, "profile")
 
+        self.import_dto(dto)
+
 
     def define_fields(self):
 
-        self.define_field(ContentScopeModelField("contentScope", "contentScope", self, self.dto["contentScope"]["range"]))
-        self.define_field(ContentScopeModelField("langScope", "langScope", self, self.dto["langScope"]["range"]))
-        self.define_field(TimeScopeModelField("timeScope", "timeScope", self, self.dto["timeScope"]["range"]))
-        self.define_field(ArgumentModelField("argument"))
-
-
-    def import_dto(self, dto):
-        
-        super().import_dto(dto)
+        self.define_field(ContentScopeModelField("contentScope", "contentScope", self))
+        self.define_field(LangScopeModelField("langScope", "langScope", self))
+        self.define_field(TimeScopeModelField("timeScope", "timeScope", self))
+        self.define_field(ArgumentModelField("argument", "argument", self))
 
 
     def get_sql_conditions(self):
@@ -126,6 +136,12 @@ class Profile(model.Model):
         cond_lang = self.get_field_value("langScope").get_sql_conditions("online_doc_lang_code")
         cond_time = self.get_field_value("timeScope").get_sql_conditions("accepted_at")
 
-        return "(" + cond_content + ") and (" + cond_lang + ") and (" + cond_time + ")"
+        return " and ".join([utils.pars(cond_content), utils.pars(cond_lang), utils.pars(cond_time)])
+
+
+    def get_sql_group_by(self):
+
+        return self.get_field_value("argument").get_sql_group_by()
+
 
 
