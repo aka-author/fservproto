@@ -41,6 +41,20 @@ def snake_to_camel(snake):
     return camel
 
 
+def isLatinUpper(c):
+
+    return c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+def camel_to_snake(camel):
+
+    snake = camel[0]
+    for idx in range(1, len(camel)):
+        snake += "_" + camel[idx].lower() if isLatinUpper(camel[idx]) else camel[idx]
+        
+    return snake
+
+
 def pars(s):
 
     return "(" + s + ")" 
@@ -50,6 +64,16 @@ def apos(s):
 
     return "'" + s + "'" 
 
+
+def consep(prefix, separ, postfix):
+
+    if prefix is not None and postfix is not None:
+        return prefix + separ + postfix
+    elif prefix is None:
+        return postfix
+    else:
+        return prefix
+    
 
 def md5(str):
 
@@ -96,7 +120,6 @@ def detect_timestamp_fromat(str):
         fmt = "%Y-%m-%d"
 
     return fmt
-
 
 
 def strnow():

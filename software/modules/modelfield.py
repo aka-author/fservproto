@@ -359,9 +359,9 @@ class ListRangeModelField(RangeModelField):
         
         cond = ""
 
-        value_list = ",".join([sql_value for sql_value in self.sql(native_value)["values"]])
+        value_list = ", ".join([sql_value for sql_value in self.sql(native_value)["values"]])
 
-        cond = col_name + " in " + utils.pars(value_list)  
+        cond = "{0}." + col_name + " in " + utils.pars(value_list)  
         
         return cond
 

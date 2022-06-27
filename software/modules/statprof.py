@@ -66,13 +66,13 @@ class LangScopeModelField(modelfield.ModelModelField):
         
         return LangScope(self.get_model_chief())
 
-
+    
 # Time scopes
 
 class TimeScope(ProfileScope):
 
     def __init__(self, chief):
-        print("::: time", file=sys.stderr)
+    
         super().__init__(chief, "timeScope")
 
 
@@ -94,12 +94,39 @@ class Argument(model.Model):
 
     def define_fields(self):
 
-        self.define_field(modelfield.JsonObjectModelField("varNames"))
+        self.define_field(modelfield.JsonObjectModelField("variables"))
+
+
+    def get_sql_select(self):
+
+        variables = self.get_field_value("variables")
+
+        varnames = ["{0}." + utils.camel_to_snake(variable["varName"]) for variable in variables]
+
+        return ", ".join(varnames)
 
 
     def get_sql_group_by(self):
 
-        return ",".join(self.get_field_value("varNames"))
+        variables = self.get_field_value("variables")
+
+        varnames = ["{0}." + utils.camel_to_snake(variable["varName"]) for variable in variables]
+
+        return ", ".join(varnames)
+
+
+    def get_final_where_cons(self):
+
+        variables = self.get_field_value("variables")
+
+        varnames = [utils.camel_to_snake(variable["varName"]) for variable in variables]
+
+        conds = []
+
+        for varname in varnames:
+            conds.append("{0}." + varname + "=" + "{1}" + varname)
+
+        return " and ".join(conds)
 
 
 class ArgumentModelField(modelfield.ModelModelField):
@@ -128,20 +155,6 @@ class Profile(model.Model):
         self.define_field(LangScopeModelField("langScope", "langScope", self))
         self.define_field(TimeScopeModelField("timeScope", "timeScope", self))
         self.define_field(ArgumentModelField("argument", "argument", self))
-
-
-    def get_sql_conditions(self):
-
-        cond_content = self.get_field_value("contentScope").get_sql_conditions("topic_code")
-        cond_lang = self.get_field_value("langScope").get_sql_conditions("online_doc_lang_code")
-        cond_time = self.get_field_value("timeScope").get_sql_conditions("accepted_at")
-
-        return " and ".join([utils.pars(cond_content), utils.pars(cond_lang), utils.pars(cond_time)])
-
-
-    def get_sql_group_by(self):
-
-        return self.get_field_value("argument").get_sql_group_by()
 
 
 

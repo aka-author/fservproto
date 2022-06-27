@@ -30,7 +30,7 @@ class ReportApp(app.App):
             if status_code == status.OK:
                 resp.set_body(report)
             else:
-                resp.set_result_401()
+                resp.set_result_404()
         else:
             resp.set_result_401()
 
@@ -44,8 +44,3 @@ class ReportApp(app.App):
 #
 
 ReportApp().process_request(httpreq.HttpRequest())
-
-
-
-
-

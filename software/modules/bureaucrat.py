@@ -7,6 +7,7 @@
 
 import uuid
 
+import status
 
 class Bureaucrat:
 
@@ -14,10 +15,16 @@ class Bureaucrat:
 
         self.chief = chief
         self.id = uuid.uuid4()
+        self.status_code = status.OK
         self.app = None
         self.cfg = None
         self.db = None
         self.req = None
+
+
+    def get_chief(self):
+
+        return self.chief
 
 
     def set_id(self, id):
@@ -29,12 +36,22 @@ class Bureaucrat:
 
     def get_id(self):
 
-        return self.id
+        return self.id 
 
 
-    def get_chief(self):
+    def set_status_code(self, status_code):
 
-        return self.chief 
+        self.status_code = status_code
+
+
+    def isOK(self):
+
+        return self.get_status_code() == status.OK
+
+
+    def get_status_code(self):
+
+        return self.status_code
 
 
     def get_app(self):

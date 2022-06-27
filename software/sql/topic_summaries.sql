@@ -1,36 +1,39 @@
+/* 
+    0 - a target column name
+    1 - a list argument columns
+    2 - the conditions for readers' activities
+    3 - a list of columns for a group by 
+    4 - the conditions for joining totals
+*/
 with
     totals
         as
     (select
-        topic_code, online_doc_lang_code, count(uuid) as topic_total
+        {1}, count(a.uuid) as topic_total
         from
-            feedback.reader_activities
+            feedback.reader_activities a
         where
-            {0}
+            {2}
         group by
-            topic_code,
-            online_doc_lang_code),
-    totals_by_reader_langs
+            {3}),
+    totals_by_reader_attr
         as
     (select
-        topic_code, online_doc_lang_code, reader_lang_code, count(uuid) as reader_lang_total
-        from feedback.reader_activities
+        {1}, {0}, count(uuid) as reader_attrvalue_total
+        from feedback.reader_activities a
         where
-            {0}
+            {2}
         group by
-            topic_code,
-            online_doc_lang_code,
-            reader_lang_code)
+            {1}, {0})
 select
-    t.topic_code,
-    t.online_doc_lang_code,
-    trl.reader_lang_code,
-    reader_lang_total,
-    topic_total,
-    (reader_lang_total::real)/(topic_total::real) as lang_share
+    {1}, trl.{0},
+    reader_attrvalue_total, topic_total,
+    (reader_attrvalue_total::real)/(topic_total::real) as share
     from
-         totals t, totals_by_reader_langs trl
+         totals a, totals_by_reader_attr trl
     where
-        t.topic_code = trl.topic_code
-            and
-        t.online_doc_lang_code = trl.online_doc_lang_code;
+       /* {4} */
+
+        a.topic_code = trl.topic_code
+            /*and
+        a.online_doc_lang_code = trl.online_doc_lang_code*/;
