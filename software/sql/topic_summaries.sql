@@ -35,5 +35,5 @@ select
        /* {4} */
 
         a.topic_code = trl.topic_code
-            /*and
-        a.online_doc_lang_code = trl.online_doc_lang_code*/;
+            and
+        a.online_doc_lang_code = trl.online_doc_lang_code;

@@ -97,6 +97,18 @@ class Argument(model.Model):
         self.define_field(modelfield.JsonObjectModelField("variables"))
 
 
+    def count_variables(self):
+
+        return len(self.get_field_value("variables"))
+
+
+    def get_argument_varnames(self):
+
+        variables = self.get_field_value("variables")
+
+        return [variable["varName"] for variable in variables]
+
+
     def get_sql_select(self):
 
         variables = self.get_field_value("variables")

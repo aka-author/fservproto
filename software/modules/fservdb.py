@@ -305,7 +305,6 @@ class TopicSummariesQuery(FservDBQuery):
             self.set_status_code(status.ERR_DB_QUERY_FAILED)
 
         return partial_result
-       
 
     def fetch(self):
 
@@ -314,4 +313,32 @@ class TopicSummariesQuery(FservDBQuery):
         self.result["oss"] = self.fetch_partial("reader_os_code")
         self.result["browsers"] = self.fetch_partial("reader_browser_code")
 
-        return self.result
+        entries = {}
+        
+        arglen = self.prof.get_field_value("argument").count_variables()
+        argnames = self.prof.get_field_value("argument").get_argument_varnames()
+
+        for row in self.result["countries"]:
+
+            hash = "#".join([row[i] for i in range(0, arglen)])
+            
+            entries[hash] = {}
+
+            for i in range(0, arglen):
+                entries[hash][argnames[i]] = row[i]
+                
+            for key in ["countries", "langs", "oss", "browsers"]:
+                entries[hash][key] = [] 
+
+        #for hash in entries:
+        for key in ["countries", "langs", "oss", "browsers"]:
+            for row in self.result[key]:
+                hash = "#".join([row[i] for i in range(0, arglen)])
+                entries[hash][key].append({"code": row[arglen], "count": row[arglen], 
+                "count": row[arglen+1], "share": row[arglen+2]})
+
+        summaries = []
+        for hash in entries:
+            summaries.append(entries[hash])
+
+        return {"summaries": summaries}
