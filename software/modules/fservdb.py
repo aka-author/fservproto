@@ -273,7 +273,7 @@ class TopicSummariesQuery(FservDBQuery):
 
     def assemble_topic_summaries_final_where_cons(self):
 
-        return self.prof.get_field_value("argument").get_final_where_cons()
+        return self.prof.get_argument().get_final_where_cons()
 
     
     def setup(self):
@@ -283,7 +283,7 @@ class TopicSummariesQuery(FservDBQuery):
         self.select_cols = self.assemble_topic_summaries_select_cols().format("a")
         self.where_conds = self.assemble_topic_summaries_where_conds().format("a")
         self.group_by_cols = self.assemble_topic_summaries_group_by_cols().format("a")
-        self.final_where_conds = self.assemble_topic_summaries_group_by_cols().format("t", "trl")
+        self.final_where_conds = self.assemble_topic_summaries_final_where_cons().format("a", "trl")
 
 
     def fetch_partial(self, attrname):
@@ -305,10 +305,12 @@ class TopicSummariesQuery(FservDBQuery):
             self.set_status_code(status.ERR_DB_QUERY_FAILED)
 
         return partial_result
+        
 
     def fetch(self):
 
         self.result["countries"] = self.fetch_partial("reader_country_code")
+
         self.result["langs"] = self.fetch_partial("reader_lang_code")
         self.result["oss"] = self.fetch_partial("reader_os_code")
         self.result["browsers"] = self.fetch_partial("reader_browser_code")
@@ -316,7 +318,7 @@ class TopicSummariesQuery(FservDBQuery):
         entries = {}
         
         arglen = self.prof.get_field_value("argument").count_variables()
-        argnames = self.prof.get_field_value("argument").get_argument_varnames()
+        argnames = self.prof.get_argument().get_varnames()
 
         for row in self.result["countries"]:
 
@@ -324,21 +326,25 @@ class TopicSummariesQuery(FservDBQuery):
             
             entries[hash] = {}
 
-            for i in range(0, arglen):
-                entries[hash][argnames[i]] = row[i]
-                
-            for key in ["countries", "langs", "oss", "browsers"]:
-                entries[hash][key] = [] 
+            entries[hash]["argument"] = {} 
+            entries[hash]["argument"]["variables"] = []
 
-        #for hash in entries:
+            for i in range(0, arglen):
+                entries[hash]["argument"]["variables"].append({"varName": argnames[i], "range": {"dataTypeName": "string", "rangeTypeName": "list", "values": [row[i]]}})
+                
+            entries[hash]["values"] = {}
+
+            for key in ["countries", "langs", "oss", "browsers"]:
+                entries[hash]["values"][key] = [] 
+
         for key in ["countries", "langs", "oss", "browsers"]:
             for row in self.result[key]:
                 hash = "#".join([row[i] for i in range(0, arglen)])
-                entries[hash][key].append({"code": row[arglen], "count": row[arglen], 
+                entries[hash]["values"][key].append({"code": row[arglen], "count": row[arglen], 
                 "count": row[arglen+1], "share": row[arglen+2]})
 
         summaries = []
         for hash in entries:
             summaries.append(entries[hash])
 
-        return {"summaries": summaries}
+        return summaries

@@ -38,4 +38,4 @@ class TopicSummaryReporter(controller.Controller):
         else:
             status_code = status.ERR_DB_CONNECTION_FAILED
 
-        return status_code, topic_summaries_dto
+        return status_code, self.export_result_dto(status_code, "topicSummaries", topic_summaries_dto)

@@ -30,10 +30,8 @@ select
     reader_attrvalue_total, topic_total,
     (reader_attrvalue_total::real)/(topic_total::real) as share
     from
-         totals a, totals_by_reader_attr trl
+        totals a, totals_by_reader_attr trl
     where
-       /* {4} */
+        {4};
 
-        a.topic_code = trl.topic_code
-            and
-        a.online_doc_lang_code = trl.online_doc_lang_code;
+        

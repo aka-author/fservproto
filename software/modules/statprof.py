@@ -97,21 +97,24 @@ class Argument(model.Model):
         self.define_field(modelfield.JsonObjectModelField("variables"))
 
 
+    def get_variables(self):
+
+        return self.get_field_value("variables")
+
+
     def count_variables(self):
 
-        return len(self.get_field_value("variables"))
+        return len(self.get_variables())
 
 
-    def get_argument_varnames(self):
+    def get_varnames(self):
 
-        variables = self.get_field_value("variables")
-
-        return [variable["varName"] for variable in variables]
+        return [variable["varName"] for variable in self.get_variables()]
 
 
     def get_sql_select(self):
 
-        variables = self.get_field_value("variables")
+        variables = self.get_variables()
 
         varnames = ["{0}." + utils.camel_to_snake(variable["varName"]) for variable in variables]
 
@@ -120,7 +123,7 @@ class Argument(model.Model):
 
     def get_sql_group_by(self):
 
-        variables = self.get_field_value("variables")
+        variables = self.get_variables()
 
         varnames = ["{0}." + utils.camel_to_snake(variable["varName"]) for variable in variables]
 
@@ -129,14 +132,14 @@ class Argument(model.Model):
 
     def get_final_where_cons(self):
 
-        variables = self.get_field_value("variables")
+        variables = self.get_variables()
 
         varnames = [utils.camel_to_snake(variable["varName"]) for variable in variables]
 
         conds = []
 
         for varname in varnames:
-            conds.append("{0}." + varname + "=" + "{1}" + varname)
+            conds.append("{0}." + varname + "=" + "{1}." + varname)
 
         return " and ".join(conds)
 
@@ -167,6 +170,26 @@ class Profile(model.Model):
         self.define_field(LangScopeModelField("langScope", "langScope", self))
         self.define_field(TimeScopeModelField("timeScope", "timeScope", self))
         self.define_field(ArgumentModelField("argument", "argument", self))
+
+
+    def get_content_scope(self):
+
+        return self.get_field_value("contentScope")
+
+
+    def get_lang_scope(self):
+
+        return self.get_field_value("langScope")
+
+
+    def get_time_scope(self):
+
+        return self.get_field_value("timeScope")
+
+
+    def get_argument(self):
+
+        return self.get_field_value("argument")
 
 
 
