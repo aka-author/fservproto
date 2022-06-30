@@ -40,7 +40,7 @@ class Auth(controller.Controller):
 
     def open_session(self):
 
-        status.code = status.ERR_LOGIN_FAILED
+        status_code = status.ERR_LOGIN_FAILED
         user_session = session.Session(self) 
 
         http_req = self.get_req()

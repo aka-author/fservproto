@@ -50,6 +50,30 @@ class HttpRequest:
         return login, passw
 
 
+    def get_url_param_value(self, param_name):
+
+        param_value = ""
+
+        params = os.environ["REQUEST_URI"].split("/")
+
+        probable_param_name = ""
+
+        for clause in params:
+
+            if probable_param_name == param_name:
+                param_value = clause
+                break
+
+            probable_param_name = clause
+
+        return param_value
+
+
+    def get_report_name(self):
+
+        return self.get_url_param_value("reports")
+
+
     def parse_json_body(self):
 
         content_len = os.environ.get('CONTENT_LENGTH', '0')

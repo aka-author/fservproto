@@ -16,6 +16,15 @@ from modules import status, httpreq, httpresp, auth, topsumrep, app
 
 class ReportApp(app.App):
 
+    def detect_report_name(self, http_req):
+
+        report_names = ["topic-summaries"]
+
+        report_name = http_req.get_report_name() 
+
+        return report_name if report_name in report_names else None 
+
+
     def process_request(self, http_req):
 
         resp = httpresp.HttpResponse()
@@ -24,8 +33,11 @@ class ReportApp(app.App):
 
             status_code = status.OK
 
-            reporter = topsumrep.TopicSummaryReporter(self)
-            status_code, report = reporter.build_report(http_req.parse_json_body())
+            if self.detect_report_name(http_req) == "topic-summaries": 
+                reporter = topsumrep.TopicSummaryReporter(self)
+                status_code, report = reporter.build_report(http_req.parse_json_body())
+            else:
+                status_code = status.ERR_REPORT_NOT_SUPPORTED
 
             if status_code == status.OK:
                 resp.set_body(report)
@@ -34,9 +46,7 @@ class ReportApp(app.App):
         else:
             resp.set_result_401()
 
-
         print(resp.serialize())
-
 
 
 #
