@@ -11,14 +11,14 @@
 import sys
 
 sys.path.append("modules")
-from modules import status, httpreq, httpresp, auth, topsumrep, app
+from modules import status, httpreq, httpresp, auth, topsumrep, topic_messages_report, app
 
 
 class ReportApp(app.App):
 
     def detect_report_name(self, http_req):
 
-        report_names = ["topic-summaries"]
+        report_names = ["topic-summaries", "topic-messages"]
 
         report_name = http_req.get_report_name() 
 
@@ -33,9 +33,14 @@ class ReportApp(app.App):
 
             status_code = status.OK
 
-            if self.detect_report_name(http_req) == "topic-summaries": 
+            report_name = self.detect_report_name(http_req)
+
+            if report_name == "topic-summaries": 
                 reporter = topsumrep.TopicSummaryReporter(self)
                 status_code, report = reporter.build_report(http_req.parse_json_body())
+            elif report_name == "topic-messages":
+                reporter = topic_messages_report.TopicMessagesReporter(self)
+                status_code, report = reporter.build_report(http_req.get_url_param_value("topic"))
             else:
                 status_code = status.ERR_REPORT_NOT_SUPPORTED
 

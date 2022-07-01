@@ -352,3 +352,57 @@ class TopicSummariesQuery(FservDBQuery):
             summaries.append(entries[hash])
 
         return summaries
+
+
+class TopicMessagesQuery(FservDBQuery):
+
+    def __init__(self, chief, topic_code):
+
+        self.topic_code = topic_code
+
+        super().__init__(chief)
+
+
+    def setup(self):
+
+        self.query_template = self.get_db().get_query_template("topic_messages.sql")
+
+
+    def fetch(self):
+       
+        result = []
+
+        self.query_text = self.query_template.format(self.topic_code)
+
+        db_cursor = self.get_db_cursor()
+        rows=[]
+        try:
+            db_cursor.execute(self.query_text)
+            if db_cursor.rowcount != 0:
+                rows = db_cursor.fetchall()
+            else:
+                self.set_status_code(status.ERR_NOT_FOUND)
+        except:
+            self.set_status_code(status.ERR_DB_QUERY_FAILED)
+
+        timestamp_format = utils.get_default_timestamp_format()
+
+        for row in rows:
+            result.append({
+                "uuid": row[0], 
+                "onlineDocCode": row[1], 
+                "onlineDocLangCode": row[2], 
+                "onlineDocVerNo": row[3],
+                "topicCode": row[4], 
+                "topicVerNo": row[5],
+                "readerCountryCode": row[6], 
+                "readerLangCode": row[7], 
+                "readerOsCode": row[8], 
+                "readerBrowserCode": row[9],
+                "acceptedAt": datetime.strftime(row[10], timestamp_format),
+                "messageTypeCode": row[11], 
+                "messageText": row[12]
+            })
+
+
+        return result
