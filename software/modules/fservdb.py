@@ -305,7 +305,7 @@ class TopicSummariesQuery(FservDBQuery):
             self.set_status_code(status.ERR_DB_QUERY_FAILED)
 
         return partial_result
-        
+
 
     def fetch(self):
 
@@ -337,11 +337,15 @@ class TopicSummariesQuery(FservDBQuery):
             for key in ["countries", "langs", "oss", "browsers"]:
                 entries[hash]["values"][key] = [] 
 
+            entries[hash]["values"]["goodness"] = 1 - row[arglen+4]
+            entries[hash]["values"]["badness"] = row[arglen+4]
+            entries[hash]["values"]["painFactor"] = 0.1
+
         for key in ["countries", "langs", "oss", "browsers"]:
             for row in self.result[key]:
                 hash = "#".join([row[i] for i in range(0, arglen)])
-                entries[hash]["values"][key].append({"code": row[arglen], "count": row[arglen], 
-                "count": row[arglen+1], "share": row[arglen+2]})
+                entries[hash]["values"][key].append({"code": row[arglen], 
+                "count": row[arglen+1], "share": row[arglen+3]})
 
         summaries = []
         for hash in entries:
